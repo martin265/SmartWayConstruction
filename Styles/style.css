@@ -1,0 +1,137 @@
+* {
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: white;
+}
+
+/* ============== using other fonts here */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&family=Roboto:wght@100;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&family=Roboto:wght@100;300;400&display=swap');
+.main-content-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.side-navigation-area {
+    overflow-y: auto;
+    height: 100vh;
+    width: 18%;
+    position: fixed;
+}
+
+.content-area {
+    width: calc(100% - 18%);
+    flex: 1;
+    padding-left: 18%; /* Add left padding to accommodate the fixed sidebar */
+}
+
+@media only screen and (max-width: 768px) {
+    .side-navigation-area {
+        width: 100%;
+        position: static;
+        height: auto;
+    }
+    .content-area {
+        width: 100%;
+        padding-left: 0;
+    }
+}
+
+/* ================ css for the sidebar navigation links */
+.side-navigation-panel {
+    margin-left: 30px;
+    margin-top: 30px;
+}
+.side-navigation-panel .navigation-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.side-navigation-area .navigation-item a{
+    text-decoration: none;
+    color: #212121;
+    font-size: 18px;
+    padding-top: 20px;
+    text-transform: capitalize;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+.side-navigation-area .navigation-item i {
+    padding-top: 20px;
+    font-size: 20px;
+    color: #0050C1;
+}
+
+/* ======== the hover effect for the links ======= */
+.side-navigation-area .navigation-item a:hover{
+    color: #311B92;
+}
+
+/*  ================= css for the job details page here =========== */
+.content-area .job-details-form-page {
+    height: 1150px;
+    background-color: #ECEEFF;
+    margin-top: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.content-area .occupational-history h3 {
+    padding-left: 20px;
+}
+
+.content-area .Technical_skills h3 {
+    padding-left: 20px;
+}
+
+.content-area .checking-history-status h3,p {
+    padding-left: 20px;
+}
+
+.content-area .application-instructions h3 {
+    padding-left: 20px;
+}
+
+.content-area .job-details-form-page .save-details-button {
+    margin-top: 20px;
+}
+
+/* ============ css for showing the error messages here =========== */
+.content-area .job-details-form-page .error-message {
+    color: red;
+    padding-left: 10px;
+    font-weight: bolder;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+}
+
+/* ============== the records page for the job details */
+.content-area .main-content-window {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.content-area .main-content-window .card .card-title {
+    text-align: center;
+    text-transform: capitalize;
+    color: #0050C1;
+}
+
+.content-area .main-content-window .card .card-body {
+    text-align: center;
+    font-weight: 300;
+}
+
+/* ============== the media query to fic the cards when they are in mobile view ============ */
+@media only screen and (max-width: 768px) {
+    .content-area .main-content-window .card{
+        margin-top: 10px;
+    }
+}

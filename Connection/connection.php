@@ -1,0 +1,95 @@
+<!-- // the connection with the database // -->
+<?php
+
+class Connection{
+    public $servername;
+    public $username;
+    public $password;
+    public $database;
+    public $connection;
+
+    // ========== the constructor for the class here
+    public function __construct($servername, $username, $password, $database)
+    {
+        $this->servername = $servername;
+        $this->username = $username;
+        $this->password = $password;
+        $this->database = $database;
+        // ======== connection here ========== //
+        $this->connection = mysqli_connect($servername, $username, $password, $database);
+    }
+    // ======== getters for the attributes here ============//
+    public function get_servername() {
+        return $this->servername;
+    }
+    // ===============// ============//
+    public function get_username() {
+        return $this->username;
+    }
+    // ================ // ============//
+    public function get_password() {
+        return $this->password;
+    }
+    //  =================// ============//
+    public function get_database() {
+        return $this->database;
+    }
+    // ===============// =============//
+    public function get_connection() {
+        return $this->connection;
+    }
+    // =========== function to establish the connection here ========//
+    public function EstablishConnection() {
+        try {
+            if ($this->connection) {
+            }
+            else {
+                print("failed to connect to the database");
+            }
+        }catch(Exception $ex) {
+            print($ex);
+        }
+    }
+
+    // ==================// ================// ================== //
+    public function CreateJobDetailsTable() {
+        try{
+            // executing the qury here
+            $sqlCommand = "CREATE TABLE IF NOT EXISTS JobDetails(
+                job_id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                job_title VARCHAR(50) NOT NULL,
+                job_location VARCHAR(50) NOT NULL,
+                job_type VARCHAR(50) NOT NULL,
+                email VARCHAR(50) NOT NULL,
+                job_description VARCHAR(100) NOT NULL,
+                company_overview VARCHAR(100) NOT NULL,
+                qualification VARCHAR(50) NOT NULL,
+                technical_skills VARCHAR(50) NOT NULL,
+                benefits VARCHAR(50) NOT NULL,
+                application_instruction VARCHAR(100) NOT NULL,
+                query_phone_number VARCHAR(50) NOT NULL,
+                application_deadline VARCHAR(50) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )";
+            //  ========== running the database quey here =============//
+            $results = mysqli_query($this->connection, $sqlCommand);
+            if ($results) {
+
+            }else {
+                print("failed to create the table");
+            }
+        }catch(Exception $ex) {
+            print($ex);
+        }
+    }
+
+
+}
+
+// $conn = new Connection("localhost", "root", "", "SmartWayConstruction");
+// $conn->EstablishConnection();
+
+// // calling the create table function here
+// $conn->CreateJobDetailsTable();
+
+?>
