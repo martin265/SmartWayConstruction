@@ -135,3 +135,17 @@ body{
         margin-top: 10px;
     }
 }
+
+
+/* =============== css for the jobs page here ============== */
+.content-area .all-jobs-table {
+    height: auto;
+    background-color: #ECEEFF;
+    margin-top: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.content-area .all-jobs-table .back-button-here {
+    margin-top: 30px;
+}
