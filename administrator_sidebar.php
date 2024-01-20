@@ -55,7 +55,7 @@
         <!-- the side bar navigation items will be here -->
         <div class="navigation-item">
             <i class="bi bi-calendar4-week"></i>
-            <a href="#">interview schedule</a>
+            <a href="administrator_interview_questions.php">interview schedule</a>
         </div>
         <!-- the side bar navigation items will be here -->
         <div class="navigation-item">

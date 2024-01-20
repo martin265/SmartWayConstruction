@@ -12,6 +12,7 @@ $company_overview = "";
 $application_instruction = "";
 $query_phone_number = "";
 $application_deadline = "";
+$id_to_update = "";
 
 // ========== function to validate the information here
 function ValidateInputs($data) {
@@ -27,6 +28,36 @@ function ValidateInputs($data) {
     }
 }
 
+// ============== function to fetch the records here ================ //
+function FetchSingleRecord() {
+    try {
+        // =========== getting the connection here ============ //
+        $connection = new Connection("localhost", "root", "", "SmartWayConstruction");
+        // ==========getting values from the form here =============== //
+        $connection->EstablishConnection();
+        $conn = $connection->get_connection();
+
+        // fetching the record here
+        if (isset($_GET["update_id"])) {
+            $id_to_update = mysqli_real_escape_string($conn, $_GET["update_id"]);
+            // getting the database records here
+            $sqlCommand = "SELECT * FROM JobDetails WHERE job_id = $id_to_update";
+            $results = mysqli_query($conn, $sqlCommand);
+            // ================= converting the results to an associative array
+            $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+            // returning the values here
+            foreach($all_results as $single_record) {
+                return $single_record;
+            }
+            
+        }
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
+
+$single_record = FetchSingleRecord(); // calling the fecth function here
+print_r($single_record);
 // checking the values here
 $all_errors = array("job_title"=>"", "job_location"=>"", "job_type"=>"", "email"=>"",
 "job_description"=>"", "company_overview"=>"", "qualification"=>"", "technical_skills"=>"",
@@ -44,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $application_deadline = ValidateInputs($_POST["application_deadline"]);
 
     //  =============== checking the inputs here ===========//
-    if (isset($_POST["save_job_details"])) {
+    if (isset($_POST["update_job_details"])) {
         // ================ validations here ===================//
         if (empty($_POST["job_title"])) {
             $all_errors["job_title"] = "fill in the blanks";
@@ -125,9 +156,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $qualification, $technical_skills, $benefits, $application_instruction,
                 $query_phone_number, $application_deadline
             );
-            // ============= the method to save the details here ============//
-            $job->SaveJobDetails();
-            $success_message = "job details saved successfully";
+            // =============== getting the function to update the records here ======== //
+            $job->UpdateJobDetails($id_to_update);
+            $success_message = "job details updated successfully";
+            //header("Location: administrator_job_records.php");
         }
         else {
             $error_message = "something is wrong";
@@ -137,7 +169,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ================== validations continues here ==============//
     
 }
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,7 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <!-- ============ // the success message will be here ==========  -->
                             <div class="success-message mt-3 me-3 w-50 fw-bolder text-light">
                                     <?php if (isset($success_message)) : ?>
-                                        <div id="successAlert" class="alert alert-primary" role="alert">
+                                        <div id="successAlert" class="alert alert-success" role="alert">
                                             <?php echo $success_message; ?>
                                         </div>
                                         <script>
@@ -173,18 +208,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             }, 5000);
                                         </script>
                                     <?php elseif (isset($error_message)) : ?>
-                                        <div class="alert alert-success" role="alert">
-
+                                        <div class="alert alert-danger" role="alert">
+                                            <?php echo($error_message); ?>
                                         </div>
                                     <?php endif; ?>
                             </div>
-                            <form action="administrator_job.php" method="POST">
+
+                            <form action="administrator_update_job.php" method="POST">
+                                <!-- ============ the foreach loop will be here -->
                                 <div class="row mb-3">
                                     <div class="col ms-3 mt-5">
                                         <label for="JobTitle fw-bolder">Job Title</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-body-text"></i></span>
-                                            <input type="text" class="form-control form-control-lg" placeholder="job title" name="job_title">
+                                            <input type="text" class="form-control form-control-lg" placeholder="job title" name="job_title" value="<?php echo($single_record["job_title"]); ?>">
                                         </div>
                                         <!-- ============ the div for showing the error message here -->
                                         <div class="error-message">
@@ -196,7 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <label for="JobLocation fw-bolder">Job Location</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-                                            <input type="text" class="form-control form-control-lg" placeholder="job location..." name="job_location">
+                                            <input type="text" class="form-control form-control-lg" placeholder="job location..." name="job_location" value="<?php echo($single_record["job_location"]); ?>">
                                         </div>
                                         <!-- ============ the div for showing the error message here -->
                                         <div class="error-message">
@@ -211,7 +248,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <label for="JobTitle fw-bolder">Job Type</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-feather"></i></span>
-                                            <input type="text" class="form-control form-control-lg" placeholder="job type" name="job_type">
+                                            <input type="text" class="form-control form-control-lg" placeholder="job type" name="job_type" value="<?php echo($single_record["job_type"]); ?>">
                                         </div>
                                         <!-- ============ the div for showing the error message here -->
                                         <div class="error-message">
@@ -223,7 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <label for="JobLocation fw-bolder">Email</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-envelope-arrow-up"></i></span>
-                                            <input type="email" class="form-control form-control-lg" placeholder="email" name="email">
+                                            <input type="email" class="form-control form-control-lg" placeholder="email" name="email" value="<?php echo($single_record["email"]); ?>">
                                         </div>
                                         <!-- ============ the div for showing the error message here -->
                                         <div class="error-message">
@@ -238,8 +275,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <label for="JobDescription">Job Description</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-file-bar-graph"></i></span>
-                                            <textarea name="job_description" id="" class="form-control form-control-lg">
-
+                                            <textarea name="job_description" id="" class="form-control form-control-lg text-start">
+                                                <?php echo($single_record["job_description"]); ?>
                                             </textarea>
                                         </div>
                                     </div>
@@ -252,7 +289,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-tree"></i></span>
                                             <textarea name="company_overview" id="" class="form-control form-control-lg">
-
+                                                <?php echo($single_record["job_description"]); ?>
                                             </textarea>
                                         </div>
                                     </div>
@@ -266,32 +303,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="col ms-3">
                                             <!-- =======================//================= -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Certificate" name="qualification">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Certificate" name="qualification" <?php echo ($single_record["qualification"] === "Certificate") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox1">Certificate</label>
                                             </div>
                                             <!-- ==================//================= -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Diploma" name="qualification">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Diploma" name="qualification" <?php echo ($single_record["qualification"] === "Diploma") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox2">Diploma</label>
                                             </div>
-                                            <!-- ===================//=============== -->
+                                            <!-- ======================== // =============== -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Advanced Diploma" name="qualification">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Advanced Diploma" name="qualification" <?php echo ($single_record["qualification"] === "Advanced Diploma") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox1">Advanced Diploma</label>
                                             </div>
+
                                             <!-- ================//================ -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Degree" name="qualification">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Degree" name="qualification" <?php echo ($single_record["qualification"] === "Degree") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox2">Degree</label>
                                             </div>
                                             <!-- ===============//=============== -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Masters Degree" name="qualification">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Masters Degree" name="qualification" <?php echo ($single_record["qualification"] === "Masters Degree") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox2">Masters Degree</label>
                                             </div>
                                             <!-- ===============//=============== -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Retired" name="qualification">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Retired" name="qualification" <?php echo ($single_record["qualification"] === "Retired") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox2">Retired</label>
                                             </div>
 
@@ -307,32 +345,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="col ms-3">
                                             <!-- =======================//================= -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Construction Management" name="technical_skills">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Construction Management" name="technical_skills" <?php echo ($single_record["qualification"] === "Construction Management") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox1">Construction Management</label>
                                             </div>
                                             <!-- ==================//================= -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Civil Engineering" name="technical_skills">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Civil Engineering" name="technical_skills" <?php echo ($single_record["qualification"] === "Civil Engineering") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox2">Civil Engineering</label>
                                             </div>
                                             <!-- ===================//=============== -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Archtectural Design" name="technical_skills">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Archtectural Design" name="technical_skills" <?php echo ($single_record["qualification"] === "Archtecrural Design") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox1">Archtectural Design</label>
                                             </div>
                                             <!-- ================//================ -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Auto CAD and Building Information Modeling (BIM)" name="technical_skills">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Auto CAD and Building Information Modeling (BIM)" name="technical_skills" <?php echo ($single_record["qualification"] === "Auto CAD and Building Information Modeling (BIM)") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox2">Auto CAD and Building Information Modeling (BIM)</label>
                                             </div>
                                             <!-- ===============//=============== -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Surveying and Site Planning" name="technical_skills">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Surveying and Site Planning" name="technical_skills" <?php echo ($single_record["qualification"] === "Surveying and Site Planning") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox2">Surveying and Site Planning</label>
                                             </div>
                                             <!-- ===============//=============== -->
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Project management" name="technical_skills">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Project management" name="technical_skills" <?php echo ($single_record["qualification"] === "Project Management") ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="inlineCheckbox2">Project Management</label>
                                             </div>
                                         </div>
@@ -355,17 +393,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <span class="fw-bold">Select all that apply:</span>
                                         </label>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Health Insurance" name="benefits">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Health Insurance" name="benefits" <?php echo ($single_record["qualification"] === "Health Insurance") ? 'checked' : ''; ?>>
                                             <label class="form-check-label" for="inlineCheckbox1">Health Insurance</label>
                                         </div>
                                         <!-- ==================//================= -->
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Retirement Plans" name="benefits">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Retirement Plans" name="benefits" <?php echo ($single_record["qualification"] === "Retirement Plans") ? 'checked' : ''; ?>>
                                             <label class="form-check-label" for="inlineCheckbox2">Retirement Plans</label>
                                         </div>
                                         <!-- ================//================ -->
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Professional and Development Opportunities" name="benefits">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Professional and Development Opportunities" name="benefits" <?php echo ($single_record["qualification"] === "Professional and Development Opportunities") ? 'checked' : ''; ?>>
                                             <label class="form-check-label" for="inlineCheckbox2">Professional and Development Opportunities</label>
                                         </div>
                                     </div>
@@ -386,7 +424,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-journal-text"></i></span>
                                             <textarea name="application_instruction" id="" class="form-control form-control-lg">
-
+                                                <?php echo($single_record["application_instruction"]); ?>
                                             </textarea>
                                         </div>
                                     </div>
@@ -398,7 +436,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <label for="GuardianSignature" class="">Phone number</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-yelp"></i></span>
-                                            <input type="text" class="form-control form-control-lg" name="query_phone_number" placeholder="phone number..">
+                                            <input type="text" class="form-control form-control-lg" name="query_phone_number" placeholder="phone number.." value="<?php echo($single_record["query_phone_number"]); ?>">
                                         </div>
                                         <!-- ============ the div for showing the error message here -->
                                         <div class="error-message">
@@ -410,7 +448,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <label for="SignatureDate" class="">Application Dealine</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-dash-square-dotted"></i></span>
-                                            <input type="text" class="form-control form-control-lg" value="12-02-2024" id="ApplicationDeadlineDate" name="application_deadline">
+                                            <input type="text" class="form-control form-control-lg" value="12-02-2024" id="ApplicationDeadlineDate" name="application_deadline" value="<?php echo($single_record["application_deadline"]); ?>">
                                         </div>
                                         <!-- ============ the div for showing the error message here -->
                                         <div class="error-message">
@@ -421,8 +459,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                 <!-- ============== // the css for the button will be here ======= -->
                                 <div class="save-details-button mt-4 ms-3">
-                                    <button type="submit" name="save_job_details" class="btn btn-primary btn-lg">
-                                        <span><i class="bi bi-floppy2 me-4"></i></span>Save Job Details
+                                    <button type="submit" name="update_job_details" class="btn btn-info btn-lg">
+                                        <span><i class="bi bi-arrow-clockwise"></i></span>Update job details
                                     </button>
                                 </div>
                             </form>

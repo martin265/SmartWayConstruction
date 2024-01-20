@@ -113,6 +113,39 @@ class Job{
             print($ex);
         }
     }
+
+    // ================ function to update the records here =============== //
+    public function UpdateJobDetails($current_id) {
+        try {
+            // getting the connection with the database here
+            $this->connection->EstablishConnection();
+            $conn = $this->connection->get_connection();
+            // ==============// ==================//
+            $sqlCommand = $conn->prepare(
+                "UPDATE JobDetails SET job_title = ?,
+                job_location = ?, job_type = ?,
+                email = ?, job_description = ?, company_review = ?,
+                qualification = ?, technical_skills = ?, benefits = ?,
+                application_instruction = ?, query_phone_number = ?,
+                application_deadline = ? WHERE job_id = ?"
+            );
+            // ============= binding the parameters here =============== //
+            $sqlCommand->bind_param(
+                "ssssssssssssi",
+                $this->job_title, $this->job_location, $this->job_type,
+                $this->email, $this->job_description, $this->company_overview,
+                $this->qualification, $this->technical_skills, $this->benefits,
+                $this->application_instruction, $this->query_phone_number,
+                $this->application_deadline, $current_id
+            );
+            //  =========== running the query here ============//
+            $sqlCommand->execute();
+            print("records updated successfully");
+        } catch (Exception $ex) {
+            print($ex);
+        }
+    }
+
     
 }
 
