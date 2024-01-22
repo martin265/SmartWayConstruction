@@ -13,11 +13,15 @@ function FetchAllJobs($conn) {
         $results = mysqli_query($conn, $sqlCommand);
         $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
         // =========== passing the codes into an associative array here ======== //
-        
+        foreach($all_results as $single_record) {
+            return $single_record;
+        }
     }catch(Exception $ex) {
         print($ex);
     }
 }
+
+$all_results = FetchAllJobs($conn);
 
 ?>
 <!DOCTYPE html>
@@ -56,7 +60,11 @@ function FetchAllJobs($conn) {
     <!-- ============ the cards to list all the jobs jobs -->
     <div class="container-xxl">
         <div class="row">
-            <div class="col-lg-3">1</div>
+            <div class="col-lg-3">
+                <div class="card">
+                    <img src="Controls\Images\job-search.png" alt="job search">
+                </div>
+            </div>
         </div>
     </div>
 </body>
