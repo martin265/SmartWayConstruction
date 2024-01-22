@@ -199,3 +199,44 @@ body{
     color: black;
     font-size: 18px;
 }
+
+
+/* ====================== CSS FOR THE CLIENT SIDE ============== */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&family=Roboto:wght@100;300;400&display=swap');
+.navigation .navbar {
+    height: 80px;
+    background-color: #0078D9;
+    
+}
+
+.navigation .navbar .nav-item {
+    color: white;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+/* ============= for the jobs page the content will appear here */
+.main-job-content-area .jobs-page {
+    margin-top: 40px;
+}
+
+.main-job-content-area .jobs-page .jobs-title h1,p {
+    text-align: center;
+}
+
+
+.main-job-content-area .jobs-page .jobs-title h1 {
+    font-size: 50px;
+    text-transform: capitalize;
+    color: #0050C1;
+}
+.main-job-content-area .jobs-page .jobs-title p {
+    font-size: 18px;
+    color: black;
+    font-weight: 500;
+}
+
+.available-jobs-title h1 {
+    padding-left: 20px;
+}

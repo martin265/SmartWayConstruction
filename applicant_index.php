@@ -7,6 +7,8 @@
 </head>
 <body>
     <!--  ================= // including the top navigation bar here ========= -->
-    
+    <div class="top-navigation-bar">
+        <?php include("templates/header.php"); ?>
+    </div>
 </body>
 </html>

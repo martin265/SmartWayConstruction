@@ -24,6 +24,19 @@
     
 </head>
 <body>
-    
+    <!-- ============= the top navigation will be here ========== -->
+    <div class="navigation">
+        <nav class="navbar navbar-expand navbar-light shadow-sm">
+            <div class="nav navbar-nav">
+                <a class="nav-item nav-link active" href="#" aria-current="page"
+                    >Home <span class="visually-hidden">(current)</span></a
+                >
+                <a class="nav-item nav-link" href="#">Home</a>
+                <!-- ============ the navigation links will be here -->
+                <a class="nav-item nav-link" href="applicant_jobs.php">Jobs</a>
+            </div>
+        </nav>
+        
+    </div>
 </body>
 </html>
