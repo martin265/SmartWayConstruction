@@ -171,6 +171,7 @@ body{
 
 .content-area .interview-questions-panel .interview-page-title h1 {
     text-transform: capitalize;
+    padding-top: 10px;
     font-weight: bolder;
     color: #0050C1;
 }
