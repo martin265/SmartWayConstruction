@@ -26,6 +26,7 @@
     <script src="assets/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker3.min.css">
+    
 </head>
 <body>
     <div class="side-navigation-panel">

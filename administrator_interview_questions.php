@@ -47,11 +47,37 @@ function FetchApplicants() {
 // ============== function will be used to save the answers to the questions ================ //
 $answers_errors = array("saved_question"=>"", "question_answer"=>"");
 // =========== validating the inputs here ================ //
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $saved_question = ValidateInputs($_POST["saved_question"]);
+    $question_answer = ValidateInputs($_POST["question_answer"]);
+    // ============ making sure that the input fileds are not empty here =============== //
+    if (isset($_POST["save-question-answer"])) {
+        // ================ // ======================= //
+        if (empty($_POST["saved_question"])) {
+            $answers_errors["saved_question"] = "fill in the blanks";
+        }
+        else {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $saved_question)) {
+                $answers_errors["saved-question"] = "provide valid characters please";
+            }
+        }
+        //  ======================= // ==================== //
+        if (empty($_POST["question_answer"])) {
+            $answers_errors["question_answer"] = "fill in the blanks";
+        }
+        else {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_answer)) {
+                $answers_errors["question_answer"] = "provide the valid answer for the question";
+            }
+        }
+    }
+}
+
 
 
 // ============= the array for the errors here ============== //
 $all_errors = array("applicant"=>"", "question_1"=>"", "question_2"=>"", "question_3"=>"", "question_4"=>"",
-"question_5"=>"", "question_6"=>"", "question_7"=>"", "question_8"=>"", "question_9"=>"", "question_10"=>"", "interview_duration"=>"", "interview_date"=>"");
+"question_5"=>"", "question_6"=>"", "question_7"=>"", "question_8"=>"", "question_9"=>"", "question_10"=>"", "interview_duration"=>"", "interview_date"=>"", "question_answer"=>"", "saved_question"=>"");
 
 // =========== checking is the button is set ==========//
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -466,8 +492,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="bi bi-fire"></i></span>
                                                         <select name="saved_question" id="" class="form-control form-control-lg">
-
+                                                            <option value="Applicant">Question</option>
                                                         </select>
+                                                    </div>
+                                                    <div class="error-message">
+                                                        <?php echo($all_errors["saved_question"]); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -478,6 +507,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="bi bi-fire"></i></span>
                                                         <input type="text" name="question_answer" class="form-control form-control-lg" placeholder="provide your answer...">
+                                                    </div>
+                                                    <div class="error-message">
+                                                        <?php echo($all_errors["question_answer"]); ?>
                                                     </div>
                                                 </div>
                                             </div>
