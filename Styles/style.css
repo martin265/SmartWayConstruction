@@ -181,3 +181,21 @@ body{
     color: black;
     font-size: 18px;
 }
+
+.content-area .interview-questions-panel .questions-panel .error-message {
+    color: red;
+    font-weight: bold;
+}
+
+/* ============ the add answers panel here ========// */
+.content-area .interview-questions-panel .add-answers-panel .add-answers-title h1{
+    text-align: center;
+    color: #0050C1;
+    font-weight: bolder;
+    text-transform: capitalize;
+}
+.content-area .interview-questions-panel .add-answers-panel .add-answers-title p {
+    font-weight: bold;
+    color: black;
+    font-size: 18px;
+}

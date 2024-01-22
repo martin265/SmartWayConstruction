@@ -1,9 +1,203 @@
 <?php
 // getting the connection here
 include("Connection/connection.php");
+$connection = new Connection("localhost", "root", "", "SmartWayConstruction");
+$connection->EstablishConnection(); 
+$conn = $connection->get_connection();
 
 // ============ // function to validate the input fields here // =============== //
+$applicant = "";
+$question_1 = "";
+$question_2 = "";
+$question_3 = "";
+$question_4 = "";
+$question_5 = "";
+$question_6 = "";
+$question_7 = "";
+$question_8 = "";
+$question_9 = "";
+$question_10 = "";
+$interview_duration = "";
+$interview_date = "";
+$saved_question = "";
+$question_answer = "";
 
+
+function ValidateInputs($data) {
+    try {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+
+        return $data;
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
+
+// function to get the applicants here //
+function FetchApplicants() {
+    try {
+        // getting the connection here //
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
+
+// ============== function will be used to save the answers to the questions ================ //
+$answers_errors = array("saved_question"=>"", "question_answer"=>"");
+// =========== validating the inputs here ================ //
+
+
+// ============= the array for the errors here ============== //
+$all_errors = array("applicant"=>"", "question_1"=>"", "question_2"=>"", "question_3"=>"", "question_4"=>"",
+"question_5"=>"", "question_6"=>"", "question_7"=>"", "question_8"=>"", "question_9"=>"", "question_10"=>"", "interview_duration"=>"", "interview_date"=>"");
+
+// =========== checking is the button is set ==========//
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $question_1 = ValidateInputs($_POST["question_1"]);
+    $question_2 = ValidateInputs($_POST["question_2"]);
+    $question_3 = ValidateInputs($_POST["question_3"]);
+    $question_4 = ValidateInputs($_POST["question_4"]);
+    $question_5 = ValidateInputs($_POST["question_5"]);
+    $question_6 = ValidateInputs($_POST["question_6"]);
+    $question_7 = ValidateInputs($_POST["question_7"]);
+    $question_8 = ValidateInputs($_POST["question_8"]);
+    $question_9 = ValidateInputs($_POST["question_9"]);
+    $question_10 = ValidateInputs($_POST["question_10"]);
+    $interview_duration = ValidateInputs($_POST["interview_duration"]);
+    $interview_date = ValidateInputs($_POST["interview_date"]);
+
+
+    // ============ validating if the fields are empty here ========= //
+    if (isset($_POST["save_details"])) {
+
+        if(empty($_POST["applicant"])) {
+            $all_errors["applicant"] = "enter appplicant";
+        }
+        else {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $applicant)) {
+                $all_errors["applicant"] = "enter valid characters";
+            }
+        }
+        //  ====================== // ====================== //
+        if(empty($_POST["question_1"])) {
+            $all_errors["question_1"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_1)) {
+                $all_errors["question_1"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["question_2"])) {
+            $all_errors["question_2"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_2)) {
+                $all_errors["question_2"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["question_3"])) {
+            $all_errors["question_3"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_3)) {
+                $all_errors["question_3"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["question_4"])) {
+            $all_errors["question_4"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_4)) {
+                $all_errors["question_4"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["question_5"])) {
+            $all_errors["question_5"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_5)) {
+                $all_errors["question_5"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["question_6"])) {
+            $all_errors["question_6"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_6)) {
+                $all_errors["question_6"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["question_7"])) {
+            $all_errors["question_7"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_7)) {
+                $all_errors["question_7"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["question_8"])) {
+            $all_errors["question_8"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_8)) {
+                $all_errors["question_8"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["question_9"])) {
+            $all_errors["question_9"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_9)) {
+                $all_errors["question_9"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["question_10"])) {
+            $all_errors["question_10"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $question_10)) {
+                $all_errors["question_10"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["interview_duration"])) {
+            $all_errors["interview_duration"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $interview_duration)) {
+                $all_errors["interview_duration"] = "enter valid characters";
+            }
+        }
+
+        // ============= // the other question will be here ============== //
+        if(empty($_POST["interview_date"])) {
+            $all_errors["interview_date"] = "enter your question";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z-' ]*$/", $interview_duration)) {
+                $all_errors["interview_date"] = "enter valid characters";
+            }
+        }
+        // ============= // the other question will be here ============== //
+        if (array_filter($all_errors)) {
+
+        }
+        else {
+
+        }
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -51,6 +245,10 @@ include("Connection/connection.php");
                                                         <option value="Applicant">Applicants</option>
                                                     </select>
                                                 </div>
+                                                <!-- =============== // the error will be shown here =======  -->
+                                                <div class="error-message">
+                                                    <?php echo($all_errors["applicant"]); ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -65,6 +263,10 @@ include("Connection/connection.php");
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_1" class="form-control form-control-lg" placeholder="question one">
                                             </div>
+                                             <!-- =============== // the error will be shown here =======  -->
+                                             <div class="showing-error">
+                                                <?php echo($all_errors["question_1"]); ?>
+                                            </div>
                                         </div>
 
                                         <!--  =========== the second question will be here =============== -->
@@ -76,6 +278,10 @@ include("Connection/connection.php");
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_2" class="form-control form-control-lg" placeholder="question two">
                                             </div>
+                                            <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                    <?php echo($all_errors["question_2"]); ?>
+                                                </div>
                                         </div>
                                     </div>
 
@@ -89,6 +295,10 @@ include("Connection/connection.php");
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_3" class="form-control form-control-lg" placeholder="question three">
                                             </div>
+                                            <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                <?php echo($all_errors["question_3"]); ?>
+                                            </div>
                                         </div>
 
                                         <!--  =========== the second question will be here =============== -->
@@ -99,6 +309,10 @@ include("Connection/connection.php");
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_4" class="form-control form-control-lg" placeholder="question four">
+                                            </div>
+                                            <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                <?php echo($all_errors["question_4"]); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -113,6 +327,10 @@ include("Connection/connection.php");
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_5" class="form-control form-control-lg" placeholder="question five">
                                             </div>
+                                             <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                <?php echo($all_errors["question_5"]); ?>
+                                            </div>
                                         </div>
 
                                         <!--  =========== the second question will be here =============== -->
@@ -123,6 +341,10 @@ include("Connection/connection.php");
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_6" class="form-control form-control-lg" placeholder="question six">
+                                            </div>
+                                             <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                <?php echo($all_errors["question_6"]); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -137,6 +359,10 @@ include("Connection/connection.php");
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_7" class="form-control form-control-lg" placeholder="question seven">
                                             </div>
+                                             <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                <?php echo($all_errors["question_7"]); ?>
+                                            </div>
                                         </div>
 
                                         <!--  =========== the second question will be here =============== -->
@@ -147,6 +373,10 @@ include("Connection/connection.php");
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_8" class="form-control form-control-lg" placeholder="question eight">
+                                            </div>
+                                             <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                <?php echo($all_errors["question_8"]); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -161,6 +391,10 @@ include("Connection/connection.php");
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_9" class="form-control form-control-lg" placeholder="question nine">
                                             </div>
+                                             <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                <?php echo($all_errors["question_9"]); ?>
+                                            </div>
                                         </div>
 
                                         <!--  =========== the second question will be here =============== -->
@@ -171,6 +405,10 @@ include("Connection/connection.php");
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="question_10" class="form-control form-control-lg" placeholder="question ten">
+                                            </div>
+                                             <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                <?php echo($all_errors["question_10"]); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -185,6 +423,10 @@ include("Connection/connection.php");
                                                 <span class="input-group-text"><i class="bi bi-clock-history"></i></span>
                                                 <input type="number" name="interview_duration" class="form-control form-control-lg" placeholder="add duration...">
                                             </div>
+                                             <!-- =============== // the error will be shown here =======  -->
+                                             <div class="error-message">
+                                                <?php echo($all_errors["interview_duration"]); ?>
+                                            </div>
                                         </div>
 
                                         <!--  =========== the second question will be here =============== -->
@@ -196,12 +438,54 @@ include("Connection/connection.php");
                                                 <span class="input-group-text"><i class="bi bi-patch-question"></i></span>
                                                 <input type="text" name="interview_date" class="form-control form-control-lg" id="ApplicationDeadlineDate" value="12-02-2024">
                                             </div>
+                                             <!-- =============== // the error will be shown here =======  -->
+                                            <div class="error-message">
+                                                <?php echo($all_errors["applicant"]); ?>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <!-- ===================== // ================= //  -->
                                     <div class="save-details-button ms-3 mb-5">
-                                        <input type="text" name="save_details" class="btn btn-primary btn-lg" value="save details">
+                                        <input type="submit" name="save_details" class="btn btn-primary btn-lg" value="save details">
+                                    </div>
+
+                                    <!-- ============= the section to select a question and add an anser here -->
+                                    <div class="add-answers-panel">
+                                        <div class="add-answers-title">
+                                            <h1>add answers to the questions</h1>
+                                            <p>each answer that you add will be associated to a partcular 
+                                                question, this includes for all the ten questions to be created...
+                                            </p>
+                                        </div>
+
+                                        <div class="answers-panel">
+                                            <div class="row mb-2">
+                                                <div class="col ms-3 me-3">
+                                                    <label for="ForQuestion">Select Question</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="bi bi-fire"></i></span>
+                                                        <select name="saved_question" id="" class="form-control form-control-lg">
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ================ the input for the answers here ========= -->
+                                            <div class="row mb-2">
+                                                <div class="col ms-3 me-3">
+                                                    <label for="ForResponse">Provide answer</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="bi bi-fire"></i></span>
+                                                        <input type="text" name="question_answer" class="form-control form-control-lg" placeholder="provide your answer...">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="save-response-section mb-5 ms-3 mt-3">
+                                                <input type="submit" class="btn btn-primary btn-lg" name="save-question-answer">
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
