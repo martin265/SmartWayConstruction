@@ -13,9 +13,7 @@ function FetchAllJobs($conn) {
         $results = mysqli_query($conn, $sqlCommand);
         $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
         // =========== passing the codes into an associative array here ======== //
-        foreach($all_results as $single_record) {
-            return $single_record;
-        }
+        return $all_results;
     }catch(Exception $ex) {
         print($ex);
     }
@@ -58,13 +56,44 @@ $all_results = FetchAllJobs($conn);
     </div>
 
     <!-- ============ the cards to list all the jobs jobs -->
-    <div class="container-xxl">
+    <div class="container-xxl all-jobs-details">
         <div class="row">
-            <div class="col-lg-3">
-                <div class="card">
-                    <img src="Controls\Images\job-search.png" alt="job search">
+            <?php if ($all_results): ?>
+                <?php foreach($all_results as $single_record) {?>
+                    <div class="col-lg-3 ">
+                        <div class="card shadow-sm">
+                            <img src="Controls\Images\job-search.png" alt="job search">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h1>
+                                        <span class="me-4"><i class="bi bi-sticky"></i></span><?php echo($single_record["job_title"]); ?>
+                                    </h1>
+                                    <p class="card-text lead">
+                                        <span class="me-3 text-primary fw-bolder"><i class="bi bi-app-indicator"></i></span><?php echo($single_record["job_type"]); ?>
+                                    </p>
+                                    <p class="card-text lead">
+                                        <span class="me-3"><i class="bi bi-body-text"></i></span><?php echo($single_record["job_description"]); ?>
+                                    </p>
+                                    <p class="card-text lead">
+                                        <span class="me-3 text-primary"><i class="bi bi-calendar2-event"></i></span><?php echo($single_record["application_deadline"]); ?>
+                                    </p>
+                                    <div class="button-details">
+                                        <a href="applicant_apply_job.php?id=<?php echo($single_record["job_id"]); ?>" class="btn btn-primary">
+                                            <span><i class="bi bi-file-earmark-arrow-down me-2"></i></span>Apply Job
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php }?>
+            <?php else: ?>
+                <div class="no-available-jobs">
+                    <div class="card">
+                        <img src="Controls\Images\job-search.png" alt="job search">
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
 </body>
