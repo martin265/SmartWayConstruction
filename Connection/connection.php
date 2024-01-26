@@ -83,6 +83,37 @@ class Connection{
         }
     }
 
+    // =============== function to create the applications Table ============== //
+    public function CreateApplicationDetails() {
+        try {
+            // executing the qury here
+            $sqlCommand = "CREATE TABLE IF NOT EXISTS ApplicationDetails(
+                application_id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                first_name VARCHAR(50) NOT NULL,
+                last_name VARCHAR(50) NOT NULL,
+                phone_number VARCHAR(50) NOT NULL,
+                email VARCHAR(80) NOT NULL,
+                age VARCHAR(50) NOT NULL,
+                gender VARCHAR(50) NOT NULL,
+                cv VARCHAR(50) NOT NULL,
+                cover_letter VARCHAR(50) NOT NULL,
+                job_title VARCHAR(50) NOT NULL,
+                job_id INT UNSIGNED,
+                FOREIGN KEY (job_id) REFERENCES JobDetails(job_id),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )";
+            //  ========== running the database quey here =============//
+            $results = mysqli_query($this->connection, $sqlCommand);
+            if ($results) {
+
+            }else {
+                print("failed to create the table");
+            } 
+        }catch(Exception $ex) {
+            print($ex);
+        }
+    }
+
 
 }
 
@@ -90,6 +121,6 @@ class Connection{
 // $conn->EstablishConnection();
 
 // // calling the create table function here
-// $conn->CreateJobDetailsTable();
+// $conn->CreateApplicationDetails();
 
 ?>

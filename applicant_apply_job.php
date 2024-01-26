@@ -1,3 +1,107 @@
+<?php
+// ========== inclusing the connection here ============ //
+include("Model/Job.php");
+//  ================== // ================= // ======= //
+$first_name = "";
+$last_name = "";
+$phone_number = "";
+$email = "";
+$age = "";
+$gender = "";
+$cv = "";
+$cover_letter = "";
+// ============== validating the values here ============== //
+function ValidateInputs($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+
+    return $data;
+}
+
+// ============= the array for the errors ==================== //
+$all_errors = array(
+    "first_name"=>"", "last_name"=>"", "phone_number"=>"", "email"=>"", "age"=>"",
+    "gender"=>"", "cover_letter"=>""
+);
+// =============== getting values from the form here ================= //
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $first_name = ValidateInputs($_POST["first_name"]);
+    $last_name = ValidateInputs($_POST["last_name"]);
+    $phone_number = ValidateInputs($_POST["phone_number"]);
+    $email = ValidateInputs($_POST["email"]);
+    $age = ValidateInputs($_POST["age"]);
+    $gender = ValidateInputs($_POST["gender"]);
+    $cv = ValidateInputs($_POST["cv"]);
+    $cover_letter = ValidateInputs($_POST["cover_letter"]);
+
+    // =============== passing the values here =================== //
+    if (isset($_POST["save_details"])) {
+        if (empty($_POST["first_name"])) {
+            $all_errors["first_name"] = "fill in the blanks";
+        }
+        else {
+            if (!preg_match("/^[a-zA-Z]*$/", $first_name)) {
+                $all_errors["first_name"] = "provide valid characters";
+            }
+        }
+        // ========================= //========================= //
+        if (empty($_POST["last_name"])) {
+            $all_errors["last_name"] = "fill in the blanks";
+        }
+        else {
+            if (!preg_match("/^[a-zA-Z]*$/", $last_name)) {
+                $all_errors["last_name"] = "provide valid characters";
+            }
+        }
+        // ========================= //========================= //
+        if (empty($_POST["phone_number"])) {
+            $all_errors["phone_number"] = "fill in the blanks";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z]*$/", $phone_number)) {
+                $all_errors["phone_number"] = "provide valid characters";
+            }
+        }
+        // ========================= //========================= //
+        if (empty($_POST["email"])) {
+            $all_errors["email"] = "fill in the blanks";
+        }
+        else {
+            if (!filter_var(FILTER_VALIDATE_EMAIL, $email)) {
+                $all_errors["email"] = "provide valid email please";
+            }
+        }
+        // ========================= //========================= //
+        if (empty($_POST["age"])) {
+            $all_errors["age"] = "fill in the blanks";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z]*$/", $age)) {
+                $all_errors["age"] = "provide valid characters";
+            }
+        }
+        // ========================= //========================= //
+        if (empty($_POST["gender"])) {
+            $all_errors["gender"] = "fill in the blanks";
+        }
+        else {
+            if (preg_match("/^[a-zA-Z]*$/", $gender)) {
+                $all_errors["gender"] = "provide valid characters";
+            }
+        }
+
+        // ======================== // =============================== //
+        if (array_filter($all_errors)) {
+            $error_message = "form has errors";
+        }
+        else {
+            // =================== class will be called here ================== //
+
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +134,9 @@
                                     <span class="input-group-text"><i class="bi bi-body-text"></i></span>
                                     <input type="text" name="first_name" class="form-control form-control-lg" placeholder="first name">
                                 </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["first_name"]); ?>
+                                </div>
                             </div>
                             <!-- ================= // ================= // -->
                             <div class="col me-3">
@@ -39,6 +146,9 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-body-text"></i></span>
                                     <input type="text" name="last_name" class="form-control form-control-lg" placeholder="last name">
+                                </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["last_name"]); ?>
                                 </div>
                             </div>
                         </div>
@@ -52,6 +162,9 @@
                                     <span class="input-group-text"><i class="bi bi-body-text"></i></span>
                                     <input type="text" name="phone_number" class="form-control form-control-lg" placeholder="phone number...">
                                 </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["phone_number"]); ?>
+                                </div>
                             </div>
                             <!-- ================= // ================= // -->
                             <div class="col me-3">
@@ -61,6 +174,9 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-body-text"></i></span>
                                     <input type="email" name="email" class="form-control form-control-lg" placeholder="email">
+                                </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["email"]); ?>
                                 </div>
                             </div>
                         </div>
@@ -74,6 +190,9 @@
                                     <span class="input-group-text"><i class="bi bi-body-text"></i></span>
                                     <input type="number" name="age" class="form-control form-control-lg" placeholder="enter age...">
                                 </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["age"]); ?>
+                                </div>
                             </div>
                             <!-- ================= // ================= // -->
                             <div class="col me-3">
@@ -86,6 +205,10 @@
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
+                                   
+                                </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["gender"]); ?>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +235,7 @@
 
                         <!-- =============== the section for the form here =========== -->
                         <div class="save-details-btn mt-3 ms-3">
-                            <input type="submit" value="Apply for job" class="btn btn-primary">
+                            <input type="submit" value="Apply for job" class="btn btn-primary" name="save_details">
                         </div>
                     </form>
                 </div>
