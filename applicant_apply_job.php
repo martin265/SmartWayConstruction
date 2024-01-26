@@ -32,8 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = ValidateInputs($_POST["email"]);
     $age = ValidateInputs($_POST["age"]);
     $gender = ValidateInputs($_POST["gender"]);
-    $cv = ValidateInputs($_POST["cv"]);
-    $cover_letter = ValidateInputs($_POST["cover_letter"]);
 
     // =============== passing the values here =================== //
     if (isset($_POST["save_details"])) {
@@ -68,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["email"] = "fill in the blanks";
         }
         else {
-            if (!filter_var(FILTER_VALIDATE_EMAIL, $email)) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $all_errors["email"] = "provide valid email please";
             }
         }
@@ -86,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["gender"] = "fill in the blanks";
         }
         else {
-            if (preg_match("/^[a-zA-Z]*$/", $gender)) {
+            if (!preg_match("/^[a-zA-Z]*$/", $gender)) {
                 $all_errors["gender"] = "provide valid characters";
             }
         }
@@ -97,7 +95,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         else {
             // =================== class will be called here ================== //
+            print("hello world");
+            // Check for file uploads
+            if (isset($_FILES['cv']) && isset($_FILES['cover_letter'])) {
+                // File upload directory
+                $uploadDirectory = "uploads/";
 
+                // Extract first name and last name
+                $firstName = ValidateInputs($_POST["first_name"]);
+                $lastName = ValidateInputs($_POST["last_name"]);
+
+                // Create a folder for each user based on their first name
+                $userFolder = $uploadDirectory . $firstName . '/';
+
+                if (!file_exists($userFolder)) {
+                    mkdir($userFolder, 0755, true); // Create the user's folder if it doesn't exist
+                }
+
+                // Get file names
+                $cvFileName = $_FILES['cv']['name'];
+                $coverLetterFileName = $_FILES['cover_letter']['name'];
+
+                // Append first name and last name to file names
+                $cvFileNameWithNames = $firstName . '_' . $lastName . '_' . $cvFileName;
+                $coverLetterFileNameWithNames = $firstName . '_' . $lastName . '_' . $coverLetterFileName;
+
+                // Set file paths
+                $cvFilePath = $userFolder . $cvFileNameWithNames;
+                $coverLetterFilePath = $userFolder . $coverLetterFileNameWithNames;
+
+                // Move uploaded files to the specified directory
+                move_uploaded_file($_FILES['cv']['tmp_name'], $cvFilePath);
+                move_uploaded_file($_FILES['cover_letter']['tmp_name'], $coverLetterFilePath);
+
+                // You can save the file paths in the database or perform other actions
+            }
         }
     }
 }
@@ -124,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
             <div class="col-lg-12">
                 <div class="job-application-page shadow-sm">
-                    <form action="applicant_apply_job.php" method="POST" class="job-application-form">
+                    <form action="applicant_apply_job.php" method="POST" class="job-application-form" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col ms-3">
                                 <label for="FirstName">
