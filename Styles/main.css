@@ -72,3 +72,15 @@ body {
         margin-top: 20px;
     }
 }
+
+/* ============= apply job page ============ */
+.job-application-page {
+    margin-top: 60px;
+}
+
+.application-details-page h1 {
+    text-align: center;
+    padding-top: 30px;
+    text-transform: capitalize;
+    color: #0050C1;
+}
