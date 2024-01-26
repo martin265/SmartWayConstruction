@@ -78,7 +78,7 @@ $all_results = FetchAllJobs($conn);
                                         <span class="me-3 text-primary"><i class="bi bi-calendar2-event"></i></span><?php echo($single_record["application_deadline"]); ?>
                                     </p>
                                     <div class="button-details">
-                                        <a href="applicant_apply_job.php?id=<?php echo($single_record["job_id"]); ?>" class="btn btn-primary">
+                                        <a href="applicant_apply_job.php?job_id=<?php echo($single_record["job_id"]); ?>" class="btn btn-primary">
                                             <span><i class="bi bi-file-earmark-arrow-down me-2"></i></span>Apply Job
                                         </a>
                                     </div>

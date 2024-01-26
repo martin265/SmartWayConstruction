@@ -2,6 +2,10 @@
 // ========== inclusing the connection here ============ //
 include("Model/Job.php");
 //  ================== // ================= // ======= //
+$connection = new Connection("localhost", "root", "", "SmartWayConstruction");
+$connection->EstablishConnection();
+$conn = $connection->get_connection();
+
 $first_name = "";
 $last_name = "";
 $phone_number = "";
@@ -18,6 +22,24 @@ function ValidateInputs($data) {
 
     return $data;
 }
+
+// ================ function to get the job id here ================== //
+function FetchJobID($conn) {
+    try {
+        if (isset($_GET["job_id"])) {
+            $job_id = mysqli_real_escape_string($conn, $_GET["job_id"]);
+            $sqlCommand = "SELECT * FROM JobDetails WHERE job_id = '$job_id'";
+            $results = mysqli_query($conn, $sqlCommand);
+            $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+
+            return $all_results;
+        }
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
+
+$all_results = FetchJobID($conn);
 
 // ============= the array for the errors ==================== //
 $all_errors = array(
@@ -100,7 +122,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_FILES['cv']) && isset($_FILES['cover_letter'])) {
                 // File upload directory
                 $uploadDirectory = "uploads/";
-
                 // Extract first name and last name
                 $firstName = ValidateInputs($_POST["first_name"]);
                 $lastName = ValidateInputs($_POST["last_name"]);
@@ -128,7 +149,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 move_uploaded_file($_FILES['cv']['tmp_name'], $cvFilePath);
                 move_uploaded_file($_FILES['cover_letter']['tmp_name'], $coverLetterFilePath);
 
-                // You can save the file paths in the database or perform other actions
+                // ============= // calling the class here // ================ //
+                $first_name = mysqli_real_escape_string($conn, $_POST["first_name"]);
+                $last_name = mysqli_escape_string($conn, $_POST["last_name"]);
+                $phone_number = mysqli_escape_string($conn, $_POST["phone_number"]);
+                $email = mysqli_escape_string($conn, $_POST["email"]);
+                $age = mysqli_escape_string($conn, $_POST["age"]);
+                $gender = mysqli_escape_string($conn, $_POST["gender"]);
+
+                // =========== calling the class to save the details here ================= //
+                $applicant = new Application(
+                    $first_name, $last_name, $phone_number, $email, $age, $gender,
+                    $cv, $cover_letter, $cvFileName, $coverLetterFileName
+                );
+
+                // =============== calling the function here =============== //
+                $applicant->SaveApplicantDetails();
             }
         }
     }
@@ -156,6 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
             <div class="col-lg-12">
                 <div class="job-application-page shadow-sm">
+                    <!-- ============ the form will be here ============= -->
                     <form action="applicant_apply_job.php" method="POST" class="job-application-form" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col ms-3">
@@ -191,7 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <span class="fw-bold">phone number</span>
                                 </label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+                                    <span class="input-group-text"><i class="bi bi-phone"></i></span>
                                     <input type="text" name="phone_number" class="form-control form-control-lg" placeholder="phone number...">
                                 </div>
                                 <div class="error-message">
@@ -204,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <span class="fw-bold">Email</span>
                                 </label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+                                    <span class="input-group-text"><i class="bi bi-envelope-paper"></i></span>
                                     <input type="email" name="email" class="form-control form-control-lg" placeholder="email">
                                 </div>
                                 <div class="error-message">
@@ -219,7 +256,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <span class="fw-bold">Age</span>
                                 </label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+                                    <span class="input-group-text"><i class="bi bi-list-ol"></i></span>
                                     <input type="number" name="age" class="form-control form-control-lg" placeholder="enter age...">
                                 </div>
                                 <div class="error-message">
@@ -232,7 +269,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <span class="fw-bold">gender</span>
                                 </label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+                                    <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></i></span>
                                     <select name="gender" id="" class="form-control form-control-lg">
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>

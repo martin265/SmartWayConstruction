@@ -115,3 +115,11 @@ body {
     color: red;
     font-weight: bolder;
 }
+
+.job-application-page .job-to-apply h1 {
+    text-align: center;
+    text-transform: capitalize;
+    padding-top: 20px;
+    color: #0078D9;
+    font-weight: 500;
+}
