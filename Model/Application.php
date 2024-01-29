@@ -4,7 +4,7 @@ include("Connection/connection.php");
 
 
 
-class Application{
+class Applicant{
     public $first_name;
     public $last_name;
     public $phone_number;
@@ -38,7 +38,7 @@ class Application{
             $sqlCommand = $conn->prepare(
                 "INSERT INTO ApplicationDetails (
                     first_name, last_name, phone_number, email, age, gender,
-                    cv, cover_letter job_title, job_id, 
+                    cv, cover_letter, job_title, job_id
                 ) VALUES(?,?,?,?,?,?,?,?,?,?)"
             );
             // =========== binding the parameters here ============= //

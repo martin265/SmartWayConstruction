@@ -1,6 +1,6 @@
 <?php
 // ========== inclusing the connection here ============ //
-include("Model/Job.php");
+include("Model/Application.php");
 //  ================== // ================= // ======= //
 $connection = new Connection("localhost", "root", "", "SmartWayConstruction");
 $connection->EstablishConnection();
@@ -32,20 +32,49 @@ function FetchJobID($conn) {
             $results = mysqli_query($conn, $sqlCommand);
             $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
 
-            return $all_results;
+            // ============ looping to get the results here ============= //
+            foreach($all_results as $single_record) {
+                return $single_record["job_id"];
+                print($single_record["job_id"]);
+            }
         }
     }catch(Exception $ex) {
         print($ex);
     }
 }
 
-$all_results = FetchJobID($conn);
+$job_id = FetchJobID($conn);
+
+
+
+
+// ============== function to get the current Job title here ============//
+function getJObTitle($conn) {
+    try {
+        if (isset($_GET["job_id"])) {
+            $job_id = mysqli_real_escape_string($conn, $_GET["job_id"]);
+            $sqlCommand = "SELECT job_title FROM JobDetails WHERE job_id = '$job_id'";
+            $results = mysqli_query($conn, $sqlCommand);
+            $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+            
+            foreach($all_results as $job_title) {
+                return $job_title["job_title"];
+            }
+        }
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
+
+$job_title = getJObTitle($conn);
+
 
 // ============= the array for the errors ==================== //
 $all_errors = array(
     "first_name"=>"", "last_name"=>"", "phone_number"=>"", "email"=>"", "age"=>"",
     "gender"=>"", "cover_letter"=>""
 );
+
 // =============== getting values from the form here ================= //
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = ValidateInputs($_POST["first_name"]);
@@ -114,10 +143,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // ======================== // =============================== //
         if (array_filter($all_errors)) {
             $error_message = "form has errors";
+            print($job_title);
         }
         else {
             // =================== class will be called here ================== //
-            print("hello world");
             // Check for file uploads
             if (isset($_FILES['cv']) && isset($_FILES['cover_letter'])) {
                 // File upload directory
@@ -157,14 +186,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $age = mysqli_escape_string($conn, $_POST["age"]);
                 $gender = mysqli_escape_string($conn, $_POST["gender"]);
 
+                
                 // =========== calling the class to save the details here ================= //
-                $applicant = new Application(
+                $applicant = new Applicant(
                     $first_name, $last_name, $phone_number, $email, $age, $gender,
                     $cv, $cover_letter, $cvFileName, $coverLetterFileName
                 );
 
+               
                 // =============== calling the function here =============== //
-                $applicant->SaveApplicantDetails();
+                //$applicant->SaveApplicantDetails($job_title, $job_id);
             }
         }
     }
