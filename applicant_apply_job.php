@@ -6,6 +6,8 @@ $connection = new Connection("localhost", "root", "", "SmartWayConstruction");
 $connection->EstablishConnection();
 $conn = $connection->get_connection();
 
+$current_id = "";
+$job_title = "";
 $first_name = "";
 $last_name = "";
 $phone_number = "";
@@ -35,7 +37,6 @@ function FetchJobID($conn) {
             // ============ looping to get the results here ============= //
             foreach($all_results as $single_record) {
                 return $single_record["job_id"];
-                print($single_record["job_id"]);
             }
         }
     }catch(Exception $ex) {
@@ -43,9 +44,9 @@ function FetchJobID($conn) {
     }
 }
 
-$job_id = FetchJobID($conn);
+$current_id = FetchJobID($conn);
 
-
+print($current_id);
 
 
 // ============== function to get the current Job title here ============//
@@ -67,6 +68,7 @@ function getJObTitle($conn) {
 }
 
 $job_title = getJObTitle($conn);
+
 
 
 // ============= the array for the errors ==================== //
@@ -193,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $cv, $cover_letter, $cvFileName, $coverLetterFileName
                 );
 
-               
+                print($current_id);
                 // =============== calling the function here =============== //
                 //$applicant->SaveApplicantDetails($job_title, $job_id);
             }
