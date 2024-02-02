@@ -6,6 +6,8 @@ $connection = new Connection("localhost", "root", "", "SmartWayConstruction");
 $connection->EstablishConnection();
 $conn = $connection->get_connection();
 
+
+$testing_name = "martin";
 $current_id = "";
 $job_title = "";
 $first_name = "";
@@ -16,6 +18,7 @@ $age = "";
 $gender = "";
 $cv = "";
 $cover_letter = "";
+$single_record;
 // ============== validating the values here ============== //
 function ValidateInputs($data) {
     $data = trim($data);
@@ -25,30 +28,32 @@ function ValidateInputs($data) {
     return $data;
 }
 
-if (isset($_GET["job_id"])) {
-    $job_id = mysqli_real_escape_string($conn, $_GET["job_id"]);
-    $sqlCommand = "SELECT * FROM JobDetails WHERE job_id = '$job_id'";
-    $results = mysqli_query($conn, $sqlCommand);
-    $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
-
-    // ============ looping to get the results here ============= //
-    foreach($all_results as $single_record) {
-        return $single_record["job_id"];
+// ============== function to fetch the records here ================ //
+function FetchSingleRecord($conn) {
+    try {
+        // fetching the record here
+        if (isset($_GET["job_id"])) {
+            $id_to_update = mysqli_real_escape_string($conn, $_GET["job_id"]);
+            // getting the database records here
+            $sqlCommand = "SELECT * FROM JobDetails WHERE job_id = $id_to_update";
+            $results = mysqli_query($conn, $sqlCommand);
+            
+            if ($results && mysqli_num_rows($results) > 0) {
+                // Fetch the first (and only) row
+                $all_results = mysqli_fetch_assoc($results);
+                return $all_results;
+            } else {
+                // Handle the case when no results are found
+                return null;
+            }
+        }
+    } catch (Exception $ex) {
+        print($ex);
     }
 }
 
-if (isset($_GET["job_id"])) {
-    $job_id = mysqli_real_escape_string($conn, $_GET["job_id"]);
-    $sqlCommand = "SELECT job_title FROM JobDetails WHERE job_id = '$job_id'";
-    $results = mysqli_query($conn, $sqlCommand);
-    $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
-    
-    foreach($all_results as $job_title) {
-        return $job_title["job_title"];
-    }
-}
 
-print($current_id . $job_title);
+
 // ============= the array for the errors ==================== //
 $all_errors = array(
     "first_name"=>"", "last_name"=>"", "phone_number"=>"", "email"=>"", "age"=>"",
@@ -66,6 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // =============== passing the values here =================== //
     if (isset($_POST["save_details"])) {
+
+
         if (empty($_POST["first_name"])) {
             $all_errors["first_name"] = "fill in the blanks";
         }
@@ -119,67 +126,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $all_errors["gender"] = "provide valid characters";
             }
         }
+        // =============== filtering the records here =============== //
 
-        // ======================== // =============================== //
-        if (array_filter($all_errors)) {
-            $error_message = "form has errors";
-            print($job_title);
+        if (!array_filter($all_errors)) {
+            // Access job_id directly from $all_results
+            if (isset($_GET["job_id"])) {
+                $d = mysqli_real_escape_string($conn, $_GET["job_id"]);
+                print($all_results["job_id"]);
+            }
         }
         else {
-            // =================== class will be called here ================== //
-            // Check for file uploads
-            if (isset($_FILES['cv']) && isset($_FILES['cover_letter'])) {
-                // File upload directory
-                $uploadDirectory = "uploads/";
-                // Extract first name and last name
-                $firstName = ValidateInputs($_POST["first_name"]);
-                $lastName = ValidateInputs($_POST["last_name"]);
-
-                // Create a folder for each user based on their first name
-                $userFolder = $uploadDirectory . $firstName . '/';
-
-                if (!file_exists($userFolder)) {
-                    mkdir($userFolder, 0755, true); // Create the user's folder if it doesn't exist
-                }
-
-                // Get file names
-                $cvFileName = $_FILES['cv']['name'];
-                $coverLetterFileName = $_FILES['cover_letter']['name'];
-
-                // Append first name and last name to file names
-                $cvFileNameWithNames = $firstName . '_' . $lastName . '_' . $cvFileName;
-                $coverLetterFileNameWithNames = $firstName . '_' . $lastName . '_' . $coverLetterFileName;
-
-                // Set file paths
-                $cvFilePath = $userFolder . $cvFileNameWithNames;
-                $coverLetterFilePath = $userFolder . $coverLetterFileNameWithNames;
-
-                // Move uploaded files to the specified directory
-                move_uploaded_file($_FILES['cv']['tmp_name'], $cvFilePath);
-                move_uploaded_file($_FILES['cover_letter']['tmp_name'], $coverLetterFilePath);
-
-                // ============= // calling the class here // ================ //
-                $client_name = isset($conn, $_POST["client_name"]) ? mysqli_real_escape_string($conn, $_POST["client_name"]) : "";
-                $first_name = isset($conn, $_POST["first_name"]) ? mysqli_real_escape_string($conn, $_POST["first_name"]) : "";
-                $last_name = isset($conn, $_POST["last_name"]) ? mysqli_escape_string($conn, $_POST["last_name"]) : "";
-                $phone_number = isset($conn, $_POST["phone_number"]) ? mysqli_escape_string($conn, $_POST["phone_number"]) : "";
-                $email = isset($conn, $_POST["email"]) ? mysqli_escape_string($conn, $_POST["email"]) : "";
-                $age = isset($conn, $_POST["age"]) ? mysqli_escape_string($conn, $_POST["age"]) : "";
-                $gender = isset($conn, $_POST["gender"]) ? mysqli_escape_string($conn, $_POST["gender"]) : "";
-
-                
-                // =========== calling the class to save the details here ================= //
-                $applicant = new Applicant(
-                    $first_name, $last_name, $phone_number, $email, $age, $gender,
-                    $cv, $cover_letter, $cvFileName, $coverLetterFileName
-                );          
-                // =============== calling the function here =============== //
-                $applicant->SaveApplicantDetails($job_title, $current_id);
-            }
+            $error_message = "the form has errors";
         }
     }
 }
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -204,6 +168,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="job-application-page shadow-sm">
                     <!-- ============ the form will be here ============= -->
                     <form action="applicant_apply_job.php" method="POST" class="job-application-form" enctype="multipart/form-data">
+                        <!-- =================== getting the current job title here =========== -->
+                        <div class="current-job-title">
+                            <div class="row mb-3 mt-3">
+                                <div class="col ms-3 me-3">
+                                    <div class="input-group">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================== // ==================== // -->
                         <div class="row mb-3">
                             <div class="col ms-3">
                                 <label for="FirstName">
@@ -313,9 +288,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
 
                         <!-- =============== the section for the form here =========== -->
-                        <div class="save-details-btn mt-3 ms-3">
-                            <input type="submit" value="Apply for job" class="btn btn-primary" name="save_details">
-                        </div>
+                        <a href="applicant_apply_job.php?job_id=<?php echo $all_results["job_id"]; ?>" class="btn btn-primary">
+                            <span><i class="bi bi-file-earmark-arrow-down me-2"></i></span>Apply Job
+                        </a>
                     </form>
                 </div>
             </div>
