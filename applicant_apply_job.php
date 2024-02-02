@@ -28,6 +28,19 @@ function ValidateInputs($data) {
     return $data;
 }
 
+if (isset($_POST["id_to_insert"])) {
+    $id_to_insert = mysqli_real_escape_string($conn, $_POST["id_to_insert"]);
+    // getting the database records here
+    $sqlCommand = "SELECT * FROM JobDetails WHERE job_id = $id_to_insert";
+    $results = mysqli_query($conn, $sqlCommand);
+    
+    foreach($results as $sing_job) {
+        $job_title = $sing_job["job_title"];
+    }
+
+}
+
+
 // ============== function to fetch the records here ================ //
 function FetchSingleRecord($conn) {
     try {
@@ -129,13 +142,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         // =============== filtering the records here =============== //
-
         if (!array_filter($all_errors)) {
             // Access job_id directly from $all_results
-            if (isset($_GET["job_id"])) {
-                $d = mysqli_real_escape_string($conn, $_GET["job_id"]);
-                print($all_results["job_id"]);
-            }
+            print($id_to_insert . $job_title);
         }
         else {
             $error_message = "the form has errors";
@@ -171,132 +180,127 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <!-- ============ the form will be here ============= -->
                     <form action="applicant_apply_job.php" method="POST" class="job-application-form" enctype="multipart/form-data">
                         <!-- =================== getting the current job title here =========== -->
+                        <div class="current-job-title">
+                            <div class="row mb-3 mt-3">
+                                <div class="col ms-3 me-3">
+                                    <div class="input-group">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <?php if ($all_results) :?>
-                            <div class="current-job-title">
-                                <div class="row mb-3 mt-3">
-                                    <div class="col ms-3 me-3">
-                                        <div class="input-group">
-                                        </div>
-                                    </div>
+                        <!-- ================== // ==================== // -->
+                        <div class="row mb-3">
+                            <div class="col ms-3">
+                                <label for="FirstName">
+                                    <span class="fw-bold">first name</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+                                    <input type="text" name="first_name" class="form-control form-control-lg" placeholder="first name">
+                                </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["first_name"]); ?>
                                 </div>
                             </div>
+                            <!-- ================= // ================= // -->
+                            <div class="col me-3">
+                                <label for="LastName">
+                                    <span class="fw-bold">last name</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+                                    <input type="text" name="last_name" class="form-control form-control-lg" placeholder="last name">
+                                </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["last_name"]); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ===================== thank you jesus christ please forgive me ================ -->
+                        <div class="row mb-3">
+                            <div class="col ms-3">
+                                <label for="PhoneNumber">
+                                    <span class="fw-bold">phone number</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                                    <input type="text" name="phone_number" class="form-control form-control-lg" placeholder="phone number...">
+                                </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["phone_number"]); ?>
+                                </div>
+                            </div>
+                            <!-- ================= // ================= // -->
+                            <div class="col me-3">
+                                <label for="Email">
+                                    <span class="fw-bold">Email</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-envelope-paper"></i></span>
+                                    <input type="email" name="email" class="form-control form-control-lg" placeholder="email">
+                                </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["email"]); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ======================= // for the gender here // ================ -->
+                        <div class="row mb-3">
+                            <div class="col ms-3">
+                                <label for="Age">
+                                    <span class="fw-bold">Age</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-list-ol"></i></span>
+                                    <input type="number" name="age" class="form-control form-control-lg" placeholder="enter age...">
+                                </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["age"]); ?>
+                                </div>
+                            </div>
+                            <!-- ================= // ================= // -->
+                            <div class="col me-3">
+                                <label for="LastName">
+                                    <span class="fw-bold">gender</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></i></span>
+                                    <select name="gender" id="" class="form-control form-control-lg">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                
+                                </div>
+                                <div class="error-message">
+                                    <?php echo($all_errors["gender"]); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ============= the section for applying for a job here ========= -->
+                        <div class="row">
+                            <div class="col ms-3">
+                                <label for="ForFile">
+                                    <span class="fw-bold"><i class="bi bi-file-earmark-person me-2"></i>Select Cv File</span>
+                                </label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control form-control-lg" name="cv">
+                                </div>
+                            </div>
+                            <!-- ============== // ================ // -->
+                            <div class="col me-3">
+                                <label for="ForCoverLetter">
+                                    <span class="fw-bold"><i class="bi bi-postcard me-2"></i>Upload Cover Letter</span>
+                                </label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control form-control-lg" name="cover_letter">
+                                </div>
+                            </div>
+                        </div>
 
-                            <!-- ================== // ==================== // -->
-                            <div class="row mb-3">
-                                <div class="col ms-3">
-                                    <label for="FirstName">
-                                        <span class="fw-bold">first name</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-body-text"></i></span>
-                                        <input type="text" name="first_name" class="form-control form-control-lg" placeholder="first name">
-                                    </div>
-                                    <div class="error-message">
-                                        <?php echo($all_errors["first_name"]); ?>
-                                    </div>
-                                </div>
-                                <!-- ================= // ================= // -->
-                                <div class="col me-3">
-                                    <label for="LastName">
-                                        <span class="fw-bold">last name</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-body-text"></i></span>
-                                        <input type="text" name="last_name" class="form-control form-control-lg" placeholder="last name">
-                                    </div>
-                                    <div class="error-message">
-                                        <?php echo($all_errors["last_name"]); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ===================== thank you jesus christ please forgive me ================ -->
-                            <div class="row mb-3">
-                                <div class="col ms-3">
-                                    <label for="PhoneNumber">
-                                        <span class="fw-bold">phone number</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                                        <input type="text" name="phone_number" class="form-control form-control-lg" placeholder="phone number...">
-                                    </div>
-                                    <div class="error-message">
-                                        <?php echo($all_errors["phone_number"]); ?>
-                                    </div>
-                                </div>
-                                <!-- ================= // ================= // -->
-                                <div class="col me-3">
-                                    <label for="Email">
-                                        <span class="fw-bold">Email</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-envelope-paper"></i></span>
-                                        <input type="email" name="email" class="form-control form-control-lg" placeholder="email">
-                                    </div>
-                                    <div class="error-message">
-                                        <?php echo($all_errors["email"]); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ======================= // for the gender here // ================ -->
-                            <div class="row mb-3">
-                                <div class="col ms-3">
-                                    <label for="Age">
-                                        <span class="fw-bold">Age</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-list-ol"></i></span>
-                                        <input type="number" name="age" class="form-control form-control-lg" placeholder="enter age...">
-                                    </div>
-                                    <div class="error-message">
-                                        <?php echo($all_errors["age"]); ?>
-                                    </div>
-                                </div>
-                                <!-- ================= // ================= // -->
-                                <div class="col me-3">
-                                    <label for="LastName">
-                                        <span class="fw-bold">gender</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></i></span>
-                                        <select name="gender" id="" class="form-control form-control-lg">
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                    
-                                    </div>
-                                    <div class="error-message">
-                                        <?php echo($all_errors["gender"]); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ============= the section for applying for a job here ========= -->
-                            <div class="row">
-                                <div class="col ms-3">
-                                    <label for="ForFile">
-                                        <span class="fw-bold"><i class="bi bi-file-earmark-person me-2"></i>Select Cv File</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control form-control-lg" name="cv">
-                                    </div>
-                                </div>
-                                <!-- ============== // ================ // -->
-                                <div class="col me-3">
-                                    <label for="ForCoverLetter">
-                                        <span class="fw-bold"><i class="bi bi-postcard me-2"></i>Upload Cover Letter</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control form-control-lg" name="cover_letter">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- =============== the section for the form here =========== -->
-                            <input type="hidden" name="id_to_insert" value="<?php echo($all_results["job_id"]); ?>">
-                            <input type="submit" name="save_details" class="btn btn-success btn-lg mt-3 ms-3" value="save details">
-                        <?php else:?>
-
-                        <?php endif;?>
+                        <!-- =============== the section for the form here =========== -->
+                        <input type="hidden" name="id_to_insert" value="<?php echo($all_results["job_id"]); ?>">
+                        <input type="submit" name="save_details" class="btn btn-success btn-lg mt-3 ms-3" value="save details">
                     </form>
                 </div>
             </div>
