@@ -25,52 +25,30 @@ function ValidateInputs($data) {
     return $data;
 }
 
-// ================ function to get the job id here ================== //
-function FetchJobID($conn) {
-    try {
-        if (isset($_GET["job_id"])) {
-            $job_id = mysqli_real_escape_string($conn, $_GET["job_id"]);
-            $sqlCommand = "SELECT * FROM JobDetails WHERE job_id = '$job_id'";
-            $results = mysqli_query($conn, $sqlCommand);
-            $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+if (isset($_GET["job_id"])) {
+    $job_id = mysqli_real_escape_string($conn, $_GET["job_id"]);
+    $sqlCommand = "SELECT * FROM JobDetails WHERE job_id = '$job_id'";
+    $results = mysqli_query($conn, $sqlCommand);
+    $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
 
-            // ============ looping to get the results here ============= //
-            foreach($all_results as $single_record) {
-                return $single_record["job_id"];
-            }
-        }
-    }catch(Exception $ex) {
-        print($ex);
+    // ============ looping to get the results here ============= //
+    foreach($all_results as $single_record) {
+        return $single_record["job_id"];
     }
 }
 
-$current_id = FetchJobID($conn);
-
-print($current_id);
-
-
-// ============== function to get the current Job title here ============//
-function getJObTitle($conn) {
-    try {
-        if (isset($_GET["job_id"])) {
-            $job_id = mysqli_real_escape_string($conn, $_GET["job_id"]);
-            $sqlCommand = "SELECT job_title FROM JobDetails WHERE job_id = '$job_id'";
-            $results = mysqli_query($conn, $sqlCommand);
-            $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
-            
-            foreach($all_results as $job_title) {
-                return $job_title["job_title"];
-            }
-        }
-    }catch(Exception $ex) {
-        print($ex);
+if (isset($_GET["job_id"])) {
+    $job_id = mysqli_real_escape_string($conn, $_GET["job_id"]);
+    $sqlCommand = "SELECT job_title FROM JobDetails WHERE job_id = '$job_id'";
+    $results = mysqli_query($conn, $sqlCommand);
+    $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+    
+    foreach($all_results as $job_title) {
+        return $job_title["job_title"];
     }
 }
 
-$job_title = getJObTitle($conn);
-
-
-
+print($current_id . $job_title);
 // ============= the array for the errors ==================== //
 $all_errors = array(
     "first_name"=>"", "last_name"=>"", "phone_number"=>"", "email"=>"", "age"=>"",
@@ -181,23 +159,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 move_uploaded_file($_FILES['cover_letter']['tmp_name'], $coverLetterFilePath);
 
                 // ============= // calling the class here // ================ //
-                $first_name = mysqli_real_escape_string($conn, $_POST["first_name"]);
-                $last_name = mysqli_escape_string($conn, $_POST["last_name"]);
-                $phone_number = mysqli_escape_string($conn, $_POST["phone_number"]);
-                $email = mysqli_escape_string($conn, $_POST["email"]);
-                $age = mysqli_escape_string($conn, $_POST["age"]);
-                $gender = mysqli_escape_string($conn, $_POST["gender"]);
+                $client_name = isset($conn, $_POST["client_name"]) ? mysqli_real_escape_string($conn, $_POST["client_name"]) : "";
+                $first_name = isset($conn, $_POST["first_name"]) ? mysqli_real_escape_string($conn, $_POST["first_name"]) : "";
+                $last_name = isset($conn, $_POST["last_name"]) ? mysqli_escape_string($conn, $_POST["last_name"]) : "";
+                $phone_number = isset($conn, $_POST["phone_number"]) ? mysqli_escape_string($conn, $_POST["phone_number"]) : "";
+                $email = isset($conn, $_POST["email"]) ? mysqli_escape_string($conn, $_POST["email"]) : "";
+                $age = isset($conn, $_POST["age"]) ? mysqli_escape_string($conn, $_POST["age"]) : "";
+                $gender = isset($conn, $_POST["gender"]) ? mysqli_escape_string($conn, $_POST["gender"]) : "";
 
                 
                 // =========== calling the class to save the details here ================= //
                 $applicant = new Applicant(
                     $first_name, $last_name, $phone_number, $email, $age, $gender,
                     $cv, $cover_letter, $cvFileName, $coverLetterFileName
-                );
-
-                print($current_id);
+                );          
                 // =============== calling the function here =============== //
-                //$applicant->SaveApplicantDetails($job_title, $job_id);
+                $applicant->SaveApplicantDetails($job_title, $current_id);
             }
         }
     }
