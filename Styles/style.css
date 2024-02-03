@@ -215,11 +215,10 @@ body{
 /* ============= card for the applicant details ============ */
 .all-applicants .applicant-details {
     height: 400px;
-    width: 350px;
+    width: 330px;
     background: linear-gradient(to left, #0078D9, #009CDC);
     border-radius: 10px;
-    margin-top: 50px;
-    margin-left: 20px;
+    margin-top: 20px;
    
 }
 
@@ -227,11 +226,44 @@ body{
 @media only screen and (max-width: 768px) {
     .all-applicants .applicant-details {
         height: 400px;
-        width: 100%;
+        width: 95%;
         background: linear-gradient(to left, #0078D9, #009CDC);
         border-radius: 8px;
         margin-top: 50px;
         margin-left: 0;
         margin-right: 0;
     }
+}
+
+/* ================== // ======================== // */
+.content-area .applicant-details h1 {
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+    padding-top: 20px;
+    color: white;
+    font-weight: bolder;
+}
+
+.content-area .applicant-details .applicant-personal-details {
+    padding-top: 20px;
+}
+
+.content-area .applicant-details .applicant-personal-details p {
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.content-area .applicant-details .applicant-profile {
+    display: flex;
+    justify-content: center;
+}
+
+.content-area .applicant-details .applicant-profile img {
+    width: 70px;
+    height: auto;
+    margin-top: 30px;
 }

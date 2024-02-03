@@ -39,22 +39,32 @@ $all_results = fetchAllRecords($conn);
         <div class="content-area">
             <div class="container-xxl">
                 <div class="row">
-                    <div class="col-lg-12 all-applicants">
-                        <?php if ($all_results): ?>
-                            <?php foreach($all_results as $single_record) {?>
-                                <div class="applicant-details">
-                                    <h1>hello</h1>
-                                </div>
-                            <?php }?>
-
-                            <?php else: ?>
-                                <div class="no-available-jobs">
-                                    <div class="card">
-                                        <img src="Controls\Images\job-search.png" alt="job search">
+                    <div class="col-lg-12">
+                        
+                        <!-- ============= // ================ // -->
+                        <div class="all-applicants">
+                            <?php if ($all_results): ?>
+                                <?php foreach($all_results as $single_record) {?>
+                                    <div class="applicant-details">
+                                        <div class="applicant-profile">
+                                            <img src="assets\images\man (1).png" alt="">
+                                        </div>
+                                        <h1><?php echo($single_record["first_name"] . " " . $single_record["last_name"]); ?></h1>
+                                        <div class="applicant-personal-details">
+                                            <p><span><i class="bi bi-envelope-open me-1 text-warning"></i></span>Email: <?php echo($single_record["email"]);?></p>
+                                            <p>Phone Number: <?php echo($single_record["phone_number"]); ?></p>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php }?>
 
-                        <?php endif; ?>
+                                <?php else: ?>
+                                    <div class="no-available-jobs">
+                                        <div class="card">
+                                            <img src="Controls\Images\job-search.png" alt="job search">
+                                        </div>
+                                    </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                     
                 </div>
