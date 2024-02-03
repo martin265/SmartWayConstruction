@@ -20,6 +20,9 @@ function fetchAllRecords($conn) {
 }
 
 $all_results = fetchAllRecords($conn);
+
+// File upload directory
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +55,13 @@ $all_results = fetchAllRecords($conn);
                                         <h1><?php echo($single_record["first_name"] . " " . $single_record["last_name"]); ?></h1>
                                         <div class="applicant-personal-details">
                                             <p><span><i class="bi bi-envelope-open me-1 text-warning"></i></span>Email: <?php echo($single_record["email"]);?></p>
-                                            <p>Phone Number: <?php echo($single_record["phone_number"]); ?></p>
+                                            <p><span><i class="bi bi-phone me-1"></i></span>Phone Number: <?php echo($single_record["phone_number"]); ?></p>
+                                            <p><i class="bi bi-gender-ambiguous me-1"></i>Gender: <?php echo($single_record["gender"]); ?></p>
+                                            <p><i class="bi bi-body-text me-1"></i>Job Title: <?php echo($single_record["job_title"]); ?></p>
+                                        </div>
+                                        <div class="applicant-documents mt-4 ms-3">
+                                            <!-- Add this code to embed or preview the documents -->
+                                            <a href="" class="btn btn-warning btn-lg">preview documents</a>
                                         </div>
                                     </div>
                                 <?php }?>
