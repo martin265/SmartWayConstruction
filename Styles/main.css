@@ -123,3 +123,22 @@ body {
     color: #0078D9;
     font-weight: 500;
 }
+
+.full-job-details-page {
+    background: linear-gradient(to left, #ECEEFF, #ECEEFF);
+    margin-top: 30px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    height: 400px;
+}
+
+.full-job-details-page .full-job-details-title h1 {
+    padding-top: 30px;
+    padding-left: 20px;
+    font-size: 24px;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+    color: #0078D9;
+    font-weight: bolder;
+} 

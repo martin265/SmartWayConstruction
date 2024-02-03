@@ -28,16 +28,28 @@ function ValidateInputs($data) {
     return $data;
 }
 
-if (isset($_POST["id_to_insert"])) {
-    $id_to_insert = mysqli_real_escape_string($conn, $_POST["id_to_insert"]);
-    // getting the database records here
-    $sqlCommand = "SELECT * FROM JobDetails WHERE job_id = $id_to_insert";
-    $results = mysqli_query($conn, $sqlCommand);
-    
-    foreach($results as $sing_job) {
-        $job_title = $sing_job["job_title"];
-    }
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save_details"])) {
+    // Validate and sanitize inputs as needed
 
+    // Use prepared statements to prevent SQL injection
+    $id_to_insert = mysqli_real_escape_string($conn, $_POST["id_to_insert"]);
+    $sqlCommand = "SELECT * FROM JobDetails WHERE job_id = ?";
+    
+    $stmt = mysqli_prepare($conn, $sqlCommand);
+    mysqli_stmt_bind_param($stmt, "s", $id_to_insert);
+    
+    if (mysqli_stmt_execute($stmt)) {
+        $result = mysqli_stmt_get_result($stmt);
+        
+        while ($sing_job = mysqli_fetch_assoc($result)) {
+            $job_title = $sing_job["job_title"];
+        }
+        
+        mysqli_stmt_close($stmt);
+    } else {
+        // Handle the SQL error as needed
+        echo "Error executing query: " . mysqli_error($conn);
+    }
 }
 
 
@@ -67,7 +79,6 @@ function FetchSingleRecord($conn) {
 
 
 $all_results = FetchSingleRecord($conn);
-
 
 // ============= the array for the errors ==================== //
 $all_errors = array(
@@ -145,6 +156,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!array_filter($all_errors)) {
             // Access job_id directly from $all_results
             print($id_to_insert . $job_title);
+            // =================== class will be called here ================== //
+            // Check for file uploads
+            if (isset($_FILES['cv']) && isset($_FILES['cover_letter'])) {
+                // File upload directory
+                $uploadDirectory = "uploads/";
+                // Extract first name and last name
+                $firstName = ValidateInputs($_POST["first_name"]);
+                $lastName = ValidateInputs($_POST["last_name"]);
+
+                // Create a folder for each user based on their first name
+                $userFolder = $uploadDirectory . $firstName . '/';
+
+                if (!file_exists($userFolder)) {
+                    mkdir($userFolder, 0755, true); // Create the user's folder if it doesn't exist
+                }
+
+                // Get file names
+                $cvFileName = $_FILES['cv']['name'];
+                $coverLetterFileName = $_FILES['cover_letter']['name'];
+
+                // Append first name and last name to file names
+                $cvFileNameWithNames = $firstName . '_' . $lastName . '_' . $cvFileName;
+                $coverLetterFileNameWithNames = $firstName . '_' . $lastName . '_' . $coverLetterFileName;
+
+                // Set file paths
+                $cvFilePath = $userFolder . $cvFileNameWithNames;
+                $coverLetterFilePath = $userFolder . $coverLetterFileNameWithNames;
+
+                // Move uploaded files to the specified directory
+                move_uploaded_file($_FILES['cv']['tmp_name'], $cvFilePath);
+                move_uploaded_file($_FILES['cover_letter']['tmp_name'], $coverLetterFilePath);
+
+                // Get only the file names without the directory path
+                $cvFileNameOnly = basename($cvFileNameWithNames);
+                $coverLetterFileNameOnly = basename($coverLetterFileNameWithNames);
+
+                // ============= // calling the class here // ================ //
+                $client_name = isset($conn, $_POST["client_name"]) ? mysqli_real_escape_string($conn, $_POST["client_name"]) : "";
+                $first_name = isset($conn, $_POST["first_name"]) ? mysqli_real_escape_string($conn, $_POST["first_name"]) : "";
+                $last_name = isset($conn, $_POST["last_name"]) ? mysqli_escape_string($conn, $_POST["last_name"]) : "";
+                $phone_number = isset($conn, $_POST["phone_number"]) ? mysqli_escape_string($conn, $_POST["phone_number"]) : "";
+                $email = isset($conn, $_POST["email"]) ? mysqli_escape_string($conn, $_POST["email"]) : "";
+                $age = isset($conn, $_POST["age"]) ? mysqli_escape_string($conn, $_POST["age"]) : "";
+                $gender = isset($conn, $_POST["gender"]) ? mysqli_escape_string($conn, $_POST["gender"]) : "";
+
+                // =========== calling the class to save the details here ================= //
+                $applicant = new Applicant(
+                    $first_name, $last_name, $phone_number, $email, $age, $gender,
+                    $cvFilePath, $coverLetterFilePath, $cvFileNameOnly, $coverLetterFileNameOnly
+                );
+                // =============== calling the function here =============== //
+                $applicant->SaveApplicantDetails($job_title, $id_to_insert);
+            }
+            else {
+                $error_message = "the form has errors";
+            }
+
         }
         else {
             $error_message = "the form has errors";
@@ -176,19 +244,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container-xxl">
         <div class="row">
             <div class="col-lg-12">
+                <div class="full-job-details-page shadow-sm">
+                    <div class="full-job-details-title">
+                        <h1>full job details</h1>
+                    </div>
+                </div>
+                <!-- =============== the other section will be here -->
                 <div class="job-application-page shadow-sm">
                     <!-- ============ the form will be here ============= -->
                     <form action="applicant_apply_job.php" method="POST" class="job-application-form" enctype="multipart/form-data">
                         <!-- =================== getting the current job title here =========== -->
-                        <div class="current-job-title">
-                            <div class="row mb-3 mt-3">
-                                <div class="col ms-3 me-3">
-                                    <div class="input-group">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- ================== // ==================== // -->
                         <div class="row mb-3">
                             <div class="col ms-3">
