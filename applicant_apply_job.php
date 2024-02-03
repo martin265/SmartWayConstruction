@@ -248,6 +248,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="full-job-details-title">
                         <h1>full job details</h1>
                     </div>
+
+                   <div class="job-details-panel">
+                        <div class="job-detail">
+                            <?php if($all_results):?>
+                                <div class="all-job-details">
+                                    <p><span><i class="bi bi-body-text me-2 text-primary"></i></span>job title: <?php echo($all_results["job_title"]); ?></p>
+                                    <p><span><i class="bi bi-body-text me-2 text-primary"></i></span>job type: <?php echo($all_results["job_type"]); ?></p>
+                                    <p><span><i class="bi bi-geo-alt me-2 text-primary"></i></span>job location: <?php echo($all_results["job_location"]); ?></p>
+                                    <p><span><i class="bi bi-envelope-paper me-2 text-primary"></i></span>job email: <?php echo($all_results["email"]); ?></p>
+                                    <p><span><i class="bi bi-receipt me-2 text-primary"></i></span>job description: <?php echo($all_results["job_description"]); ?></p>
+                                    <p><span><i class="bi bi-phone me-2 text-primary"></i></span>job phone number: <?php echo($all_results["query_phone_number"]); ?></p>
+                                </div>
+                            <?php endif;?>
+                        </div>
+
+                        <div class="job-detail-2">
+                            <?php if($all_results):?>
+                                <div class="all-job-details">
+                                    <p><span><i class="bi bi-building me-2 text-primary"></i></span>company overview: <?php echo($all_results["company_overview"]); ?></p>
+                                    <p><span><i class="bi bi-bookmarks me-2 text-primary"></i></span>qualification: <?php echo($all_results["qualification"]); ?></p>
+                                    <p><span><i class="bi bi-gear-wide me-2 text-primary"></i></span>technical skills: <?php echo($all_results["technical_skills"]); ?></p>
+                                    <p><span><i class="bi bi-backpack3 me-2 text-primary"></i></span>benefits: <?php echo($all_results["benefits"]); ?></p>
+                                    <p><span><i class="bi bi-calendar-week me-2 text-primary"></i></span>application dealine: <?php echo($all_results["application_deadline"]); ?></p>
+                                    
+                                </div>
+                            <?php endif;?>
+                        </div>
+                   </div>
                 </div>
                 <!-- =============== the other section will be here -->
                 <div class="job-application-page shadow-sm">
@@ -365,7 +393,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         <!-- =============== the section for the form here =========== -->
                         <input type="hidden" name="id_to_insert" value="<?php echo($all_results["job_id"]); ?>">
-                        <input type="submit" name="save_details" class="btn btn-success btn-lg mt-3 ms-3" value="save details">
+                        <input type="submit" name="save_details" class="btn btn-primary btn-lg mt-3 ms-3" value="save details">
                     </form>
                 </div>
             </div>
