@@ -43,7 +43,7 @@
         <!-- the side bar navigation items will be here -->
         <div class="navigation-item">
             <i class="bi bi-file-earmark-richtext"></i>
-            <a href="#">applications</a>
+            <a href="administrator_applicants.php">applications</a>
         </div>
 
         <!-- ========== drop down for the therapy sessions will be here  -->
