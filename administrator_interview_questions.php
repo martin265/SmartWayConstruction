@@ -36,13 +36,23 @@ function ValidateInputs($data) {
 }
 
 // function to get the applicants here //
-function FetchApplicants() {
+function FetchApplicants($conn) {
     try {
         // getting the connection here //
+        $sqlCommand = "SELECT * FROM ApplicationDetails";
+        // =========== // running the query here ============ //
+        $results = mysqli_query($conn, $sqlCommand);
+        // ========== changing the results to associative array =========== //
+        $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+
+        return $all_results;
+
     }catch(Exception $ex) {
         print($ex);
     }
 }
+
+$all_results = FetchApplicants($conn);
 
 // ============== function will be used to save the answers to the questions ================ //
 $answers_errors = array("saved_question"=>"", "question_answer"=>"");
@@ -268,7 +278,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <div class="input-group">
                                                     <span class="input-group-text"><i class="bi bi-emoji-laughing"></i></span>
                                                     <select name="applicant" id="" class="form-control form-control-lg">
-                                                        <option value="Applicant">Applicants</option>
+                                                        <?php if ($all_results):?>
+                                                            <?php foreach($all_results as $single_record) {?>
+                                                                <option value="<?php echo($single_record["first_name"] . " " . $single_record["last_name"]); ?>"><?php echo($single_record["first_name"] . " " . $single_record["last_name"]); ?></option>
+                                                            <?php }?>
+                                                        <?php else:?>
+                                                            <option value="Applicants">Applicants</option>
+                                                        <?php endif;?>
                                                     </select>
                                                 </div>
                                                 <!-- =============== // the error will be shown here =======  -->
@@ -515,7 +531,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             </div>
 
                                             <div class="save-response-section mb-5 ms-3 mt-3">
-                                                <input type="submit" class="btn btn-primary btn-lg" name="save-question-answer">
+                                                <input type="submit" class="btn btn-primary btn-lg" name="save-question-answer" value="save answers">
                                             </div>
                                         </div>
                                     </div>
