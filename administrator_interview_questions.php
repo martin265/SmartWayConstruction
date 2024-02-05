@@ -39,7 +39,7 @@ function ValidateInputs($data) {
 function FetchApplicants($conn) {
     try {
         // getting the connection here //
-        $sqlCommand = "SELECT * FROM ApplicationDetails";
+        $sqlCommand = "SELECT * FROM InterviewQuestionsDetails";
         // =========== // running the query here ============ //
         $results = mysqli_query($conn, $sqlCommand);
         // ========== changing the results to associative array =========== //
@@ -592,7 +592,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="bi bi-fire"></i></span>
                                                         <select name="saved_question" id="" class="form-control form-control-lg">
-                                                            <option value="Applicant">Question</option>
+                                                            <?php if ($all_results):?>
+                                                                <?php foreach($all_results as $single_record) {?>
+                                                                    <option value="<?php echo($single_record["first_name"]); ?>"><?php echo($single_record["first_name"]); ?></option>
+                                                                <?php }?>
+                                                            <?php else:?>
+                                                                <option value="Applicants">Applicants</option>
+                                                            <?php endif;?>
                                                         </select>
                                                     </div>
                                                     <div class="error-message ms-2">
