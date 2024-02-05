@@ -276,3 +276,19 @@ body{
     justify-content: center;
     text-align: center;
 }
+
+/* =================== the answers panel for the answers will be here ============ */
+.answers-panel {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.answer-container-panel {
+    /* background: linear-gradient(to right, #7e57c2, #7e57c2); */
+    height: auto;
+    width: 330px;
+    margin: 3px;
+    border: 1px solid #7e57c2;
+    border-radius: 8px;
+} 
