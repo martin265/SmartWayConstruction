@@ -52,16 +52,16 @@ class InterviewQuestions {
             $sqlCommand = $conn->prepare(
                 "INSERT INTO InterviewQuestionsDetails(
                     question_1, question_2, question_3, question_4, question_5,
-                    question_6, question_6, question_7, question_8, question_9, question_10,
-                    interview_duration, interview_date, applicant_name, applicant_id
+                    question_6, question_7, question_8, question_9, question_10,
+                    interview_duration, interview_date, applicant_name, application_id
                 ) VALUES(
-                    ?,?,?,?,?,?,?,?,?,?,?,?
+                    ?,?,?,?,?,?,?,?,?,?,?,?,?,?
                 )"
             );
-            $this->allNotNull();
+            //$this->allNotNull();
             // ============ passing the parameters to the prepared statement here ========= //
             $sqlCommand->bind_param(
-                "ssssssssssss",
+                "ssssssssssssss",
                 $this->question_1, $this->question_2, $this->question_3, $this->question_4,
                 $this->question_5, $this->question_6, $this->question_7, $this->question_8,
                 $this->question_9,  $this->question_10, $this->interview_duration, $this->interview_date,

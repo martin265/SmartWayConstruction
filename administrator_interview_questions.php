@@ -59,13 +59,13 @@ function FetchClientID($conn) {
     try {
         if (isset($_POST["save_details"])) {
             $applicant_name = mysqli_real_escape_string($conn, $_POST["applicant_name"]);
-            $sqlCommand = "SELECT application_id FROM InterviewQuestionsDetails WHERE first_name = '$applicant_name'";
+            $sqlCommand = "SELECT application_id FROM ApplicationDetails WHERE first_name = '$applicant_name'";
             $results = mysqli_query($conn, $sqlCommand);
             // =========== fetching the patient id here ==========//
             $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
             // ========== looping through the results ============= //
             foreach($all_results as $single_result) {
-                return $single_result["applicant_id"];
+                return $single_result["application_id"];
             }
         }
     } catch(Exception $ex) {
@@ -76,7 +76,6 @@ function FetchClientID($conn) {
 }
 
 $applicant_id = FetchClientID($conn);
-print($applicant_id);
 
 // ============== function will be used to save the answers to the questions ================ //
 $answers_errors = array("saved_question"=>"", "question_answer"=>"");
@@ -250,7 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         // ============= // the other question will be here ============== //
-        if (array_filter($all_errors)) {
+        if (!array_filter($all_errors)) {
             // getting inputs from the clients here ============== //
             $applicant_name = isset($conn, $_POST["applicant_name"]) ? mysqli_real_escape_string($conn, $_POST["applicant_name"]) : "";
             $question_1 = isset($conn, $_POST["question_1"]) ? mysqli_real_escape_string($conn, $_POST["question_1"]) : "";
@@ -283,11 +282,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             );
 
             // =============== getting the function to save the details here ========== //
-            // $interviewQuestion->saveQuestions(
-            //     $applicant_name,
-            //     1
-            // );
-
+            $interviewQuestions->saveQuestions(
+                $applicant_name,
+                $applicant_id
+            );
+            $success_message = 'questions saved successfully';
         }
         else {
             $error_message = "the form has errors";
@@ -324,6 +323,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     so if the applicant select a wrong response the system will automatically
                                     calculate the mark...
                                 </p>
+                            </div>
+
+                            <!-- ================ // the success message will be here ------------ -->
+                            <div class="success-message">
+                                <?php if (isset($success_message)) : ?>
+                                    <div id="successAlert" class="alert alert-success w-50" role="alert">
+                                        <?php echo $success_message; ?>
+                                    </div>
+                                    <script>
+                                        // Automatically dismiss the success alert after 5 seconds
+                                        setTimeout(function() {
+                                            document.getElementById("successAlert").style.display = "none";
+                                        }, 5000);
+                                    </script>
+                                    <?php elseif (isset($error_message)) : ?>
+                                        <div class="alert alert-danger w-50" role="alert" id="errorAlert">
+                                            <?php echo($error_message); ?>
+                                        </div>
+                                        <script>
+                                            // Automatically dismiss the success alert after 5 seconds
+                                            setTimeout(function() {
+                                                document.getElementById("errorAlert").style.display = "none";
+                                            }, 5000);
+                                        </script>
+                                <?php endif; ?>
                             </div>
 
                             <!-- the questions panel here -->

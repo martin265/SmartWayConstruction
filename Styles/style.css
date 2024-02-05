@@ -268,3 +268,11 @@ body{
     height: auto;
     margin-top: 30px;
 }
+
+
+/* ============= CSS FOR THE SUCCESS MESSAGE ========= */
+.success-message {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
