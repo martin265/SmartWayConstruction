@@ -114,6 +114,40 @@ class Connection{
         }
     }
 
+    // =============== function for creating the questions table here ==========//
+    public function createInterviewQuestionTable() {
+        try {
+            // executing the qury here
+            $sqlCommand = "CREATE TABLE IF NOT EXISTS InterviewQuestionsDetails(
+                question_id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                question_1 VARCHAR(100) NOT NULL,
+                question_2 VARCHAR(100) NOT NULL,
+                question_3 VARCHAR(100) NOT NULL,
+                question_4 VARCHAR(100) NOT NULL,
+                question_5 VARCHAR(100) NOT NULL,
+                question_6 VARCHAR(100) NOT NULL,
+                question_7 VARCHAR(100) NOT NULL,
+                question_8 VARCHAR(100) NOT NULL,
+                question_9 VARCHAR(100) NOT NULL,
+                question_10 VARCHAR(100) NOT NULL,
+                interview_duration VARCHAR(100) NOT NULL,
+                interview_date VARCHAR(100) NOT NULL,
+                applicant_name VARCHAR(50) NOT NULL,
+                application_id INT UNSIGNED,
+                FOREIGN KEY (application_id) REFERENCES ApplicationDetails(application_id),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )";
+            //  ========== running the database quey here =============//
+            $results = mysqli_query($this->connection, $sqlCommand);
+            if ($results) {
+
+            }else {
+                print("failed to create the table");
+            } 
+        }catch(Exception $ex) {
+            print($ex);
+        }
+    }
 
 }
 
@@ -121,6 +155,6 @@ class Connection{
 // $conn->EstablishConnection();
 
 // // calling the create table function here
-// $conn->CreateApplicationDetails();
+// $conn->createInterviewQuestionTable();
 
 ?>

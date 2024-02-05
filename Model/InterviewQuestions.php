@@ -1,10 +1,6 @@
 <?php
-
 // ============ getting the connection here ============= //
 include("Connection/connection.php");
-
-$connection->EstablishConnection();
-$conn = $connection->get_connection();
 
 class InterviewQuestions {
     public $applicant_name;
@@ -18,14 +14,13 @@ class InterviewQuestions {
     public $question_8;
     public $question_9;
     public $question_10;
-    public $current_question;
-    public $answer;
+    public $interview_duration;
+    public $interview_date;
     public $connection;
 
     // ============ the constructor for the class will be here =========== //
-    public function __construct($applicant_name, $question_1, $question_2,$question_3,$question_4,$question_5,$question_6,$question_7,$question_8,$question_9,$question_10, $current_question, $answer)
+    public function __construct($question_1, $question_2,$question_3,$question_4,$question_5,$question_6,$question_7,$question_8,$question_9,$question_10, $interview_duration, $interview_date)
     {
-        $this->applicant_name = $applicant_name;
         $this->question_1 = $question_1;
         $this->question_2 = $question_2;
         $this->question_3 = $question_3;
@@ -36,10 +31,10 @@ class InterviewQuestions {
         $this->question_8 = $question_8;
         $this->question_9 = $question_9;
         $this->question_10 = $question_10;
-        $this->current_question = $current_question;
-        $this->answer = $answer;
+        $this->interview_duration = $interview_duration;
+        $this->interview_date = $interview_date;
         // passing the database connection here ============= //
-        $this->connection = mysqli_connect("localhost", "root", "", "SmartWayConstruction");
+        $this->connection = new Connection("localhost", "root", "", "SmartWayConstruction");
     }
 
     // ============== the getter for the connection will be here ================ //
@@ -48,7 +43,58 @@ class InterviewQuestions {
     }
 
     // ================ function to insert the records into the database here ============ //
-    public function saveQuest
+    public function saveQuestions($applicant_name, $applicant_id) {
+        try {
+            // getting the connection with the databse here ============= //
+            $this->connection->EstablishConnection();
+            $conn = $this->connection->get_connection();
+            // ============== the query for inserting the records will be here ======== //
+            $sqlCommand = $conn->prepare(
+                "INSERT INTO InterviewQuestionsDetails(
+                    question_1, question_2, question_3, question_4, question_5,
+                    question_6, question_6, question_7, question_8, question_9, question_10,
+                    interview_duration, interview_date, applicant_name, applicant_id
+                ) VALUES(
+                    ?,?,?,?,?,?,?,?,?,?,?,?
+                )"
+            );
+            $this->allNotNull();
+            // ============ passing the parameters to the prepared statement here ========= //
+            $sqlCommand->bind_param(
+                "ssssssssssss",
+                $this->question_1, $this->question_2, $this->question_3, $this->question_4,
+                $this->question_5, $this->question_6, $this->question_7, $this->question_8,
+                $this->question_9,  $this->question_10, $this->interview_duration, $this->interview_date,
+                $applicant_name, $applicant_id
+            );
+
+            // =========== running the databse query here ================ //
+            $sqlCommand->execute();
+        }catch(Exception $ex) {
+            print($ex);
+        }
+    }
+
+    // =============== function to allow the not null values ================= //
+    private function allNotNull() {
+        try {
+            $this->applicant_name = $applicant_name ?? "";
+            $this->question_1 = $question_1 ?? "";
+            $this->question_2 = $question_2 ?? "";
+            $this->question_3 = $question_3 ?? "";
+            $this->question_4 = $question_4 ?? "";
+            $this->question_5 = $question_5 ?? "";
+            $this->question_6 = $question_6 ?? "";
+            $this->question_7 = $question_7 ?? "";
+            $this->question_8 = $question_8 ?? "";
+            $this->question_9 = $question_9 ?? "";
+            $this->question_10 = $question_10 ?? "";
+            $this->interview_duration = $interview_duration ?? "";
+            $this->interview_date = $interview_date ?? "";
+        }catch(Exception $ex) {
+            print($ex);
+        }
+    }
 }
 
 ?>

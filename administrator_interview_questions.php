@@ -1,12 +1,12 @@
 <?php
 // getting the connection here
-include("Connection/connection.php");
+include("Model/InterviewQuestions.php");
 $connection = new Connection("localhost", "root", "", "SmartWayConstruction");
 $connection->EstablishConnection(); 
 $conn = $connection->get_connection();
 
 // ============ // function to validate the input fields here // =============== //
-$applicant = "";
+$applicant_name = "";
 $question_1 = "";
 $question_2 = "";
 $question_3 = "";
@@ -53,6 +53,30 @@ function FetchApplicants($conn) {
 }
 
 $all_results = FetchApplicants($conn);
+
+// ================ function to get the ID of the selected applicant ================ //
+function FetchClientID($conn) {
+    try {
+        if (isset($_POST["save_details"])) {
+            $applicant_name = mysqli_real_escape_string($conn, $_POST["applicant_name"]);
+            $sqlCommand = "SELECT application_id FROM InterviewQuestionsDetails WHERE first_name = '$applicant_name'";
+            $results = mysqli_query($conn, $sqlCommand);
+            // =========== fetching the patient id here ==========//
+            $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+            // ========== looping through the results ============= //
+            foreach($all_results as $single_result) {
+                return $single_result["applicant_id"];
+            }
+        }
+    } catch(Exception $ex) {
+        // Handle exceptions here
+        print($ex);
+        return false;
+    }
+}
+
+$applicant_id = FetchClientID($conn);
+print($applicant_id);
 
 // ============== function will be used to save the answers to the questions ================ //
 $answers_errors = array("saved_question"=>"", "question_answer"=>"");
@@ -108,11 +132,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ============ validating if the fields are empty here ========= //
     if (isset($_POST["save_details"])) {
 
-        if(empty($_POST["applicant"])) {
-            $all_errors["applicant"] = "enter appplicant";
+        if(empty($_POST["applicant_name"])) {
+            $all_errors["applicant_name"] = "enter appplicant";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $applicant)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $applicant_name)) {
                 $all_errors["applicant"] = "enter valid characters";
             }
         }
@@ -121,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_1"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_1)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_1)) {
                 $all_errors["question_1"] = "enter valid characters";
             }
         }
@@ -130,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_2"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_2)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_2)) {
                 $all_errors["question_2"] = "enter valid characters";
             }
         }
@@ -139,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_3"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_3)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_3)) {
                 $all_errors["question_3"] = "enter valid characters";
             }
         }
@@ -148,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_4"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_4)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_4)) {
                 $all_errors["question_4"] = "enter valid characters";
             }
         }
@@ -157,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_5"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_5)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_5)) {
                 $all_errors["question_5"] = "enter valid characters";
             }
         }
@@ -166,7 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_6"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_6)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_6)) {
                 $all_errors["question_6"] = "enter valid characters";
             }
         }
@@ -175,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_7"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_7)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_7)) {
                 $all_errors["question_7"] = "enter valid characters";
             }
         }
@@ -184,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_8"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_8)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_8)) {
                 $all_errors["question_8"] = "enter valid characters";
             }
         }
@@ -193,7 +217,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_9"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_9)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_9)) {
                 $all_errors["question_9"] = "enter valid characters";
             }
         }
@@ -202,7 +226,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_10"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $question_10)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_10)) {
                 $all_errors["question_10"] = "enter valid characters";
             }
         }
@@ -221,16 +245,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["interview_date"] = "enter your question";
         }
         else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $interview_duration)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $interview_duration)) {
                 $all_errors["interview_date"] = "enter valid characters";
             }
         }
         // ============= // the other question will be here ============== //
         if (array_filter($all_errors)) {
+            // getting inputs from the clients here ============== //
+            $applicant_name = isset($conn, $_POST["applicant_name"]) ? mysqli_real_escape_string($conn, $_POST["applicant_name"]) : "";
+            $question_1 = isset($conn, $_POST["question_1"]) ? mysqli_real_escape_string($conn, $_POST["question_1"]) : "";
+            $question_2 = isset($conn, $_POST["question_2"]) ? mysqli_real_escape_string($conn, $_POST["question_2"]) : "";
+            $question_3 = isset($conn, $_POST["question_3"]) ? mysqli_real_escape_string($conn, $_POST["question_3"]) : "";
+            $question_4 = isset($conn, $_POST["question_4"]) ? mysqli_real_escape_string($conn, $_POST["question_4"]) : "";
+            $question_5 = isset($conn, $_POST["question_5"]) ? mysqli_real_escape_string($conn, $_POST["question_5"]) : "";
+            $question_6 = isset($conn, $_POST["question_6"]) ? mysqli_real_escape_string($conn, $_POST["question_6"]) : "";
+            $question_7 = isset($conn, $_POST["question_7"]) ? mysqli_real_escape_string($conn, $_POST["question_7"]) : "";
+            $question_8 = isset($conn, $_POST["question_8"]) ? mysqli_real_escape_string($conn, $_POST["question_8"]) : "";
+            $question_9 = isset($conn, $_POST["question_9"]) ? mysqli_real_escape_string($conn, $_POST["question_9"]) : "";
+            $question_10 = isset($conn, $_POST["question_10"]) ? mysqli_real_escape_string($conn, $_POST["question_10"]) : "";
+            $interview_duration = isset($conn, $_POST["interview_duration"]) ? mysqli_real_escape_string($conn, $_POST["interview_duration"]) : "";
+            $interview_duration = isset($conn, $_POST["interview_date"]) ? mysqli_real_escape_string($conn, $_POST["interview_date"]) : "";
+
+            // ============== creating the class object here ================== //
+            $interviewQuestions = new InterviewQuestions(
+                $question_1,
+                $question_2,
+                $question_3,
+                $question_4,
+                $question_5,
+                $question_6,
+                $question_7,
+                $question_8,
+                $question_9,
+                $question_10,
+                $interview_duration,
+                $interview_date,
+            );
+
+            // =============== getting the function to save the details here ========== //
+            // $interviewQuestion->saveQuestions(
+            //     $applicant_name,
+            //     1
+            // );
 
         }
         else {
-
+            $error_message = "the form has errors";
         }
     }
 }
@@ -277,10 +337,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 </label>
                                                 <div class="input-group">
                                                     <span class="input-group-text"><i class="bi bi-emoji-laughing"></i></span>
-                                                    <select name="applicant" id="" class="form-control form-control-lg">
+                                                    <select name="applicant_name" id="" class="form-control form-control-lg">
                                                         <?php if ($all_results):?>
                                                             <?php foreach($all_results as $single_record) {?>
-                                                                <option value="<?php echo($single_record["first_name"] . " " . $single_record["last_name"]); ?>"><?php echo($single_record["first_name"] . " " . $single_record["last_name"]); ?></option>
+                                                                <option value="<?php echo($single_record["first_name"]); ?>"><?php echo($single_record["first_name"]); ?></option>
                                                             <?php }?>
                                                         <?php else:?>
                                                             <option value="Applicants">Applicants</option>
@@ -306,7 +366,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_1" class="form-control form-control-lg" placeholder="question one">
                                             </div>
                                              <!-- =============== // the error will be shown here =======  -->
-                                             <div class="showing-error">
+                                             <div class="error-message ms-2">
                                                 <?php echo($all_errors["question_1"]); ?>
                                             </div>
                                         </div>
@@ -321,7 +381,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_2" class="form-control form-control-lg" placeholder="question two">
                                             </div>
                                             <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                     <?php echo($all_errors["question_2"]); ?>
                                                 </div>
                                         </div>
@@ -338,7 +398,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_3" class="form-control form-control-lg" placeholder="question three">
                                             </div>
                                             <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                 <?php echo($all_errors["question_3"]); ?>
                                             </div>
                                         </div>
@@ -353,7 +413,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_4" class="form-control form-control-lg" placeholder="question four">
                                             </div>
                                             <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                 <?php echo($all_errors["question_4"]); ?>
                                             </div>
                                         </div>
@@ -370,7 +430,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_5" class="form-control form-control-lg" placeholder="question five">
                                             </div>
                                              <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                 <?php echo($all_errors["question_5"]); ?>
                                             </div>
                                         </div>
@@ -385,7 +445,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_6" class="form-control form-control-lg" placeholder="question six">
                                             </div>
                                              <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                 <?php echo($all_errors["question_6"]); ?>
                                             </div>
                                         </div>
@@ -402,7 +462,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_7" class="form-control form-control-lg" placeholder="question seven">
                                             </div>
                                              <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                 <?php echo($all_errors["question_7"]); ?>
                                             </div>
                                         </div>
@@ -417,7 +477,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_8" class="form-control form-control-lg" placeholder="question eight">
                                             </div>
                                              <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                 <?php echo($all_errors["question_8"]); ?>
                                             </div>
                                         </div>
@@ -434,7 +494,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_9" class="form-control form-control-lg" placeholder="question nine">
                                             </div>
                                              <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                 <?php echo($all_errors["question_9"]); ?>
                                             </div>
                                         </div>
@@ -449,7 +509,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="question_10" class="form-control form-control-lg" placeholder="question ten">
                                             </div>
                                              <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                 <?php echo($all_errors["question_10"]); ?>
                                             </div>
                                         </div>
@@ -466,7 +526,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="number" name="interview_duration" class="form-control form-control-lg" placeholder="add duration...">
                                             </div>
                                              <!-- =============== // the error will be shown here =======  -->
-                                             <div class="error-message">
+                                             <div class="error-message ms-2">
                                                 <?php echo($all_errors["interview_duration"]); ?>
                                             </div>
                                         </div>
@@ -481,7 +541,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <input type="text" name="interview_date" class="form-control form-control-lg" id="ApplicationDeadlineDate" value="12-02-2024">
                                             </div>
                                              <!-- =============== // the error will be shown here =======  -->
-                                            <div class="error-message">
+                                            <div class="error-message ms-2">
                                                 <?php echo($all_errors["applicant"]); ?>
                                             </div>
                                         </div>
@@ -511,7 +571,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                             <option value="Applicant">Question</option>
                                                         </select>
                                                     </div>
-                                                    <div class="error-message">
+                                                    <div class="error-message ms-2">
                                                         <?php echo($all_errors["saved_question"]); ?>
                                                     </div>
                                                 </div>
@@ -524,7 +584,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                         <span class="input-group-text"><i class="bi bi-fire"></i></span>
                                                         <input type="text" name="question_answer" class="form-control form-control-lg" placeholder="provide your answer...">
                                                     </div>
-                                                    <div class="error-message">
+                                                    <div class="error-message ms-2">
                                                         <?php echo($all_errors["question_answer"]); ?>
                                                     </div>
                                                 </div>

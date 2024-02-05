@@ -99,6 +99,7 @@ class Job{
                 query_phone_number, application_deadline
             ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
             // binding the parameters here ===========//
+            $this->allowNotNull();
             $sqlCommand->bind_param(
                 "ssssssssssss",
                 $this->job_title, $this->job_location, $this->job_type,
@@ -130,6 +131,7 @@ class Job{
                 application_deadline = ? WHERE job_id = ?"
             );
             // ============= binding the parameters here =============== //
+            $this->allowNotNull();
             $sqlCommand->bind_param(
                 "ssssssssssssi",
                 $this->job_title, $this->job_location, $this->job_type,
@@ -142,6 +144,25 @@ class Job{
             $sqlCommand->execute();
             print("records updated successfully");
         } catch (Exception $ex) {
+            print($ex);
+        }
+    }
+    // =============== function to allow null values ================ //
+    private function allowNotNull() {
+        try {
+            $this->job_title = $job_title ?? "";
+            $this->job_location = $job_location ?? "";
+            $this->job_type = $job_type ?? "";
+            $this->email = $email ?? "";
+            $this->job_description = $job_description ?? "";
+            $this->company_overview = $company_overview ?? "";
+            $this->qualification = $qualification ?? "";
+            $this->technical_skills = $technical_skills ?? "";
+            $this->benefits = $benefits ?? "";
+            $this->application_instruction = $application_instruction ?? "";
+            $this->query_phone_number = $query_phone_number ?? "";
+            $this->application_deadline = $application_deadline ?? "";
+        }catch(Exception $ex) {
             print($ex);
         }
     }
