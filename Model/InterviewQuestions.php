@@ -48,7 +48,7 @@ class InterviewQuestions {
     }
 
     // ================ function to insert the records into the database here ============ //
-    
+    public function saveQuest
 }
 
 ?>
