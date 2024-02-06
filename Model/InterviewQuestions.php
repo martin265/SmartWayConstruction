@@ -73,6 +73,7 @@ class InterviewQuestions {
         }catch(Exception $ex) {
             print($ex);
         }
+        
     }
 
     // =============== function to allow the not null values ================= //

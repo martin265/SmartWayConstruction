@@ -98,7 +98,7 @@ $all_questions = fetchAllQuestions($conn);
 
 // ============= the function to get the current id for the select question ============== //
 function getCurrentQuestionID($conn) {
-    
+
 }
 
 // ============== function will be used to save the answers to the questions ================ //
@@ -115,7 +115,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $question8 = mysqli_real_escape_string($conn, $_POST["question8"]);
         $question9 = mysqli_real_escape_string($conn, $_POST["question9"]);
         $question10 = mysqli_real_escape_string($conn, $_POST["question10"]);
+
+        // =================== getting the answers here =================== //
+        $answer_question_1 = isset($conn, $_POST["answer_question_1"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_1"]) : "";
+        $answer_question_2 = isset($conn, $_POST["answer_question_2"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_2"]) : "";
+        $answer_question_3 = isset($conn, $_POST["answer_question_3"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_3"]) : "";
+        $answer_question_4 = isset($conn, $_POST["answer_question_4"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_4"]) : "";
+        $answer_question_5 = isset($conn, $_POST["answer_question_5"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_4"]) : "";
+        $answer_question_6 = isset($conn, $_POST["answer_question_6"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_6"]) : "";
+        $answer_question_7 = isset($conn, $_POST["answer_question_7"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_7"]) : "";
+        $answer_question_8 = isset($conn, $_POST["answer_question_8"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_8"]) : "";
+        $answer_question_9 = isset($conn, $_POST["answer_question_9"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_9"]) : "";
+        $answer_question_10 = isset($conn, $_POST["answer_question_10"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_10"]) : "";
         
+
+        // ======================= getting the applicant name here ========================== //
+        print($answer_question_1);        
         // ============ getting the id of the selected question here =========== //
         if ($question1) {
             $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_1 = '$question1'";
@@ -787,7 +802,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
-                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                        <input type="text" name="answer_question_2" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -814,7 +829,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
-                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                        <input type="text" name="answer_question_3" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -844,7 +859,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
-                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                        <input type="text" name="answer_question_4" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -871,7 +886,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
-                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                        <input type="text" name="answer_question_5" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -898,7 +913,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
-                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                        <input type="text" name="answer_question_6" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -929,7 +944,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
-                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                        <input type="text" name="answer_question_7" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1014,7 +1029,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
-                                                        <input type="text" name="answer_question_9" class="form-control form-control-lg">
+                                                        <input type="text" name="answer_question_10" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>

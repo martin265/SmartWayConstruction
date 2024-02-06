@@ -5,31 +5,31 @@ include("Connection/connection.php");
 
 class QuestionAnswers{
     public $applicant_name;
-    public $answer_1;
-    public $answer_2;
-    public $answer_3;
-    public $answer_4;
-    public $answer_5;
-    public $answer_6;
-    public $answer_7;
-    public $answer_8;
-    public $answer_9;
-    public $answer_10;
+    public $question_1;
+    public $question_2;
+    public $question_3;
+    public $question_4;
+    public $question_5;
+    public $question_6;
+    public $question_7;
+    public $question_8;
+    public $question_9;
+    public $question_10;
     public $connection;
 
     // ============ the constructor for the class will be here =========== //
-    public function __construct($answer_1, $answer_2, $answer_3, $answer_4, $answer_5, $answer_6, $answer_7, $answer_8, $answer_9, $answer_10)
+    public function __construct($question_1, $question_2,$question_3,$question_4,$question_5,$question_6,$question_7,$question_8,$question_9,$question_10, $interview_duration, $interview_date)
     {
-        $this->answer_1 = $answer_1;
-        $this->answer_2 = $answer_2;
-        $this->answer_3 = $answer_3;
-        $this->answer_4 = $answer_4;
-        $this->answer_5 = $answer_5;
-        $this->answer_6 = $answer_6;
-        $this->answer_7 = $answer_7;
-        $this->answer_8 = $answer_8;
-        $this->answer_9 = $answer_9;
-        $this->answer_10 = $answer_10;
+        $this->question_1 = $question_1;
+        $this->question_2 = $question_2;
+        $this->question_3 = $question_3;
+        $this->question_4 = $question_4;
+        $this->question_5 = $question_5;
+        $this->question_6 = $question_6;
+        $this->question_7 = $question_7;
+        $this->question_8 = $question_8;
+        $this->question_9 = $question_9;
+        $this->question_10 = $question_10;
         // passing the database connection here ============= //
         $this->connection = new Connection("localhost", "root", "", "SmartWayConstruction");
     }
@@ -39,7 +39,7 @@ class QuestionAnswers{
         return $this->connection;
     }
 
-    // ================= function to insert the answers in corresspondence to the questions =========== //
+    // ==================== function to save the answers here =========================== //
     public function saveQuestionAnswers($applicant_name, $applicant_id) {
         try {
             // getting the connection with the databse here ============= //
@@ -47,21 +47,21 @@ class QuestionAnswers{
             $conn = $this->connection->get_connection();
             // ============== the query for inserting the records will be here ======== //
             $sqlCommand = $conn->prepare(
-                "INSERT INTO InterviewQuestionsDetails(
-                    answer_1, answer_2, answer_3, answer_4, answer_5,
-                    answer_6, answer_7, answer_8, answer_9, answer_10,
+                "INSERT INTO QuestionAnswersDetails(
+                    question_1, question_2, question_3, question_4, question_5,
+                    question_6, question_7, question_8, question_9, question_10,
                     applicant_name, application_id
                 ) VALUES(
-                    ?,?,?,?,?,?,?,?,?,?,?,?,?,?
+                    ?,?,?,?,?,?,?,?,?,?,?,?
                 )"
             );
             //$this->allNotNull();
             // ============ passing the parameters to the prepared statement here ========= //
             $sqlCommand->bind_param(
-                "ssssssssssssss",
-                $this->answer_1, $this->answer_2, $this->answer_3, $this->answer_4,
-                $this->answer_5, $this->answer_6, $this->answer_7, $this->answer_8,
-                $this->answer_9,  $this->answer_10,
+                "ssssssssssss",
+                $this->question_1, $this->question_2, $this->question_3, $this->question_4,
+                $this->question_5, $this->question_6, $this->question_7, $this->question_8,
+                $this->question_9,  $this->question_10,
                 $applicant_name, $applicant_id
             );
 
