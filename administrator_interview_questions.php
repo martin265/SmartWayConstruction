@@ -98,7 +98,7 @@ $all_questions = fetchAllQuestions($conn);
 
 // ============= the function to get the current id for the select question ============== //
 function getCurrentQuestionID($conn) {
-
+    
 }
 
 // ============== function will be used to save the answers to the questions ================ //
@@ -126,6 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_1_row = mysqli_fetch_assoc($results);
                 $question_1_id = $question_1_row["question_id"];
+                print($question_1_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -139,6 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_2_row = mysqli_fetch_assoc($results);
                 $question_2_id = $question_2_row["question_id"];
+                print($question_2_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -154,10 +156,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_3_row = mysqli_fetch_assoc($results);
                 $question_3_id = $question_3_row["question_id"];
+                print($question_3_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
         }
+
         // ==================== the other if state will be here ================ //
         if ($question4) {
             $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_4 = '$question4'";
@@ -168,10 +172,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_4_row = mysqli_fetch_assoc($results);
                 $question_4_id = $question_4_row["question_id"];
+                print($question_4_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
         }
+
         // ==================== the other if state will be here ================ //
         if ($question5) {
             $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_5 = '$question5'";
@@ -182,10 +188,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_5_row = mysqli_fetch_assoc($results);
                 $question_5_id = $question_5_row["question_id"];
+                print($question_5_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
         }
+
         // ==================== the other if state will be here ================ //
         if ($question6) {
             $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_6 = '$question6'";
@@ -196,10 +204,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_6_row = mysqli_fetch_assoc($results);
                 $question_6_id = $question_6_row["question_id"];
+                print($question_6_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
         }
+
         // ==================== the other if state will be here ================ //
         if ($question7) {
             $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_7 = '$question7'";
@@ -210,10 +220,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_7_row = mysqli_fetch_assoc($results);
                 $question_7_id = $question_7_row["question_id"];
+                print($question_7_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
         }
+
         // ==================== the other if state will be here ================ //
         if ($question8) {
             $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_7 = '$question7'";
@@ -224,10 +236,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_8_row = mysqli_fetch_assoc($results);
                 $question_8_id = $question_8_row["question_id"];
+                print($question_8_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
         }
+
         // ==================== the other if state will be here ================ //
         if ($question9) {
             $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_8 = '$question8'";
@@ -237,6 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_9_row = mysqli_fetch_assoc($results);
                 $question_9_id = $question_9_row["question_id"];
+                print($question_9_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -252,6 +267,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_10_row = mysqli_fetch_assoc($results);
                 $question_10_id = $question_10_row["question_id"];
+                print($question_10_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
