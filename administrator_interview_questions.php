@@ -1,6 +1,6 @@
 <?php
 // getting the connection here
-include("Model/");
+include("Model/InterviewQuestions.php");
 $connection = new Connection("localhost", "root", "", "SmartWayConstruction");
 $connection->EstablishConnection(); 
 $conn = $connection->get_connection();
@@ -117,6 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $question10 = mysqli_real_escape_string($conn, $_POST["question10"]);
 
         // =================== getting the answers here =================== //
+        $applicant_name = isset($conn, $_POST["applicant_name"]) ? mysqli_real_escape_string($conn, $_POST["applicant_name"]) : "";
         $answer_question_1 = isset($conn, $_POST["answer_question_1"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_1"]) : "";
         $answer_question_2 = isset($conn, $_POST["answer_question_2"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_2"]) : "";
         $answer_question_3 = isset($conn, $_POST["answer_question_3"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_3"]) : "";
@@ -130,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
 
         // =================== getting the object for the class here ================= //
-        $question_answers = new QuestionAnswers(
+        $question_answers = new InterviewQuestions(
             $answer_question_1,
             $answer_question_2,
             $answer_question_3,
@@ -141,8 +142,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $answer_question_8,
             $answer_question_9,
             $answer_question_10,
+            $interview_duration,
+            $interview_date,
         );
-        
+
         // ============ getting the id of the selected question here =========== //
         if ($question1) {
             $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_1 = '$question1'";
@@ -154,6 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $question_1_row = mysqli_fetch_assoc($results);
                 $question_1_id = $question_1_row["question_id"];
                 // ================== inserting the record for the first question here =============== //
+                $question_answers->saveQuestionAnswers($applicant_name, $question_1_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -167,6 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_2_row = mysqli_fetch_assoc($results);
                 $question_2_id = $question_2_row["question_id"];
+                $question_answers->saveQuestionAnswers($applicant_name, $question_2_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -182,6 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_3_row = mysqli_fetch_assoc($results);
                 $question_3_id = $question_3_row["question_id"];
+                $question_answers->saveQuestionAnswers($applicant_name, $question_3_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -197,6 +203,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_4_row = mysqli_fetch_assoc($results);
                 $question_4_id = $question_4_row["question_id"];
+                $question_answers->saveQuestionAnswers($applicant_name, $question_4_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -212,6 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_5_row = mysqli_fetch_assoc($results);
                 $question_5_id = $question_5_row["question_id"];
+                $question_answers->saveQuestionAnswers($applicant_name, $question_5_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -227,6 +235,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_6_row = mysqli_fetch_assoc($results);
                 $question_6_id = $question_6_row["question_id"];
+                $question_answers->saveQuestionAnswers($applicant_name, $question_6_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -242,6 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_7_row = mysqli_fetch_assoc($results);
                 $question_7_id = $question_7_row["question_id"];
+                $question_answers->saveQuestionAnswers($applicant_name, $question_7_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -257,6 +267,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_8_row = mysqli_fetch_assoc($results);
                 $question_8_id = $question_8_row["question_id"];
+                $question_answers->saveQuestionAnswers($applicant_name, $question_8_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -271,6 +282,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_9_row = mysqli_fetch_assoc($results);
                 $question_9_id = $question_9_row["question_id"];
+                $question_answers->saveQuestionAnswers($applicant_name, $question_9_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -286,6 +298,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_10_row = mysqli_fetch_assoc($results);
                 $question_10_id = $question_10_row["question_id"];
+                $question_answers->saveQuestionAnswers($applicant_name, $question_10_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
