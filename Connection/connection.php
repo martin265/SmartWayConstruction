@@ -149,12 +149,35 @@ class Connection{
         }
     }
 
+    // =============== the function to save the question and its associated answer ========= //
+    public function createQuestionAnswerTable() {
+        try {
+            $sqlCommand = "CREATE TABLE IF NOT EXISTS QuestionsAnswerDetails(
+                answer_id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                current_question VARCHAR(100) NOT NULL,
+                answer VARCHAR(100) NOT NULL,
+                question_id INT UNSIGNED,
+                FOREIGN KEY (question_id) REFERENCES InterviewQuestionsDetails(question_id),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )";
+            //  ========== running the database quey here =============//
+            $results = mysqli_query($this->connection, $sqlCommand);
+            if ($results) {
+
+            }else {
+                print("failed to create the table");
+            } 
+        }catch(Exception $ex) {
+            print($ex);
+        }
+    }
+
 }
 
 // $conn = new Connection("localhost", "root", "", "SmartWayConstruction");
 // $conn->EstablishConnection();
 
 // // calling the create table function here
-// $conn->createInterviewQuestionTable();
+// $conn->createQuestionAnswerTable();
 
 ?>

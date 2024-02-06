@@ -95,35 +95,29 @@ function fetchAllQuestions($conn) {
 // =============== // ====================== //
 $all_questions = fetchAllQuestions($conn);
 
-// ============== function will be used to save the answers to the questions ================ //
-$answers_errors = array("saved_question"=>"", "question_answer"=>"");
-// =========== validating the inputs here ================ //
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $saved_question = ValidateInputs($_POST["saved_question"]);
-    $question_answer = ValidateInputs($_POST["question_answer"]);
-    // ============ making sure that the input fileds are not empty here =============== //
-    if (isset($_POST["save-question-answer"])) {
-        // ================ // ======================= //
-        if (empty($_POST["saved_question"])) {
-            $answers_errors["saved_question"] = "fill in the blanks";
-        }
-        else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $saved_question)) {
-                $answers_errors["saved-question"] = "provide valid characters please";
-            }
-        }
-        //  ======================= // ==================== //
-        if (empty($_POST["question_answer"])) {
-            $answers_errors["question_answer"] = "fill in the blanks";
-        }
-        else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_answer)) {
-                $answers_errors["question_answer"] = "provide the valid answer for the question";
-            }
-        }
-    }
+
+// ============= the function to get the current id for the select question ============== //
+function getCurrentQuestionID($conn) {
+
 }
 
+// ============== function will be used to save the answers to the questions ================ //
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // getting the inputs here ============ //
+    if (isset($_POST["save_all_answers"])) {
+        $question1 = mysqli_real_escape_string($conn, $_POST["question1"]);
+        $question2 = mysqli_real_escape_string($conn, $_POST["question2"]);
+        $question3 = mysqli_real_escape_string($conn, $_POST["question3"]);
+        $question4 = mysqli_real_escape_string($conn, $_POST["question4"]);
+        $question5 = mysqli_real_escape_string($conn, $_POST["question5"]);
+        $question6 = mysqli_real_escape_string($conn, $_POST["question6"]);
+        $question7 = mysqli_real_escape_string($conn, $_POST["question7"]);
+        $question8 = mysqli_real_escape_string($conn, $_POST["question8"]);
+        $question9 = mysqli_real_escape_string($conn, $_POST["question9"]);
+        $question10 = mysqli_real_escape_string($conn, $_POST["question10"]);
+        print($question3);
+    }
+}
 
 
 // ============= the array for the errors here ============== //
@@ -638,7 +632,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <span class="text-center lead fw-bolder mb-3 text-capitalize">question 2</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
-                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                        <select name="question2" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
                                                                     <option value="<?php echo($single_question["question_2"]); ?>"><?php echo($single_question["question_2"]); ?></option>
@@ -665,7 +659,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <span class="text-center lead fw-bolder mb-3 text-capitalize">question 3</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
-                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                        <select name="question3" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
                                                                     <option value="<?php echo($single_question["question_3"]); ?>"><?php echo($single_question["question_3"]); ?></option>
@@ -695,7 +689,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <span class="text-center lead fw-bolder mb-3 text-capitalize">question 4</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
-                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                        <select name="question4" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
                                                                     <option value="<?php echo($single_question["question_4"]); ?>"><?php echo($single_question["question_4"]); ?></option>
@@ -722,7 +716,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <span class="text-center lead fw-bolder mb-3 text-capitalize">question 5</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
-                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                        <select name="question5" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
                                                                     <option value="<?php echo($single_question["question_5"]); ?>"><?php echo($single_question["question_5"]); ?></option>
@@ -749,7 +743,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <span class="text-center lead fw-bolder mb-3 text-capitalize">question 6</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
-                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                        <select name="question6" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
                                                                     <option value="<?php echo($single_question["question_6"]); ?>"><?php echo($single_question["question_6"]); ?></option>
@@ -780,7 +774,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <span class="text-center lead fw-bolder mb-3 text-capitalize">question 7</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
-                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                        <select name="question7" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
                                                                     <option value="<?php echo($single_question["question_7"]); ?>"><?php echo($single_question["question_7"]); ?></option>
@@ -807,7 +801,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <span class="text-center lead fw-bolder mb-3 text-capitalize">question 8</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
-                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                        <select name="question8" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
                                                                     <option value="<?php echo($single_question["question_8"]); ?>"><?php echo($single_question["question_8"]); ?></option>
@@ -834,7 +828,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <span class="text-center lead fw-bolder mb-3 text-capitalize">question 9</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
-                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                        <select name="question9" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
                                                                     <option value="<?php echo($single_question["question_9"]); ?>"><?php echo($single_question["question_9"]); ?></option>
@@ -865,7 +859,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <span class="text-center lead fw-bolder mb-3 text-capitalize">question 10</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
-                                                        <select name="question1" id="" class="form-control form-control-lg w-100">
+                                                        <select name="question10" id="" class="form-control form-control-lg w-100">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
                                                                     <option value="<?php echo($single_question["question_10"]); ?>"><?php echo($single_question["question_10"]); ?></option>
@@ -888,7 +882,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                         <!-- =================== // ================== // -->
                                         <div class="button-panel mt-4 mb-4 ms-3 d-left justify-center">
-                                            <input type="submit" class="btn btn-lg btn-primary m-50" value="save all answers">
+                                            <input type="submit" class="btn btn-lg btn-primary m-50" value="save all answers" name="save_all_answers">
                                         </div>
                                     </div>
                                 </form>
