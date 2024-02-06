@@ -18,7 +18,7 @@ class QuestionAnswers{
     public $connection;
 
     // ============ the constructor for the class will be here =========== //
-    public function __construct($question_1, $question_2,$question_3,$question_4,$question_5,$question_6,$question_7,$question_8,$question_9,$question_10, $interview_duration, $interview_date)
+    public function __construct($question_1, $question_2,$question_3,$question_4,$question_5,$question_6,$question_7,$question_8,$question_9,$question_10)
     {
         $this->question_1 = $question_1;
         $this->question_2 = $question_2;
@@ -47,18 +47,18 @@ class QuestionAnswers{
             $conn = $this->connection->get_connection();
             // ============== the query for inserting the records will be here ======== //
             $sqlCommand = $conn->prepare(
-                "INSERT INTO QuestionAnswersDetails(
+                "INSERT INTO QuestionAnswerDetails(
                     question_1, question_2, question_3, question_4, question_5,
                     question_6, question_7, question_8, question_9, question_10,
                     applicant_name, application_id
                 ) VALUES(
-                    ?,?,?,?,?,?,?,?,?,?,?,?
+                    ?,?,?,?,?,?,?,?,?,?
                 )"
             );
             //$this->allNotNull();
             // ============ passing the parameters to the prepared statement here ========= //
             $sqlCommand->bind_param(
-                "ssssssssssss",
+                "ssssssssss",
                 $this->question_1, $this->question_2, $this->question_3, $this->question_4,
                 $this->question_5, $this->question_6, $this->question_7, $this->question_8,
                 $this->question_9,  $this->question_10,

@@ -149,15 +149,25 @@ class Connection{
         }
     }
 
-    // =============== the function to save the question and its associated answer ========= //
-    public function createQuestionAnswerTable() {
+     // =============== function for creating the questions table here ==========//
+     public function createQuestionAnswerTable() {
         try {
-            $sqlCommand = "CREATE TABLE IF NOT EXISTS QuestionsAnswerDetails(
+            // executing the qury here
+            $sqlCommand = "CREATE TABLE IF NOT EXISTS QuestionAnswerDetails(
                 answer_id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                current_question VARCHAR(100) NOT NULL,
-                answer VARCHAR(100) NOT NULL,
-                question_id INT UNSIGNED,
-                FOREIGN KEY (question_id) REFERENCES InterviewQuestionsDetails(question_id),
+                question_1 VARCHAR(100) NOT NULL,
+                question_2 VARCHAR(100) NOT NULL,
+                question_3 VARCHAR(100) NOT NULL,
+                question_4 VARCHAR(100) NOT NULL,
+                question_5 VARCHAR(100) NOT NULL,
+                question_6 VARCHAR(100) NOT NULL,
+                question_7 VARCHAR(100) NOT NULL,
+                question_8 VARCHAR(100) NOT NULL,
+                question_9 VARCHAR(100) NOT NULL,
+                question_10 VARCHAR(100) NOT NULL,
+                applicant_name VARCHAR(50) NOT NULL,
+                application_id INT UNSIGNED,
+                FOREIGN KEY (application_id) REFERENCES ApplicationDetails(application_id),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )";
             //  ========== running the database quey here =============//
@@ -172,12 +182,14 @@ class Connection{
         }
     }
 
+    
+
 }
 
-// $conn = new Connection("localhost", "root", "", "SmartWayConstruction");
-// $conn->EstablishConnection();
+$conn = new Connection("localhost", "root", "", "SmartWayConstruction");
+$conn->EstablishConnection();
 
-// // calling the create table function here
-// $conn->createQuestionAnswerTable();
+// calling the create table function here
+$conn->createQuestionAnswerTable();
 
 ?>

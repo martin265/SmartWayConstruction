@@ -1,6 +1,6 @@
 <?php
 // getting the connection here
-include("Model/InterviewQuestions.php");
+include("Model/");
 $connection = new Connection("localhost", "root", "", "SmartWayConstruction");
 $connection->EstablishConnection(); 
 $conn = $connection->get_connection();
@@ -129,8 +129,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $answer_question_10 = isset($conn, $_POST["answer_question_10"]) ? mysqli_real_escape_string($conn, $_POST["answer_question_10"]) : "";
         
 
-        // ======================= getting the applicant name here ========================== //
-        print($answer_question_1);        
+        // =================== getting the object for the class here ================= //
+        $question_answers = new QuestionAnswers(
+            $answer_question_1,
+            $answer_question_2,
+            $answer_question_3,
+            $answer_question_4,
+            $answer_question_5,
+            $answer_question_6,
+            $answer_question_7,
+            $answer_question_8,
+            $answer_question_9,
+            $answer_question_10,
+        );
+        
         // ============ getting the id of the selected question here =========== //
         if ($question1) {
             $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_1 = '$question1'";
@@ -141,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_1_row = mysqli_fetch_assoc($results);
                 $question_1_id = $question_1_row["question_id"];
-                print($question_1_id);
+                // ================== inserting the record for the first question here =============== //
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -155,7 +167,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_2_row = mysqli_fetch_assoc($results);
                 $question_2_id = $question_2_row["question_id"];
-                print($question_2_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -171,7 +182,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_3_row = mysqli_fetch_assoc($results);
                 $question_3_id = $question_3_row["question_id"];
-                print($question_3_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -187,7 +197,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_4_row = mysqli_fetch_assoc($results);
                 $question_4_id = $question_4_row["question_id"];
-                print($question_4_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -203,7 +212,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_5_row = mysqli_fetch_assoc($results);
                 $question_5_id = $question_5_row["question_id"];
-                print($question_5_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -219,7 +227,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_6_row = mysqli_fetch_assoc($results);
                 $question_6_id = $question_6_row["question_id"];
-                print($question_6_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -235,7 +242,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_7_row = mysqli_fetch_assoc($results);
                 $question_7_id = $question_7_row["question_id"];
-                print($question_7_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -251,7 +257,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_8_row = mysqli_fetch_assoc($results);
                 $question_8_id = $question_8_row["question_id"];
-                print($question_8_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -266,7 +271,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_9_row = mysqli_fetch_assoc($results);
                 $question_9_id = $question_9_row["question_id"];
-                print($question_9_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
@@ -282,11 +286,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($results) {
                 $question_10_row = mysqli_fetch_assoc($results);
                 $question_10_id = $question_10_row["question_id"];
-                print($question_10_id);
             } else {
                 echo "Error fetching question 1 ID: " . mysqli_error($conn);
             }
         }
+
+        // ========================= inserting the records into the database here ================ //
+
 
 
     }
