@@ -115,7 +115,149 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $question8 = mysqli_real_escape_string($conn, $_POST["question8"]);
         $question9 = mysqli_real_escape_string($conn, $_POST["question9"]);
         $question10 = mysqli_real_escape_string($conn, $_POST["question10"]);
-        print($question3);
+        
+        // ============ getting the id of the selected question here =========== //
+        if ($question1) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_1 = '$question1'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_1_row = mysqli_fetch_assoc($results);
+                $question_1_id = $question_1_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+        if ($question2) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_2 = '$question2'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_2_row = mysqli_fetch_assoc($results);
+                $question_2_id = $question_2_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+
+        // ==================== the other if state will be here ================ //
+        if ($question3) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_3 = '$question3'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_3_row = mysqli_fetch_assoc($results);
+                $question_3_id = $question_3_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+        // ==================== the other if state will be here ================ //
+        if ($question4) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_4 = '$question4'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_4_row = mysqli_fetch_assoc($results);
+                $question_4_id = $question_4_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+        // ==================== the other if state will be here ================ //
+        if ($question5) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_5 = '$question5'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_5_row = mysqli_fetch_assoc($results);
+                $question_5_id = $question_5_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+        // ==================== the other if state will be here ================ //
+        if ($question6) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_6 = '$question6'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_6_row = mysqli_fetch_assoc($results);
+                $question_6_id = $question_6_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+        // ==================== the other if state will be here ================ //
+        if ($question7) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_7 = '$question7'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_7_row = mysqli_fetch_assoc($results);
+                $question_7_id = $question_7_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+        // ==================== the other if state will be here ================ //
+        if ($question8) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_7 = '$question7'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_8_row = mysqli_fetch_assoc($results);
+                $question_8_id = $question_8_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+        // ==================== the other if state will be here ================ //
+        if ($question9) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_8 = '$question8'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_9_row = mysqli_fetch_assoc($results);
+                $question_9_id = $question_9_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+
+        // ==================== the other if state will be here ================ //
+        if ($question10) {
+            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_9 = '$question9'";
+            // ========== getting the results here ============== //
+            $results = mysqli_query($conn, $sqlCommand);
+            // ============ passing the results into an array here ============== //
+            // ============ passing the results into an array here ============== //
+            if ($results) {
+                $question_10_row = mysqli_fetch_assoc($results);
+                $question_10_id = $question_10_row["question_id"];
+            } else {
+                echo "Error fetching question 1 ID: " . mysqli_error($conn);
+            }
+        }
+
+
     }
 }
 
@@ -156,7 +298,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_1"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_1)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_1)) {
                 $all_errors["question_1"] = "enter valid characters";
             }
         }
@@ -165,7 +307,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_2"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_2)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_2)) {
                 $all_errors["question_2"] = "enter valid characters";
             }
         }
@@ -174,7 +316,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_3"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_3)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_3)) {
                 $all_errors["question_3"] = "enter valid characters";
             }
         }
@@ -183,7 +325,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_4"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_4)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_4)) {
                 $all_errors["question_4"] = "enter valid characters";
             }
         }
@@ -192,7 +334,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_5"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_5)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_5)) {
                 $all_errors["question_5"] = "enter valid characters";
             }
         }
@@ -201,7 +343,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_6"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_6)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_6)) {
                 $all_errors["question_6"] = "enter valid characters";
             }
         }
@@ -210,7 +352,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_7"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_7)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_7)) {
                 $all_errors["question_7"] = "enter valid characters";
             }
         }
@@ -219,7 +361,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_8"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_8)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_8)) {
                 $all_errors["question_8"] = "enter valid characters";
             }
         }
@@ -228,7 +370,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_9"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_9)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_9)) {
                 $all_errors["question_9"] = "enter valid characters";
             }
         }
@@ -237,29 +379,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $all_errors["question_10"] = "enter your question";
         }
         else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $question_10)) {
+            if (!preg_match("/^[a-zA-Z0-9-' ]*$/", $question_10)) {
                 $all_errors["question_10"] = "enter valid characters";
             }
         }
         // ============= // the other question will be here ============== //
-        if(empty($_POST["interview_duration"])) {
-            $all_errors["interview_duration"] = "enter your question";
-        }
-        else {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $interview_duration)) {
-                $all_errors["interview_duration"] = "enter valid characters";
-            }
-        }
-
-        // ============= // the other question will be here ============== //
-        if(empty($_POST["interview_date"])) {
-            $all_errors["interview_date"] = "enter your question";
-        }
-        else {
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $interview_duration)) {
-                $all_errors["interview_date"] = "enter valid characters";
-            }
-        }
         // ============= // the other question will be here ============== //
         if (!array_filter($all_errors)) {
             // getting inputs from the clients here ============== //
