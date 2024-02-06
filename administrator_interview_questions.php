@@ -606,7 +606,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="answers-panel">
                                             <div class="answer-container-panel">
                                                 <!-- ============= the div that will hold the first question here -->
-                                                <div class="row mt-3">
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 1</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
                                                         <select name="question1" id="" class="form-control form-control-lg">
@@ -621,24 +622,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     </div>
                                                 </div>
                                                 <!-- =========== input for the response will be here -->
-                                                <div class="row mt-3">
+                                                <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
                                                         <input type="text" name="answer_question_1" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
+
                                             <!-- ============ the other container will be here ======= -->
                                             <div class="answer-container-panel">
                                                 <!-- ============= the div that will hold the first question here -->
-                                                <div class="row mt-3">
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 2</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
                                                         <select name="question1" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
-                                                                    <option value="<?php echo($single_question["question_1"]); ?>"><?php echo($single_question["question_1"]); ?></option>
+                                                                    <option value="<?php echo($single_question["question_2"]); ?>"><?php echo($single_question["question_2"]); ?></option>
                                                                 <?php }; ?>
                                                             <?php else:?>
                                                                 <option value="question1">Question 1</option>
@@ -647,7 +650,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     </div>
                                                 </div>
                                                 <!-- =========== input for the response will be here -->
-                                                <div class="row mt-3">
+                                                <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
                                                         <input type="text" name="answer_question_1" class="form-control form-control-lg">
@@ -658,13 +661,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <!-- ==========// ==================== // -->
                                             <div class="answer-container-panel">
                                                 <!-- ============= the div that will hold the first question here -->
-                                                <div class="row mt-3">
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 3</span>
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
                                                         <select name="question1" id="" class="form-control form-control-lg">
                                                             <?php if($all_questions):?>
                                                                 <?php foreach($all_questions as $single_question) {?>
-                                                                    <option value="<?php echo($single_question["question_1"]); ?>"><?php echo($single_question["question_1"]); ?></option>
+                                                                    <option value="<?php echo($single_question["question_3"]); ?>"><?php echo($single_question["question_3"]); ?></option>
                                                                 <?php }; ?>
                                                             <?php else:?>
                                                                 <option value="question1">Question 1</option>
@@ -673,7 +677,91 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     </div>
                                                 </div>
                                                 <!-- =========== input for the response will be here -->
-                                                <div class="row mt-3">
+                                                <div class="row mb-2">
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
+                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- ============ the end of the panel here ======== -->
+                                        <div class="answers-panel">
+                                            <div class="answer-container-panel">
+                                                <!-- ============= the div that will hold the first question here -->
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 4</span>
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
+                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                            <?php if($all_questions):?>
+                                                                <?php foreach($all_questions as $single_question) {?>
+                                                                    <option value="<?php echo($single_question["question_4"]); ?>"><?php echo($single_question["question_4"]); ?></option>
+                                                                <?php }; ?>
+                                                            <?php else:?>
+                                                                <option value="question4">Question 4</option>
+                                                            <?php endif;?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- =========== input for the response will be here -->
+                                                <div class="row mb-2">
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
+                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- ============ the other container will be here ======= -->
+                                            <div class="answer-container-panel">
+                                                <!-- ============= the div that will hold the first question here -->
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 5</span>
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
+                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                            <?php if($all_questions):?>
+                                                                <?php foreach($all_questions as $single_question) {?>
+                                                                    <option value="<?php echo($single_question["question_5"]); ?>"><?php echo($single_question["question_5"]); ?></option>
+                                                                <?php }; ?>
+                                                            <?php else:?>
+                                                                <option value="question1">Question 5</option>
+                                                            <?php endif;?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- =========== input for the response will be here -->
+                                                <div class="row mb-2">
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
+                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- ==========// ==================== // -->
+                                            <div class="answer-container-panel">
+                                                <!-- ============= the div that will hold the first question here -->
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 6</span>
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
+                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                            <?php if($all_questions):?>
+                                                                <?php foreach($all_questions as $single_question) {?>
+                                                                    <option value="<?php echo($single_question["question_6"]); ?>"><?php echo($single_question["question_6"]); ?></option>
+                                                                <?php }; ?>
+                                                            <?php else:?>
+                                                                <option value="question6">Question 6</option>
+                                                            <?php endif;?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- =========== input for the response will be here -->
+                                                <div class="row mb-2">
                                                     <div class="col ms-2 me-2">
                                                         <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
                                                         <input type="text" name="answer_question_1" class="form-control form-control-lg">
@@ -681,7 +769,127 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <!-- ===================== // the other panel for the adding questions here ========== // -->
                                         <!-- ============ the end of the panel here ======== -->
+                                        <div class="answers-panel">
+                                            <div class="answer-container-panel">
+                                                <!-- ============= the div that will hold the first question here -->
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 7</span>
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
+                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                            <?php if($all_questions):?>
+                                                                <?php foreach($all_questions as $single_question) {?>
+                                                                    <option value="<?php echo($single_question["question_7"]); ?>"><?php echo($single_question["question_7"]); ?></option>
+                                                                <?php }; ?>
+                                                            <?php else:?>
+                                                                <option value="question7">Question 7</option>
+                                                            <?php endif;?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- =========== input for the response will be here -->
+                                                <div class="row mb-2">
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
+                                                        <input type="text" name="answer_question_1" class="form-control form-control-lg">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- ============ the other container will be here ======= -->
+                                            <div class="answer-container-panel">
+                                                <!-- ============= the div that will hold the first question here -->
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 8</span>
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
+                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                            <?php if($all_questions):?>
+                                                                <?php foreach($all_questions as $single_question) {?>
+                                                                    <option value="<?php echo($single_question["question_8"]); ?>"><?php echo($single_question["question_8"]); ?></option>
+                                                                <?php }; ?>
+                                                            <?php else:?>
+                                                                <option value="question1">Question 5</option>
+                                                            <?php endif;?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- =========== input for the response will be here -->
+                                                <div class="row mb-2">
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
+                                                        <input type="text" name="answer_question_8" class="form-control form-control-lg">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- ==========// ==================== // -->
+                                            <div class="answer-container-panel">
+                                                <!-- ============= the div that will hold the first question here -->
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 9</span>
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
+                                                        <select name="question1" id="" class="form-control form-control-lg">
+                                                            <?php if($all_questions):?>
+                                                                <?php foreach($all_questions as $single_question) {?>
+                                                                    <option value="<?php echo($single_question["question_9"]); ?>"><?php echo($single_question["question_9"]); ?></option>
+                                                                <?php }; ?>
+                                                            <?php else:?>
+                                                                <option value="question9">Question 9</option>
+                                                            <?php endif;?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- =========== input for the response will be here -->
+                                                <div class="row mb-2">
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
+                                                        <input type="text" name="answer_question_9" class="form-control form-control-lg">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- =================== // ========================== -->
+
+
+                                        <div class="answers-panel">
+                                            <div class="answer-container-panel">
+                                                <!-- ============= the div that will hold the first question here -->
+                                                <div class="row mt-2">
+                                                    <span class="text-center lead fw-bolder mb-3 text-capitalize">question 10</span>
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Select Question</label>
+                                                        <select name="question1" id="" class="form-control form-control-lg w-100">
+                                                            <?php if($all_questions):?>
+                                                                <?php foreach($all_questions as $single_question) {?>
+                                                                    <option value="<?php echo($single_question["question_10"]); ?>"><?php echo($single_question["question_10"]); ?></option>
+                                                                <?php }; ?>
+                                                            <?php else:?>
+                                                                <option value="question10">Question 10</option>
+                                                            <?php endif;?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- =========== input for the response will be here -->
+                                                <div class="row mb-2">
+                                                    <div class="col ms-2 me-2">
+                                                        <label for="ForAnswer" class="fw-bold ms-2">Enter your answer</label>
+                                                        <input type="text" name="answer_question_9" class="form-control form-control-lg">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- =================== // ================== // -->
+                                        <div class="button-panel mt-4 mb-4 ms-3 d-left justify-center">
+                                            <input type="submit" class="btn btn-lg btn-primary m-50" value="save all answers">
+                                        </div>
                                     </div>
                                 </form>
                             </div>
