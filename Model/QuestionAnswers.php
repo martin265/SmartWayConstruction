@@ -40,7 +40,7 @@ class QuestionAnswers{
     }
 
     // ==================== function to save the answers here =========================== //
-    public function saveQuestionAnswers($applicant_name, $applicant_id) {
+    public function questionAnswers($applicant_name) {
         try {
             // getting the connection with the databse here ============= //
             $this->connection->EstablishConnection();
@@ -50,19 +50,18 @@ class QuestionAnswers{
                 "INSERT INTO QuestionAnswerDetails(
                     question_1, question_2, question_3, question_4, question_5,
                     question_6, question_7, question_8, question_9, question_10,
-                    applicant_name, application_id
+                    applicant_name
                 ) VALUES(
-                    ?,?,?,?,?,?,?,?,?,?
+                    ?,?,?,?,?,?,?,?,?,?,?
                 )"
             );
-            //$this->allNotNull();
             // ============ passing the parameters to the prepared statement here ========= //
             $sqlCommand->bind_param(
-                "ssssssssss",
+                "sssssssssss",
                 $this->question_1, $this->question_2, $this->question_3, $this->question_4,
                 $this->question_5, $this->question_6, $this->question_7, $this->question_8,
                 $this->question_9,  $this->question_10,
-                $applicant_name, $applicant_id
+                $applicant_name
             );
 
             // =========== running the databse query here ================ //

@@ -166,8 +166,6 @@ class Connection{
                 question_9 VARCHAR(100) NOT NULL,
                 question_10 VARCHAR(100) NOT NULL,
                 applicant_name VARCHAR(50) NOT NULL,
-                application_id INT UNSIGNED,
-                FOREIGN KEY (application_id) REFERENCES ApplicationDetails(application_id),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )";
             //  ========== running the database quey here =============//

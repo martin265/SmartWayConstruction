@@ -1,6 +1,6 @@
 <?php
 // getting the connection here
-include("Model/InterviewQuestions.php");
+include("Model/QuestionAnswers.php");
 $connection = new Connection("localhost", "root", "", "SmartWayConstruction");
 $connection->EstablishConnection(); 
 $conn = $connection->get_connection();
@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
 
         // =================== getting the object for the class here ================= //
-        $question_answers = new InterviewQuestions(
+        $question_answers = new questionAnswers(
             $answer_question_1,
             $answer_question_2,
             $answer_question_3,
@@ -142,172 +142,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $answer_question_8,
             $answer_question_9,
             $answer_question_10,
-            $interview_duration,
-            $interview_date,
         );
 
-        // ============ getting the id of the selected question here =========== //
-        if ($question1) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_1 = '$question1'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_1_row = mysqli_fetch_assoc($results);
-                $question_1_id = $question_1_row["question_id"];
-                // ================== inserting the record for the first question here =============== //
-                $question_answers->saveQuestionAnswers($applicant_name, $question_1_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-        if ($question2) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_2 = '$question2'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_2_row = mysqli_fetch_assoc($results);
-                $question_2_id = $question_2_row["question_id"];
-                $question_answers->saveQuestionAnswers($applicant_name, $question_2_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-
-        // ==================== the other if state will be here ================ //
-        if ($question3) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_3 = '$question3'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_3_row = mysqli_fetch_assoc($results);
-                $question_3_id = $question_3_row["question_id"];
-                $question_answers->saveQuestionAnswers($applicant_name, $question_3_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-
-        // ==================== the other if state will be here ================ //
-        if ($question4) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_4 = '$question4'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_4_row = mysqli_fetch_assoc($results);
-                $question_4_id = $question_4_row["question_id"];
-                $question_answers->saveQuestionAnswers($applicant_name, $question_4_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-
-        // ==================== the other if state will be here ================ //
-        if ($question5) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_5 = '$question5'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_5_row = mysqli_fetch_assoc($results);
-                $question_5_id = $question_5_row["question_id"];
-                $question_answers->saveQuestionAnswers($applicant_name, $question_5_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-
-        // ==================== the other if state will be here ================ //
-        if ($question6) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_6 = '$question6'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_6_row = mysqli_fetch_assoc($results);
-                $question_6_id = $question_6_row["question_id"];
-                $question_answers->saveQuestionAnswers($applicant_name, $question_6_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-
-        // ==================== the other if state will be here ================ //
-        if ($question7) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_7 = '$question7'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_7_row = mysqli_fetch_assoc($results);
-                $question_7_id = $question_7_row["question_id"];
-                $question_answers->saveQuestionAnswers($applicant_name, $question_7_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-
-        // ==================== the other if state will be here ================ //
-        if ($question8) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_7 = '$question7'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_8_row = mysqli_fetch_assoc($results);
-                $question_8_id = $question_8_row["question_id"];
-                $question_answers->saveQuestionAnswers($applicant_name, $question_8_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-
-        // ==================== the other if state will be here ================ //
-        if ($question9) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_8 = '$question8'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_9_row = mysqli_fetch_assoc($results);
-                $question_9_id = $question_9_row["question_id"];
-                $question_answers->saveQuestionAnswers($applicant_name, $question_9_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-
-        // ==================== the other if state will be here ================ //
-        if ($question10) {
-            $sqlCommand = "SELECT question_id FROM InterviewQuestionsDetails WHERE question_9 = '$question9'";
-            // ========== getting the results here ============== //
-            $results = mysqli_query($conn, $sqlCommand);
-            // ============ passing the results into an array here ============== //
-            // ============ passing the results into an array here ============== //
-            if ($results) {
-                $question_10_row = mysqli_fetch_assoc($results);
-                $question_10_id = $question_10_row["question_id"];
-                $question_answers->saveQuestionAnswers($applicant_name, $question_10_id);
-            } else {
-                echo "Error fetching question 1 ID: " . mysqli_error($conn);
-            }
-        }
-
-        // ========================= inserting the records into the database here ================ //
-
-
-
+        // =================== saving the records into the database here =============== //
+        $question_answers->QuestionAnswers($applicant_name);
+        print("records saved successfully");
     }
 }
 

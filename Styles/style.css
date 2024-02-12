@@ -292,3 +292,15 @@ body{
     border: 1px solid #7e57c2;
     border-radius: 8px;
 } 
+
+/* =============== for mobile viewing here ================= */
+@media only screen and (max-width: 768px) {
+    .answer-container-panel {
+        height: auto;
+        width: 100%;
+        margin: 3px;
+        border: 1px solid #7e57c2;
+        border-radius: 8px;
+    } 
+}
+
