@@ -333,23 +333,63 @@ body{
     justify-content: center;
     flex-flow: row wrap;
     margin-top: 50px;
-    margin-left: 10px;
 }
 
 .content-area .dashboard-cards .total-applicants {
-    width: 320px;
+    width: 330px;
     height: auto;
     background-color:#0078D9;
+    margin-right: 10px;
+    border-radius: 8px;
 }
 
 .content-area .dashboard-cards .total-questions {
-    width: 320px;
+    width: 330px;
     height: auto;
     background-color:#0078D9;
+    margin-right: 10px;
+    border-radius: 8px;
 }
 
 .content-area .dashboard-cards .total-jobs-available {
-    width: 320px;
+    width: 330px;
     height: auto;
     background-color:#0078D9;
+    border-radius: 8px;
+}
+
+/* ============= when the window goes into mobile version ============== */
+@media only screen and (max-width: 768px) {
+    .content-area .dashboard-cards {
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        margin-top: 50px;
+    
+
+    }
+
+    .content-area .dashboard-cards .total-applicants {
+        width: 100%;
+        height: auto;
+        background-color:#0078D9;
+        margin: 10px;
+        border-radius: 8px;
+    }
+    
+    .content-area .dashboard-cards .total-questions {
+        width: 100%;
+        height: auto;
+        background-color:#0078D9;
+        margin: 10px;
+        border-radius: 8px;
+    }
+    
+    .content-area .dashboard-cards .total-jobs-available {
+        width: 100%;
+        height: auto;
+        background-color:#0078D9;
+        margin: 10px;
+        border-radius: 8px;
+    }
 }
