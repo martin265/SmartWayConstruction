@@ -327,3 +327,29 @@ body{
     padding-left: 20px;
     padding-top: 20px;
 }
+
+.content-area .dashboard-cards {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+.content-area .dashboard-cards .total-applicants {
+    width: 320px;
+    height: auto;
+    background-color:#0078D9;
+}
+
+.content-area .dashboard-cards .total-questions {
+    width: 320px;
+    height: auto;
+    background-color:#0078D9;
+}
+
+.content-area .dashboard-cards .total-jobs-available {
+    width: 320px;
+    height: auto;
+    background-color:#0078D9;
+}
