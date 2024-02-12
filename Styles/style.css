@@ -304,3 +304,26 @@ body{
     } 
 }
 
+
+/* ================ the css for the main dashboard will be here =========== */
+.main-dashboard-panel {
+    height: auto;
+    background-color: #ECEEFF;
+    margin-top: 10px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.content-area .main-dashboard-panel .top-welcome-page {
+    display: flex;
+    align-items: center;
+    gap: 5;
+}
+
+.content-area .main-dashboard-panel .top-welcome-page .top-icon h1 {
+    font-size: 30px;
+    text-transform: capitalize;
+    color: #0078D9;
+    padding-left: 20px;
+    padding-top: 20px;
+}
