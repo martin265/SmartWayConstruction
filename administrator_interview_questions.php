@@ -146,7 +146,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // =================== saving the records into the database here =============== //
         $question_answers->QuestionAnswers($applicant_name);
-        print("records saved successfully");
+        // ============== the success message will be here ================= //
+        $success_message = "answers saved successfully";
     }
 }
 
