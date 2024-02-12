@@ -33,7 +33,7 @@
         <!-- the side bar navigation items will be here -->
         <div class="navigation-item">
             <i class="bi bi-house"></i>
-            <a href="" class="">home</a>
+            <a href="administrator_index.php" class="">home</a>
         </div>
         <!-- the side bar navigation items will be here -->
         <div class="navigation-item">
