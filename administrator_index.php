@@ -1,7 +1,7 @@
 <?php
 
 // ================== including the connection class here ============//
-include("Config/connection.php");
+include("Connection/connection.php");
 $connection = new Connection("localhost", "root", "", "SmartWayConstruction");
 $connection->EstablishConnection();
 $conn = $connection->get_connection();
@@ -31,6 +31,7 @@ $totalRecords = countPatientRecords($conn);
 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,9 +65,24 @@ $totalRecords = countPatientRecords($conn);
 
                             <!-- ============== the section for the cards will be here ============ -->
                             <div class="dashboard-cards">
-                                <div class="total-applicants">1</div>
+                                <div class="total-applicants">
+                                    <div class="top-icon-applicants">
+                                        <i class="bi bi-file-earmark-richtext"></i>
+                                    </div>
+                                    <!-- =========== the text will be here ========= -->
+                                    <div class="top-text-applicants">
+                                        <h1>total applicants</h1>
+                                    </div>
+                                    <!-- =========== the text will be here ========= -->
+                                    <div class="top-text-applicants">
+                                        <h1><?php echo($totalRecords); ?></h1>
+                                    </div>
+                                </div>
+
                                 <div class="total-questions">2</div>
+
                                 <div class="total-jobs-available">3</div>
+
                             </div>
                             <!-- ================= the other section will start from here ======= -->
                         </div>

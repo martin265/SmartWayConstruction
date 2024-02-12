@@ -393,3 +393,22 @@ body{
         border-radius: 8px;
     }
 }
+
+/* ============== styling the cards here ========== */
+.content-area .dashboard-cards .top-icon-applicants {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    font-size: 80px;
+    color: white;
+}
+
+.content-area .dashboard-cards .top-text-applicants h1{
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+    font-size: 30px;
+}
