@@ -29,6 +29,48 @@ function countPatientRecords($conn) {
 
 $totalRecords = countPatientRecords($conn);
 
+// ================== function to could all the available questions in the database here ========== //
+function totalQuestions($conn) {
+    try {
+        $sqlCommand = "SELECT COUNT(*) AS total_questions FROM InterviewQuestionsDetails";
+        // =========== running the query here ==============//
+        $results = mysqli_query($conn, $sqlCommand);
+        // ============ checking is there available results ============ //
+        if ($results) {
+            // fetching the results as an associative array ========= //
+            $row = mysqli_fetch_assoc($results);
+            $totalQuestions = $row["total_questions"];
+
+            return $totalQuestions;
+        }
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
+
+$totalQuestions = totalQuestions($conn);
+
+// ================== function to could all the available questions in the database here ========== //
+function totalJobs($conn) {
+    try {
+        $sqlCommand = "SELECT COUNT(*) AS total_questions FROM JobDetails";
+        // =========== running the query here ==============//
+        $results = mysqli_query($conn, $sqlCommand);
+        // ============ checking is there available results ============ //
+        if ($results) {
+            // fetching the results as an associative array ========= //
+            $row = mysqli_fetch_assoc($results);
+            $totalJobs = $row["total_questions"];
+
+            return $totalJobs;
+        }
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
+
+$totalJobs = totalQuestions($conn);
+
 // ================= function to fetch patient details here ===============//
 function fetchPatientDetails($conn) {
     try {
@@ -50,21 +92,36 @@ $all_results = fetchPatientDetails($conn);
 // ================ the isset function for deleting the record in the database here ============== //
 if (isset($_POST["delete_record"])) {
     $id_to_delete = mysqli_real_escape_string($conn, $_POST["id_to_delete"]);
-    // getting the function to delete the records here ================ //
-    $sqlCommand = $conn->prepare(
-        "DELETE FROM ApplicationDetails WHERE application_id = ? AND job_id = ?"
-    );
 
-    // ============== binding the query here ================= //
-    $sqlCommand->bind_param(
-        "ss",
-        $id_to_delete,
-        $all_results["job_id"]
-    );
-    $sqlCommand->execute();
-    fetchPatientDetails($conn);
-    print("record deleted successfully");
+    // Check if there are any references in interviewquestionsdetails
+    $check_references_query = $conn->prepare("SELECT * FROM interviewquestionsdetails WHERE application_id = ?");
+    $check_references_query->bind_param("s", $id_to_delete);
+    $check_references_query->execute();
+    $references_result = $check_references_query->get_result();
+
+    // If there are no references, proceed with deletion
+    if ($references_result->num_rows == 0) {
+        // Delete the record from ApplicationDetails
+        $delete_query = $conn->prepare("DELETE FROM ApplicationDetails WHERE application_id = ?");
+        $delete_query->bind_param("s", $id_to_delete);
+        $delete_query->execute();
+
+        // Check if deletion was successful
+        if ($delete_query->affected_rows > 0) {
+            // Record deleted successfully
+            fetchPatientDetails($conn);
+            print("Record deleted successfully");
+        } else {
+            // No records deleted (record not found)
+            print("No record found with the provided ID");
+        }
+    } else {
+        // Records found in interviewquestionsdetails referencing this application_id
+        print("Cannot delete record: References found in interviewquestionsdetails");
+    }
 }
+
+
 
 ?>
 
@@ -125,7 +182,7 @@ if (isset($_POST["delete_record"])) {
                                     </div>
                                     <!-- =========== the text will be here ========= -->
                                     <div class="top-text-questions">
-                                        <h1><?php echo($totalRecords); ?></h1>
+                                        <h1><?php echo($totalQuestions); ?></h1>
                                     </div>
                                 </div>
 
@@ -139,7 +196,7 @@ if (isset($_POST["delete_record"])) {
                                     </div>
                                     <!-- =========== the text will be here ========= -->
                                     <div class="top-text-jobs">
-                                        <h1><?php echo($totalRecords); ?></h1>
+                                        <h1><?php echo($totalJobs); ?></h1>
                                     </div>
                                 </div>
 
