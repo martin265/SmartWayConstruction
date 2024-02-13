@@ -103,7 +103,7 @@ DeleteJobDetails();
                                                     <!-- ============ for the button here -->
                                                     <td>
                                                         <form action="" method="POST">
-                                                            <input type="hidden" name="id_to_delete" value="">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo($single_record["job_id"]); ?>">
                                                             <input type="submit" name="delete" value="delete" class="btn btn-sm btn-danger">
                                                         </form>
                                                     </td>

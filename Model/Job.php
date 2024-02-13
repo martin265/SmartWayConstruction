@@ -99,7 +99,7 @@ class Job{
                 query_phone_number, application_deadline
             ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
             // binding the parameters here ===========//
-            $this->allowNotNull();
+            //$this->allowNotNull();
             $sqlCommand->bind_param(
                 "ssssssssssss",
                 $this->job_title, $this->job_location, $this->job_type,
@@ -131,7 +131,7 @@ class Job{
                 application_deadline = ? WHERE job_id = ?"
             );
             // ============= binding the parameters here =============== //
-            $this->allowNotNull();
+            //$this->allowNotNull();
             $sqlCommand->bind_param(
                 "ssssssssssssi",
                 $this->job_title, $this->job_location, $this->job_type,

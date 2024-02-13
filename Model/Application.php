@@ -42,7 +42,7 @@ class Applicant{
                 ) VALUES(?,?,?,?,?,?,?,?,?,?)"
             );
             // =========== binding the parameters here ============= //
-            $this->allowNotNull();
+            //$this->allowNotNull();
             $sqlCommand->bind_param(
                 "ssssssssss",
                 $this->first_name, $this->last_name, $this->phone_number, $this->email, 
