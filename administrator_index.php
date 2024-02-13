@@ -220,7 +220,6 @@ if (isset($_POST["delete_record"])) {
                                             <th scope="col" class="text-capitalize">gender</th>
                                             <th scope="col" class="text-capitalize">job title</th>
                                             <th scope="col" class="text-capitalize">job id</th>
-                                            <th scope="col" class="text-capitalize">action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -236,12 +235,6 @@ if (isset($_POST["delete_record"])) {
                                                     <td><?php echo($single_record["job_title"]); ?></td>
                                                     <td><?php echo($single_record["job_id"]); ?></td>
                                                     <!-- ============ for the button here -->
-                                                    <td>
-                                                        <form action="administrator_index.php" method="POST">
-                                                            <input type="hidden" name="id_to_delete" value="<?php echo($single_record["application_id"]);?>">
-                                                            <input type="submit" name="delete_record" value="delete" class="btn btn-sm btn-danger">
-                                                        </form>
-                                                    </td>
                                                 </tr>
                                             <?php }?>
                                             <?php else: ?>

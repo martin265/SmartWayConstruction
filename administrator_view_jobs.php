@@ -86,7 +86,6 @@ DeleteJobDetails();
                                             <th scope="col" class="text-capitalize">email</th>
                                             <th scope="col" class="text-capitalize">qualification</th>
                                             <th scope="col" class="text-capitalize">technical skills</th>
-                                            <th scope="col" class="text-capitalize">action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -101,12 +100,6 @@ DeleteJobDetails();
                                                     <td><?php echo($single_record["qualification"]); ?></td>
                                                     <td><?php echo($single_record["technical_skills"]); ?></td>
                                                     <!-- ============ for the button here -->
-                                                    <td>
-                                                        <form action="" method="POST">
-                                                            <input type="hidden" name="id_to_delete" value="<?php echo($single_record["job_id"]); ?>">
-                                                            <input type="submit" name="delete" value="delete" class="btn btn-sm btn-danger">
-                                                        </form>
-                                                    </td>
                                                 </tr>
                                             <?php }?>
                                             <?php else: ?>
