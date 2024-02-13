@@ -183,8 +183,44 @@ body {
     }
 }
 
-.main-job-content-area .all-available-jobs-page {
+.available-jobs-panel {
     background-color: #ECEEFF;
     height: 500px;
-    
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+
+.available-jobs-panel .single-available-job {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.available-jobs-panel .single-available-job .job-details-card {
+    height: auto;
+    width: 400px;
+    background-color:#0078D9;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css');
+.available-jobs-panel .single-available-job .job-details-card .job-title-icon {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    color: white;
+    font-size: 60px;
+}
+
+.available-jobs-panel .page-title h1 {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 40px;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
 }

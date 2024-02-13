@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker3.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 </head>
 <body>
     <!-- ============= the top navigation will be here ========== -->

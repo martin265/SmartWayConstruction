@@ -57,25 +57,25 @@ $all_results = FetchAllJobs($conn);
 
     <!-- ============ the cards to list all the jobs jobs -->
     <div class="container-xxl">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="all-available-jobs-page">
-                <?php if ($all_results): ?>
+        <div class="available-jobs-panel shadow-sm">
+            <div class="page-title">
+                <h1>available jobs</h1>
+            </div>
+            <div class="single-available-job">
+                <?php if($all_results):?>
                     <?php foreach($all_results as $single_record) {?>
-                        <div class="single-available-job">
-                            <?php echo($single_record["job_title"]);?>
+                        <div class="job-details-card shadow-sm">
+                            <div class="job-title-icon">
+                                <i class="fi fi-sr-briefcase-blank text-warning"></i>
+                            </div>
                         </div>
                     <?php }?>
-                <?php else: ?>
-                    <div class="no-available-jobs">
-                        <div class="card">
-                            <img src="Controls\Images\job-search.png" alt="job search">
-                        </div>
-                    </div>
-                <?php endif; ?>
-                </div>
+                <?php else :?>
+
+                <?php endif;?>
             </div>
         </div>
     </div>
+    
 </body>
 </html>
