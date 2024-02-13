@@ -44,24 +44,41 @@ $all_results = fetchAllRecords($conn);
                 <div class="row">
                     <div class="col-lg-12">
                         
-                        <!-- ============= // ================ // -->
+                        
                         <div class="all-applicants">
                             <?php if ($all_results): ?>
                                 <?php foreach($all_results as $single_record) {?>
                                     <div class="applicant-details">
-                                        <div class="applicant-profile">
+                                        <div class="card-header">
                                             <img src="assets\images\man (1).png" alt="">
                                         </div>
-                                        <h1><?php echo($single_record["first_name"] . " " . $single_record["last_name"]); ?></h1>
                                         <div class="applicant-personal-details">
-                                            <p><span><i class="bi bi-envelope-open me-1 text-warning"></i></span>Email: <?php echo($single_record["email"]);?></p>
-                                            <p><span><i class="bi bi-phone me-1"></i></span>Phone Number: <?php echo($single_record["phone_number"]); ?></p>
-                                            <p><i class="bi bi-gender-ambiguous me-1"></i>Gender: <?php echo($single_record["gender"]); ?></p>
-                                            <p><i class="bi bi-body-text me-1"></i>Job Title: <?php echo($single_record["job_title"]); ?></p>
+                                            <div class="details-column">
+                                                <h1><span><i class="bi bi-body-text me-2 text-primary"></i></span>first name</h1>
+                                                <h1><span><i class="bi bi-body-text me-2 text-primary"></i></span>last name</h1>
+                                                <h1><span><i class="bi bi-phone me-2 text-primary"></i></span>phone number</h1>
+                                                <h1><span><i class="bi bi-envelope-paper me-2 text-primary"></i></span>email</h1>
+                                                <h1><span><i class="bi bi-calendar2-week me-2 text-primary"></i></span>age</h1>
+                                                <h1><span><i class="bi bi-gender-ambiguous me-2 text-primary"></i></span>gender</h1>
+                                                <h1><span><i class="bi bi-tools me-2 text-primary"></i></span>job title</h1>
+                                                <h1><span><i class="bi bi-tools me-2 text-primary"></i></span>job id</h1>
+                                                <h1><span><i class="bi bi-calendar-check me-2 text-primary"></i></span>applied at</h1>
+                                            </div>
+                                            <div class="main-details">
+                                                <h1><?php echo($single_record["first_name"]); ?></h1>
+                                                <h1><?php echo($single_record["last_name"]); ?></h1>
+                                                <h1><?php echo($single_record["phone_number"]); ?></h1>
+                                                <h1><?php echo($single_record["email"]); ?></h1>
+                                                <h1><?php echo($single_record["age"]); ?></h1>
+                                                <h1><?php echo($single_record["gender"]); ?></h1>
+                                                <h1><?php echo($single_record["job_title"]); ?></h1>
+                                                <h1><?php echo($single_record["job_id"]); ?></h1>
+                                                <h1><?php echo($single_record["created_at"]); ?></h1>
+                                            </div>
                                         </div>
-                                        <div class="applicant-documents mt-4 ms-3">
-                                            <!-- Add this code to embed or preview the documents -->
-                                            <a href="" class="btn btn-warning btn-lg">preview documents</a>
+
+                                        <div class="document-preview-btn">
+                                            <a href="" class="btn btn-primary btn-lg ms-3">preview documents</a>
                                         </div>
                                     </div>
                                 <?php }?>

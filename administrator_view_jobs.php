@@ -71,51 +71,48 @@ DeleteJobDetails();
                         <div class="all-jobs-table">
                             <div class="back-button-here">
                                 <a href="administrator_job_records.php" class="btn btn-lg btn-outline-dark mt-4 ms-3">
-                                    <span><i class="bi bi-back"></i></span>back
+                                    <span><i class="bi bi-back me-2 text-primary"></i></span>back
                                 </a>
                             </div>
 
                             <!-- ============= the table for the records will be here ======= -->
                             <div class="all-records-table ms-2 me-2 mt-4">
-                                <table class="table table-hover table-striped col-lg-12">
+                                <table id="recent-table" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="col">Job Title</th>
-                                            <th class="col">Job Location</th>
-                                            <th class="col">Job Type</th>
-                                            <th class="col">Qualification</th>
-                                            <th class="col">Application deadline</th>
-                                            <th class="col">Operations</th>
+                                            <th scope="col" class="text-capitalize">job title</th>
+                                            <th scope="col" class="text-capitalize">job location</th>
+                                            <th scope="col" class="text-capitalize">job type</th>
+                                            <th scope="col" class="text-capitalize">email</th>
+                                            <th scope="col" class="text-capitalize">qualification</th>
+                                            <th scope="col" class="text-capitalize">technical skills</th>
+                                            <th scope="col" class="text-capitalize">action</th>
                                         </tr>
-
-                                        <!-- the table data will go in the table body here -->
-                                        <?php foreach($all_results as $single_record) {?>
-                                            <tbody>
+                                    </thead>
+                                    <tbody>
+                                        <!-- ============== looping through the results here ====== -->
+                                        <?php if ($all_results): ?>
+                                            <?php foreach($all_results as $single_record) {?>
                                                 <tr>
-                                                    <td><?php echo($single_record["job_title"]);?></td>
-                                                    <td><?php echo($single_record["job_location"]);?></td>
-                                                    <td><?php echo($single_record["job_type"]);?></td>
-                                                    <td><?php echo($single_record["qualification"]);?></td>
-                                                    <td><?php echo($single_record["application_deadline"]);?></td>
-                                                    <!-- the buttons for updating and deleting the records here -->
-                                                    <td class="ms-3 d-flex">
-                                                        <a href="administrator_update_job.php?update_id=<?php echo($single_record["job_id"]); ?>" class="btn btn-sm btn-primary">
-                                                            <span><i class="bi bi-arrow-clockwise me-2"></i></span>Update
-                                                        </a>
-
-                                                        <form action="" method="POST" class="ms-2">
-                                                            <input type="hidden" name="id_to_delete" value="<?php echo($single_record["job_id"]); ?>">
+                                                    <td><?php echo($single_record["job_title"]); ?></td>
+                                                    <td><?php echo($single_record["job_location"]); ?></td>
+                                                    <td><?php echo($single_record["job_type"]); ?></td>
+                                                    <td><?php echo($single_record["email"]); ?></td>
+                                                    <td><?php echo($single_record["qualification"]); ?></td>
+                                                    <td><?php echo($single_record["technical_skills"]); ?></td>
+                                                    <!-- ============ for the button here -->
+                                                    <td>
+                                                        <form action="" method="POST">
+                                                            <input type="hidden" name="id_to_delete" value="">
                                                             <input type="submit" name="delete" value="delete" class="btn btn-sm btn-danger">
                                                         </form>
                                                     </td>
-                                                    <!-- the delete button here -->
-                                                    <td>
-                                                        
-                                                    </td>
                                                 </tr>
-                                            </tbody>
-                                        <?php }?>
-                                    </thead>
+                                            <?php }?>
+                                            <?php else: ?>
+
+                                            <?php endif; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

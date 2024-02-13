@@ -27,6 +27,12 @@
     <link rel="stylesheet" href="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker3.min.css">
     
+    <script defer src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <script defer src="Styles/style.js"></script>
+
 </head>
 <body>
     <div class="side-navigation-panel">

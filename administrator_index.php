@@ -29,6 +29,42 @@ function countPatientRecords($conn) {
 
 $totalRecords = countPatientRecords($conn);
 
+// ================= function to fetch patient details here ===============//
+function fetchPatientDetails($conn) {
+    try {
+        $sqlCommand = "SELECT * FROM ApplicationDetails";
+        // =========== getting the results here =================//
+        $results = mysqli_query($conn, $sqlCommand);
+        // ============== passing the results into an array here ==========//
+        $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+
+        return $all_results;
+        
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
+
+$all_results = fetchPatientDetails($conn);
+
+// ================ the isset function for deleting the record in the database here ============== //
+if (isset($_POST["delete_record"])) {
+    $id_to_delete = mysqli_real_escape_string($conn, $_POST["id_to_delete"]);
+    // getting the function to delete the records here ================ //
+    $sqlCommand = $conn->prepare(
+        "DELETE FROM ApplicationDetails WHERE application_id = ? AND job_id = ?"
+    );
+
+    // ============== binding the query here ================= //
+    $sqlCommand->bind_param(
+        "ss",
+        $id_to_delete,
+        $all_results["job_id"]
+    );
+    $sqlCommand->execute();
+    fetchPatientDetails($conn);
+    print("record deleted successfully");
+}
 
 ?>
 
@@ -65,7 +101,7 @@ $totalRecords = countPatientRecords($conn);
 
                             <!-- ============== the section for the cards will be here ============ -->
                             <div class="dashboard-cards">
-                                <div class="total-applicants">
+                                <div class="total-applicants shadow-sm">
                                     <div class="top-icon-applicants">
                                         <i class="bi bi-file-earmark-richtext"></i>
                                     </div>
@@ -79,13 +115,86 @@ $totalRecords = countPatientRecords($conn);
                                     </div>
                                 </div>
 
-                                <div class="total-questions">2</div>
+                                <div class="total-questions shadow-sm">
+                                    <div class="top-icon-questions">
+                                        <i class="bi bi-patch-question"></i>
+                                    </div>
+                                    <!-- =========== the text will be here ========= -->
+                                    <div class="top-text-questions">
+                                        <h1>total questions</h1>
+                                    </div>
+                                    <!-- =========== the text will be here ========= -->
+                                    <div class="top-text-questions">
+                                        <h1><?php echo($totalRecords); ?></h1>
+                                    </div>
+                                </div>
 
-                                <div class="total-jobs-available">3</div>
+                                <div class="total-jobs-available shadow-sm">
+                                    <div class="top-icon-jobs">
+                                        <i class="bi bi-tools"></i>
+                                    </div>
+                                    <!-- =========== the text will be here ========= -->
+                                    <div class="top-text-jobs">
+                                        <h1>total jobs</h1>
+                                    </div>
+                                    <!-- =========== the text will be here ========= -->
+                                    <div class="top-text-jobs">
+                                        <h1><?php echo($totalRecords); ?></h1>
+                                    </div>
+                                </div>
 
                             </div>
                             <!-- ================= the other section will start from here ======= -->
+
+                            <div class="recent-activity-panel">
+                                <div class="recent-activity-header">
+                                    <h1><i class="bi bi-clock-history me-2"></i>recent activity</h1>
+                                </div>
+                            </div>
+
+                            <div class="recent-activity-data-table">
+                                <table id="recent-table" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="text-capitalize">first name</th>
+                                            <th scope="col" class="text-capitalize">last name</th>
+                                            <th scope="col" class="text-capitalize">email</th>
+                                            <th scope="col" class="text-capitalize">age</th>
+                                            <th scope="col" class="text-capitalize">gender</th>
+                                            <th scope="col" class="text-capitalize">job title</th>
+                                            <th scope="col" class="text-capitalize">job id</th>
+                                            <th scope="col" class="text-capitalize">action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- ============== looping through the results here ====== -->
+                                        <?php if ($all_results): ?>
+                                            <?php foreach($all_results as $single_record) {?>
+                                                <tr>
+                                                    <td><?php echo($single_record["first_name"]); ?></td>
+                                                    <td><?php echo($single_record["last_name"]); ?></td>
+                                                    <td><?php echo($single_record["email"]); ?></td>
+                                                    <td><?php echo($single_record["age"]); ?></td>
+                                                    <td><?php echo($single_record["gender"]); ?></td>
+                                                    <td><?php echo($single_record["job_title"]); ?></td>
+                                                    <td><?php echo($single_record["job_id"]); ?></td>
+                                                    <!-- ============ for the button here -->
+                                                    <td>
+                                                        <form action="administrator_index.php" method="POST">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo($single_record["application_id"]);?>">
+                                                            <input type="submit" name="delete_record" value="delete" class="btn btn-sm btn-danger">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            <?php }?>
+                                            <?php else: ?>
+
+                                            <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
