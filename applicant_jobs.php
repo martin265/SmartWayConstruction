@@ -68,7 +68,37 @@ $all_results = FetchAllJobs($conn);
                             <div class="job-title-icon">
                                 <i class="fi fi-sr-briefcase-blank text-warning"></i>
                             </div>
+
+                            <div class="main-job-details">
+                                <p><?php echo($single_record["job_title"]); ?></p>
+                            </div>
+
+                            <div class="job-related-details">
+                                <div class="single-job-details">
+                                    <p>job location</p>
+                                    <p>job type</p>
+                                    <p>job email</p>
+                                    <p>qualification</p>
+                                    <p>technical skills</p>
+                                    <p>benefits</p>
+                                    <p>company phone number</p>
+                                    <p>application deadline</p>
+                                </div>
+
+                                <div class="single-job-details">
+                                    <p><?php echo($single_record["job_location"]); ?></p>
+                                    <p><?php echo($single_record["job_type"]); ?></p>
+                                    <p><?php echo($single_record["email"]); ?></p>
+                                    <p><?php echo($single_record["qualification"]); ?></p>
+                                    <p><?php echo($single_record["technical_skills"]); ?></p>
+                                    <p><?php echo($single_record["benefits"]); ?></p>
+                                    <p><?php echo($single_record["query_phone_number"]); ?></p>
+                                    <p><?php echo($single_record["application_deadline"]); ?></p>
+                                </div>
+
+                            </div>
                         </div>
+
                     <?php }?>
                 <?php else :?>
 

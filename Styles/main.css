@@ -185,7 +185,7 @@ body {
 
 .available-jobs-panel {
     background-color: #ECEEFF;
-    height: 500px;
+    height: auto;
     width: 100%;
     margin-bottom: 30px;
     border-radius: 10px;
@@ -205,6 +205,7 @@ body {
     background-color:#0078D9;
     border-radius: 10px;
     margin-top: 30px;
+    margin-bottom: 30px
 }
 
 @import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css');
@@ -223,4 +224,22 @@ body {
     font-family: 'Manrope', sans-serif;
     font-family: 'Roboto', sans-serif;
     text-transform: capitalize;
+    color: #0078D9;
+}
+
+.available-jobs-panel .main-job-details p {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+}
+
+.available-jobs-panel .job-details-card .job-related-details {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.available-jobs-panel .job-details-card .single-job-details p {
+    color: white;
+    font-size: 20px;
 }
