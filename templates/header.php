@@ -35,6 +35,8 @@
                 <a class="nav-item nav-link" href="#">Home</a>
                 <!-- ============ the navigation links will be here -->
                 <a class="nav-item nav-link" href="applicant_jobs.php">Jobs</a>
+                <!-- ============ the navigation links will be here -->
+                <a class="nav-item nav-link" href="applicant_jobs.php">interviews</a>
             </div>
         </nav>
         

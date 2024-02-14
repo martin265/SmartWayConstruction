@@ -74,18 +74,18 @@ $all_results = FetchAllJobs($conn);
                             </div>
 
                             <div class="job-related-details">
-                                <div class="single-job-details">
-                                    <p>job location</p>
-                                    <p>job type</p>
-                                    <p>job email</p>
-                                    <p>qualification</p>
-                                    <p>technical skills</p>
-                                    <p>benefits</p>
-                                    <p>company phone number</p>
-                                    <p>application deadline</p>
+                                <div class="single-job-details-1">
+                                    <p><span><i class="bi bi-body-text me-3"></i></span>job location</p>
+                                    <p><span><i class="bi bi-tree me-3"></i></span>job type</p>
+                                    <p><span><i class="bi bi-envelope-open me-3"></i></span>job email</p>
+                                    <p><span><i class="bi bi-file-earmark-richtext me-3"></i></span>qualification</p>
+                                    <p><span><i class="bi bi-tools me-3"></i></span>technical skills</p>
+                                    <p><span><i class="bi bi-backpack3 me-3"></i></span>benefits</p>
+                                    <p><span><i class="bi bi-phone me-3"></i></span>company phone number</p>
+                                    <p><span><i class="bi bi-calendar-week me-3"></i></span>application deadline</p>
                                 </div>
 
-                                <div class="single-job-details">
+                                <div class="single-job-details-2">
                                     <p><?php echo($single_record["job_location"]); ?></p>
                                     <p><?php echo($single_record["job_type"]); ?></p>
                                     <p><?php echo($single_record["email"]); ?></p>
@@ -96,6 +96,11 @@ $all_results = FetchAllJobs($conn);
                                     <p><?php echo($single_record["application_deadline"]); ?></p>
                                 </div>
 
+                            </div>
+
+                            <!-- ============ button to apply for the job here -->
+                            <div class="apply-job-button mt-5 ms-5 mb-3">
+                                <a href="applicant_apply_job.php?job_id=<?php echo($single_record["job_id"]); ?>" class="btn btn-lg btn-warning">Apply for job</a>
                             </div>
                         </div>
 
