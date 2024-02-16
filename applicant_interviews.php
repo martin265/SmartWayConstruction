@@ -1,5 +1,18 @@
 <?php
+// fetching all the jobs in the database here //
+include("Model/InterviewQuestions.php");
+// ============ estabishing the connection here ============ //
+$connection = new Connection("localhost", "root", "", "SmartWayConstruction");
+$connection->EstablishConnection(); // establishing the connection here
+$conn = $connection->get_connection();
+// ============ function to fetch the questions in the databse here =========== //
+function fecthQuestions($conn) {
+    try {
 
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,11 +71,18 @@
                 </div>
             </div>
         </div>
-
-        <div class="interview-questions-panel">
-            
+    </div>
+    
+    <div class="container-xxl">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="interview-questions-panel shadow-lg">
+                    <div class="interview-question-panel-title">
+                        <h1>questions</h1>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-     
 </body>
 </html>
