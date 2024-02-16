@@ -26,22 +26,41 @@
                 <div class="interviews-timeline-title">
                     <i class="bi bi-hourglass-top"></i>
                 </div>
+                <div class="interviews-timeline-header">
+                    <h1>interviews timeline</h1>
+                </div>
             </div>
+
             <div class="interview-score">
                 <div class="interview-score-title">
                     <i class="bi bi-file-earmark-check"></i>
                 </div>
-            </div>
-            <div class="interviews-answer-evaluation">
-                <div class="interviews-answer-evaluation">
-                    <i class="bi bi-funnel"></i>
+                <div class="interview-score-header">
+                    <h1>interviews score</h1>
                 </div>
             </div>
+
+            <div class="interviews-answer-evaluation">
+                <div class="interviews-answer-evaluation-title">
+                    <i class="bi bi-funnel"></i>
+                </div>
+                <div class="interviews-answer-evaluation-header">
+                    <h1>evaluated interviews</h1>
+                </div>
+            </div>
+
             <div class="interviews-personalisation">
                 <div class="interviews-personalisation-title">
                     <i class="bi bi-cloud-download"></i>
                 </div>
+                <div class="interviews-personalisation-header">
+                    <h1>personalised interviews</h1>
+                </div>
             </div>
+        </div>
+
+        <div class="interview-questions-panel">
+            
         </div>
     </div>
      

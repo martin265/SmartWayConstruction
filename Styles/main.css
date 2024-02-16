@@ -318,6 +318,71 @@ body {
     background: linear-gradient(to left, #0078D9, #0050C1);
 }
 
+/* ============== for the title icons ================  */
+.main-interviews-panel .welcome-interviews-cards .interviews-timeline-title {
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    padding-top: 40px;
+}
+
+/* ================== */
+.main-interviews-panel .welcome-interviews-cards .interview-score-title {
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    padding-top: 40px;
+}
+
+/* ================== */
+.main-interviews-panel .welcome-interviews-cards .interviews-answer-evaluation-title {
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    padding-top: 40px;
+}
+
+/* ================== */
+.main-interviews-panel .welcome-interviews-cards .interviews-personalisation-title {
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    padding-top: 40px;
+}
+
+/* ============== for the title icons ================  */
+.main-interviews-panel .welcome-interviews-cards .interviews-timeline-header h1 {
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    text-transform: capitalize;
+}
+
+/* ================== */
+.main-interviews-panel .welcome-interviews-cards .interview-score-header h1{
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    text-transform: capitalize;
+}
+
+/* ================== */
+.main-interviews-panel .welcome-interviews-cards .interviews-answer-evaluation-header h1 {
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    text-transform: capitalize;
+}
+
+/* ================== */
+.main-interviews-panel .welcome-interviews-cards .interviews-personalisation-header h1 {
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    text-transform: capitalize;
+}
+
+
 /* ============ changing the size of the cards when the page in mobile */
 @media only screen and (max-width: 768px) {
     .main-interviews-panel .welcome-interviews-cards .interviews-timeline {
@@ -331,25 +396,37 @@ body {
     /* ================== */
     .main-interviews-panel .welcome-interviews-cards .interview-score {
         height: 200px;
-        width: 300px;
+        width: 100%;
         border-radius: 8px;
+        margin: 10px;
         background: linear-gradient(to left, #0078D9, #009CDC);
     }
     
     /* ================== */
     .main-interviews-panel .welcome-interviews-cards .interviews-answer-evaluation {
         height: 200px;
-        width: 300px;
+        width: 100%;
         border-radius: 8px;
-        
+        margin: 10px;
         background: linear-gradient(to left, #0050C1, #0078D9);
     }
     
     /* ================== */
     .main-interviews-panel .welcome-interviews-cards .interviews-personalisation {
         height: 200px;
-        width: 300px;
+        width: 100%;
         border-radius: 8px;
+        margin: 10px;
         background: linear-gradient(to left, #0078D9, #0050C1);
     }
+}
+
+/* ===============CSS FOR THE QUESTIONS ============ */
+.interview-questions-panel {
+    background-color: #ECEEFF;
+    height: 500px;
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    margin-top: 50px;
 }
