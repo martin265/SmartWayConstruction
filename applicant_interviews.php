@@ -8,11 +8,23 @@ $conn = $connection->get_connection();
 // ============ function to fetch the questions in the databse here =========== //
 function fecthQuestions($conn) {
     try {
+        $sqlCommand = "SELECT * FROM InterviewQuestionsDetails WHERE question_id = 8";
+        // =========== running the sql command here ============ //
+        $results = mysqli_query($conn, $sqlCommand);
+        // ============ showing the results here =============== //
+        $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+
+        foreach($all_results as $single_record) {
+            return $single_record;
+        }
 
     }catch(Exception $ex) {
         print($ex);
     }
 }
+
+$single_record = fecthQuestions($conn);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,6 +92,15 @@ function fecthQuestions($conn) {
                     <div class="interview-question-panel-title">
                         <h1>questions</h1>
                     </div>
+
+                    <!-- ============ the section for the questions will be here -->
+                    <form action="applicant_interviews.php" method="POST">
+                        <div class="row">
+                            <div class="col">
+                                
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
