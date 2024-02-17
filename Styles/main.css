@@ -6,7 +6,7 @@
 }
 
 body {
-    background: linear-gradient(to right, #fafafa #eeeeee)
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);
 }
 /* ====================== CSS FOR THE CLIENT SIDE ============== */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&family=Roboto:wght@100;300;400&display=swap');
@@ -87,7 +87,7 @@ body {
 
 /* ============ the job application page will be here ======== */
 .job-application-page {
-    background: linear-gradient(to left, #ECEEFF, #ECEEFF);
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);
     margin-top: 30px;
     border-radius: 8px;
     margin-bottom: 50px;
@@ -125,7 +125,7 @@ body {
 }
 
 .full-job-details-page {
-    background: linear-gradient(to left, #ECEEFF, #ECEEFF);
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);
     margin-top: 30px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -184,7 +184,7 @@ body {
 }
 
 .available-jobs-panel {
-    background-color: #ECEEFF;
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);;
     height: auto;
     width: 100%;
     margin-bottom: 30px;
@@ -423,7 +423,7 @@ body {
 
 /* ===============CSS FOR THE QUESTIONS ============ */
 .interview-questions-panel {
-    background-color: #ECEEFF;
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);
     height: auto;
     width: 100%;
     margin-bottom: 30px;

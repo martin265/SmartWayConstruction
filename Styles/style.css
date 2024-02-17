@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color: white;
+    background-color: linear-gradient(to left, #F9EAFF, #ECEEFF);
 }
 
 /* ============== using other fonts here */
@@ -77,7 +77,7 @@ body{
 /*  ================= css for the job details page here =========== */
 .content-area .job-details-form-page {
     height: 1150px;
-    background-color: #ECEEFF;
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);
     margin-top: 30px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -140,7 +140,7 @@ body{
 /* =============== css for the jobs page here ============== */
 .content-area .all-jobs-table {
     height: auto;
-    background-color: #ECEEFF;
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);
     margin-top: 30px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -159,7 +159,7 @@ body{
 /* =================== css for the questions page will be here ============== */
 .content-area .interview-questions-panel {
     height: auto;
-    background-color: #ECEEFF;
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);
     margin-top: 10px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -203,7 +203,7 @@ body{
 /* =================== CSS FOR THE APPLICANTS PAGE ================ */
 .all-applicants {
     height: auto;
-    background-color: #ECEEFF;
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);
     margin-top: 10px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -314,7 +314,7 @@ body{
 /* ================ the css for the main dashboard will be here =========== */
 .main-dashboard-panel {
     height: auto;
-    background-color: #ECEEFF;
+    background: linear-gradient(to left, #F9EAFF, #ECEEFF);
     margin-top: 10px;
     border-radius: 8px;
     margin-bottom: 30px;
