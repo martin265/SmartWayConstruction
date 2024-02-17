@@ -25,6 +25,27 @@ function fecthQuestions($conn) {
 
 $single_record = fecthQuestions($conn);
 
+
+// =================== function to get answers from the database here ================= //
+function getAnswersFunc($conn) {
+    try {
+        $sqlCommand = "SELECT * FROM QuestionAnswerDetails";
+        // =========== running the sql command here ============ //
+        $results = mysqli_query($conn, $sqlCommand);
+        // ============ showing the results here =============== //
+        $all_results = mysqli_fetch_all($results, MYSQLI_ASSOC);
+
+        foreach($all_results as $single_answer) {
+            return $single_answer;
+        }
+    }catch(Exception $ex) {
+        print($ex);
+    }
+}
+
+$single_answer = getAnswersFunc($conn);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,26 +123,26 @@ $single_record = fecthQuestions($conn);
                                     <?php if ($single_record) :?>
                                         <p>Question 1: <?php echo($single_record["question_1"]); ?></p>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_1" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_1" id="flexRadioDefault2" value="<?php echo($single_answer["question_1"]); ?>">
                                             <label class="form-check-label" for="flexRadioDefault2">
-                                                Default checked radio
+                                                <?php echo($single_answer["question_1"]); ?>
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_1" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_1" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
@@ -136,97 +157,26 @@ $single_record = fecthQuestions($conn);
                                     <?php if ($single_record) :?>
                                         <p>Question 2: <?php echo($single_record["question_2"]); ?></p>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_2" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_2" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_2" id="flexRadioDefault1" value="<?php echo($single_answer["question_2"]); ?>">
                                             <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
+                                                <?php echo($single_answer["question_2"]); ?>
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Default checked radio
-                                            </label>
-                                        </div>
-
-                                    <?php endif; ?>
-                                    <!-- ===================== // second question will be available here ======== -->
-                                </div>
-                                <!-- ==================== // -->
-                            </div>
-
-
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <?php if ($single_record) :?>
-                                        <p>Question 1: <?php echo($single_record["question_3"]); ?></p>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
-                                            </label>
-                                            </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Default checked radio
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
-                                            </label>
-                                            </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Default checked radio
-                                            </label>
-                                        </div>
-                                    <?php endif; ?>
-                                    <!-- ===================== // second question will be available here ======== -->
-                                </div>
-
-                                <!-- ================ // second column will be here =========== -->
-
-                                <div class="col">
-                                    <?php if ($single_record) :?>
-                                        <p>Question 2: <?php echo($single_record["question_4"]); ?></p>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
-                                            </label>
-                                            </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Default checked radio
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
-                                            </label>
-                                            </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_2" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
@@ -242,28 +192,28 @@ $single_record = fecthQuestions($conn);
                             <div class="row mb-3">
                                 <div class="col">
                                     <?php if ($single_record) :?>
-                                        <p>Question 1: <?php echo($single_record["question_5"]); ?></p>
+                                        <p>Question 3: <?php echo($single_record["question_3"]); ?></p>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_3" id="flexRadioDefault1" value="<?php echo($single_answer["question_3"]); ?>">
                                             <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
+                                                <?php echo($single_answer["question_3"]); ?>
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_3" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_3" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_3" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
@@ -276,28 +226,99 @@ $single_record = fecthQuestions($conn);
 
                                 <div class="col">
                                     <?php if ($single_record) :?>
-                                        <p>Question 2: <?php echo($single_record["question_6"]); ?></p>
+                                        <p>Question 4: <?php echo($single_record["question_4"]); ?></p>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_4" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_4" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_4" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_4" id="flexRadioDefault2" value="<?php echo($single_answer["question_4"]); ?>">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                <?php echo($single_answer["question_4"]); ?>
+                                            </label>
+                                        </div>
+
+                                    <?php endif; ?>
+                                    <!-- ===================== // second question will be available here ======== -->
+                                </div>
+                                <!-- ==================== // -->
+                            </div>
+
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <?php if ($single_record) :?>
+                                        <p>Question 5: <?php echo($single_record["question_5"]); ?></p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="question_5" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Default radio
+                                            </label>
+                                            </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="question_5" id="flexRadioDefault2" value="<?php echo($single_answer["question_5"]); ?>">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                <?php echo($single_answer["question_5"]); ?>
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="question_5" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Default radio
+                                            </label>
+                                            </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="question_5" id="flexRadioDefault2">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                Default checked radio
+                                            </label>
+                                        </div>
+                                    <?php endif; ?>
+                                    <!-- ===================== // second question will be available here ======== -->
+                                </div>
+
+                                <!-- ================ // second column will be here =========== -->
+
+                                <div class="col">
+                                    <?php if ($single_record) :?>
+                                        <p>Question 6: <?php echo($single_record["question_6"]); ?></p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="question_6" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Default radio
+                                            </label>
+                                            </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="question_6" id="flexRadioDefault2" value="<?php echo($single_answer["question_6"]); ?>">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                <?php echo($single_answer["question_6"]); ?>
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="question_6" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Default radio
+                                            </label>
+                                            </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="question_6" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
@@ -313,28 +334,28 @@ $single_record = fecthQuestions($conn);
                             <div class="row mb-3">
                                 <div class="col">
                                     <?php if ($single_record) :?>
-                                        <p>Question 1: <?php echo($single_record["question_7"]); ?></p>
+                                        <p>Question 7: <?php echo($single_record["question_7"]); ?></p>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_7" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_7" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_7" id="flexRadioDefault1" value="<?php echo($single_answer["question_7"]); ?>">
                                             <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
+                                                <?php echo($single_answer["question_1"]); ?>
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_7" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
@@ -347,28 +368,28 @@ $single_record = fecthQuestions($conn);
 
                                 <div class="col">
                                     <?php if ($single_record) :?>
-                                        <p>Question 2: <?php echo($single_record["question_8"]); ?></p>
+                                        <p>Question 8: <?php echo($single_record["question_8"]); ?></p>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_8" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_8" id="flexRadioDefault2" value="<?php echo($single_answer["question_8"]); ?>">
                                             <label class="form-check-label" for="flexRadioDefault2">
-                                                Default checked radio
+                                                <?php echo($single_answer["question_8"]); ?>
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_8" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_8" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
@@ -385,30 +406,30 @@ $single_record = fecthQuestions($conn);
                             <div class="row mb-3">
                                 <div class="col">
                                     <?php if ($single_record) :?>
-                                        <p>Question 1: <?php echo($single_record["question_9"]); ?></p>
+                                        <p>Question 9: <?php echo($single_record["question_9"]); ?></p>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_9" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_9" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_9" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_9" id="flexRadioDefault2" value="<?php echo($single_answer["question_9"]); ?>">
                                             <label class="form-check-label" for="flexRadioDefault2">
-                                                Default checked radio
+                                                <?php echo($single_answer["question_9"]); ?>
                                             </label>
                                         </div>
                                     <?php endif; ?>
@@ -419,28 +440,28 @@ $single_record = fecthQuestions($conn);
 
                                 <div class="col">
                                     <?php if ($single_record) :?>
-                                        <p>Question 2: <?php echo($single_record["question_10"]); ?></p>
+                                        <p>Question 10: <?php echo($single_record["question_10"]); ?></p>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_10" id="flexRadioDefault1" value="<?php echo($single_answer["question_10"]); ?>">
                                             <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
+                                                <?php echo($single_answer["question_10"]); ?>
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_10" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="question_10" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Default radio
                                             </label>
                                             </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="question_10" id="flexRadioDefault2">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Default checked radio
                                             </label>
