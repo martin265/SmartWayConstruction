@@ -94,13 +94,33 @@ $single_record = fecthQuestions($conn);
                     </div>
 
                     <!-- ============ the section for the questions will be here -->
-                    <form action="applicant_interviews.php" method="POST">
-                        <div class="row">
-                            <div class="col">
-                                
+                    <div class="interviews-questions-panel-area">
+                        <form action="applicant_interviews.php" method="POST">
+                            <div class="row">
+                                <div class="col">
+                                     <p>Question 1: the question will be here</p>
+                                     <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="flexCheckDefault">
+                                        <label for="flexCheckDefault" class="form-check-label">hello</label>
+                                     </div>
+                                     <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="flexCheckDefault">
+                                        <label for="flexCheckDefault" class="form-check-label">hello</label>
+                                     </div>
+                                     <!--  -->
+                                     <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="flexCheckDefault">
+                                        <label for="flexCheckDefault" class="form-check-label">hello</label>
+                                     </div>
+                                     <!--  -->
+                                     <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="flexCheckDefault">
+                                        <label for="flexCheckDefault" class="form-check-label">hello</label>
+                                     </div>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

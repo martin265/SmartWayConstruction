@@ -440,3 +440,15 @@ body {
     text-transform: capitalize;
     font-weight: bolder;
 }
+
+.interview-questions-panel .interviews-questions-panel-area {
+    margin-left: 80px;
+    margin-top: 30px;
+}
+
+.interview-questions-panel .interviews-questions-panel-area p {
+    font-size: 24px;
+    text-transform: capitalize;
+    color: black;
+    font-weight: bolder;
+}
