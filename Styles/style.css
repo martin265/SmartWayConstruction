@@ -478,3 +478,12 @@ body{
     margin-right: 10px;
 }
 
+/* ============= css for exporting the database here ============ */
+.side-navigation-panel .database-controller {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    margin-top: 90px;
+}
+
+

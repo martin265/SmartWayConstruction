@@ -1,6 +1,14 @@
 <?php
-// thank you Jesus Christ ==================//
+include("Connection/connection.php");
+// ============ estabishing the connection here ============ //
+$connection = new Connection("localhost", "root", "", "SmartWayConstruction");
+$connection->EstablishConnection(); // establishing the connection here
+$conn = $connection->get_connection();
 
+// thank you Jesus Christ ==================//
+function createDatabase() {
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,6 +81,10 @@
         <div class="navigation-item">
             <i class="bi bi-file-earmark-text"></i>
             <a href="administrator_job_records.php">records</a>
+        </div>
+
+        <div class="database-controller shadow-lg">
+            <input type="submit" value="sync database" name="database-build" class="btn btn-primary btn-lg ms-4 mt-5">
         </div>
         
     </div>
