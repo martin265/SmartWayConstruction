@@ -424,7 +424,7 @@ body {
 /* ===============CSS FOR THE QUESTIONS ============ */
 .interview-questions-panel {
     background-color: #ECEEFF;
-    height: 500px;
+    height: auto;
     width: 100%;
     margin-bottom: 30px;
     border-radius: 10px;
