@@ -452,3 +452,56 @@ body {
     color: black;
     font-weight: bolder;
 }
+
+/* ============== css for the footer here =============== */
+.main-footer-panel {
+    height: auto;
+    width: 100%;
+    background: linear-gradient(to right, #212121, #424242);
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.main-footer-panel img {
+    height: 300px;
+    width: 300px;
+    margin-left: 30px;
+}
+
+.main-footer-panel .center-content {
+    width: 500px;
+}
+
+.main-footer-panel .center-content  h1 {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+    font-weight: bolder;
+    color: white;
+}
+.main-footer-panel .center-content p {
+    color: white;
+    padding-top: 10px;
+    text-align: center;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.main-footer-panel .footer-socials {
+    width: 500px;
+}
+.main-footer-panel .footer-socials .socials-header h1 {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+    font-weight: bolder;
+    color: white;
+}
