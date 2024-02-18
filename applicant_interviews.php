@@ -46,6 +46,25 @@ function getAnswersFunc($conn) {
 $single_answer = getAnswersFunc($conn);
 
 
+// =============== getting the selected values from the form here ============ //
+if (isset($_POST["save_responses"])) {
+    $question1 = isset($conn, $_POST["question_1"]) ? mysqli_real_escape_string($conn, $_POST["question_1"]) : "";
+    $question2 = isset($conn, $_POST["question_2"]) ? mysqli_real_escape_string($conn, $_POST["question_2"]) : "";
+    $question3 = isset($conn, $_POST["question_3"]) ? mysqli_real_escape_string($conn, $_POST["question_3"]) : "";
+    $question4 = isset($conn, $_POST["question_4"]) ? mysqli_real_escape_string($conn, $_POST["question_4"]) : "";
+    $question5 = isset($conn, $_POST["question_5"]) ? mysqli_real_escape_string($conn, $_POST["question_5"]) : "";
+    $question6 = isset($conn, $_POST["question_6"]) ? mysqli_real_escape_string($conn, $_POST["question_6"]) : "";
+    $question7 = isset($conn, $_POST["question_7"]) ? mysqli_real_escape_string($conn, $_POST["question_7"]) : "";
+    $question8 = isset($conn, $_POST["question_8"]) ? mysqli_real_escape_string($conn, $_POST["question_8"]) : "";
+    $question9 = isset($conn, $_POST["question_9"]) ? mysqli_real_escape_string($conn, $_POST["question_9"]) : "";
+    $question10 = isset($conn, $_POST["question_10"]) ? mysqli_real_escape_string($conn, $_POST["question_10"]) : "";
+
+    // ========== checking if the responses are valid basing on the saved records =============== //
+    if ($question1 != $single_answer["question_1"]) {
+        echo("the response does not match");
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -474,7 +493,7 @@ $single_answer = getAnswersFunc($conn);
                             </div>
 
                             <div class="saving-questions-panel ms-2 mt-3 mb-5">
-                                <input type="submit" class="btn btn-lg btn-primary" value="send interview responses">
+                                <input type="submit" class="btn btn-lg btn-primary" value="send interview responses" name="save_responses">
                             </div>
 
                         </form>
