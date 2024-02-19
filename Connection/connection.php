@@ -98,8 +98,6 @@ class Connection{
                 cv VARCHAR(50) NOT NULL,
                 cover_letter VARCHAR(50) NOT NULL,
                 job_title VARCHAR(50) NOT NULL,
-                job_id INT UNSIGNED,
-                FOREIGN KEY (job_id) REFERENCES JobDetails(job_id),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )";
             //  ========== running the database quey here =============//
@@ -133,8 +131,6 @@ class Connection{
                 interview_duration VARCHAR(100) NOT NULL,
                 interview_date VARCHAR(100) NOT NULL,
                 applicant_name VARCHAR(50) NOT NULL,
-                application_id INT UNSIGNED,
-                FOREIGN KEY (application_id) REFERENCES ApplicationDetails(application_id),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )";
             //  ========== running the database quey here =============//
@@ -188,6 +184,9 @@ $conn = new Connection("localhost", "root", "", "SmartWayConstruction");
 $conn->EstablishConnection();
 
 // calling the create table function here
+$conn->CreateApplicationDetails();
+$conn->createInterviewQuestionTable();
+$conn->CreateJobDetailsTable();
 $conn->createQuestionAnswerTable();
 
 ?>

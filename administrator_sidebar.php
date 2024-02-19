@@ -1,14 +1,8 @@
 <?php
-include("Connection/connection.php");
-// ============ estabishing the connection here ============ //
-$connection = new Connection("localhost", "root", "", "SmartWayConstruction");
-$connection->EstablishConnection(); // establishing the connection here
-$conn = $connection->get_connection();
 
-// thank you Jesus Christ ==================//
-function createDatabase() {
-    
-}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +78,7 @@ function createDatabase() {
         </div>
 
         <div class="database-controller shadow-lg">
-            <input type="submit" value="sync database" name="database-build" class="btn btn-primary btn-lg ms-4 mt-5">
+            <a href="create_database.php" class="btn btn-lg ms-3 mt-5 btn-primary">Sync Database</a>
         </div>
         
     </div>
