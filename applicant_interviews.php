@@ -536,7 +536,7 @@ if (isset($_POST["save_responses"])) {
 
     <!-- ================ the footer for the website will be here========= -->
     <div class="footer-panel">
-        <?php include("templates/footer.php"); ?>
+        
     </div>
 </body>
 </html>

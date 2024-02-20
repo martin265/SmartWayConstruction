@@ -22,7 +22,7 @@ class Connection {
         // Create new database
         $sqlCreateDatabase = "CREATE DATABASE IF NOT EXISTS $database";
         if (mysqli_query($this->connection, $sqlCreateDatabase)) {
-            echo "Database created successfully\n";
+           
         } else {
             echo "Error creating database: " . mysqli_error($this->connection) . "\n";
             die();
@@ -34,6 +34,11 @@ class Connection {
 
     // =========== function to establish the connection here ========//
     public function EstablishConnection() {
+        return $this->connection;
+    }
+
+    // ============== function to get the connection
+    public function get_connection() {
         return $this->connection;
     }
 
@@ -59,7 +64,7 @@ class Connection {
         //  ========== running the database query here =============//
         $results = mysqli_query($this->connection, $sqlCommand);
         if ($results) {
-            echo "JobDetails table created successfully\n";
+            
         } else {
             echo "Failed to create the JobDetails table: " . mysqli_error($this->connection) . "\n";
         }
@@ -84,7 +89,7 @@ class Connection {
         //  ========== running the database query here =============//
         $results = mysqli_query($this->connection, $sqlCommand);
         if ($results) {
-            echo "ApplicationDetails table created successfully\n";
+            
         } else {
             echo "Failed to create the ApplicationDetails table: " . mysqli_error($this->connection) . "\n";
         } 
@@ -113,7 +118,7 @@ class Connection {
         //  ========== running the database query here =============//
         $results = mysqli_query($this->connection, $sqlCommand);
         if ($results) {
-            echo "InterviewQuestionsDetails table created successfully\n";
+           
         } else {
             echo "Failed to create the InterviewQuestionsDetails table: " . mysqli_error($this->connection) . "\n";
         } 
@@ -140,7 +145,7 @@ class Connection {
         //  ========== running the database query here =============//
         $results = mysqli_query($this->connection, $sqlCommand);
         if ($results) {
-            echo "QuestionAnswerDetails table created successfully\n";
+            
         } else {
             echo "Failed to create the QuestionAnswerDetails table: " . mysqli_error($this->connection) . "\n";
         } 
