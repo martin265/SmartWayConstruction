@@ -43,11 +43,13 @@
             <i class="bi bi-house"></i>
             <a href="administrator_index.php" class="">home</a>
         </div>
+
         <!-- the side bar navigation items will be here -->
         <div class="navigation-item">
             <i class="bi bi-tools"></i>
             <a href="administrator_job.php">jobs</a>
         </div>
+        
         <!-- the side bar navigation items will be here -->
         <div class="navigation-item">
             <i class="bi bi-file-earmark-richtext"></i>
