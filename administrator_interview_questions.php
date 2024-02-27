@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $question7 = mysqli_real_escape_string($conn, $_POST["question7"]);
         $question8 = mysqli_real_escape_string($conn, $_POST["question8"]);
         $question9 = mysqli_real_escape_string($conn, $_POST["question9"]);
-        $question10 = mysqli_real_escape_string($conn, $_POST["question10"]);
+        $question10 = mysqli_real_escape_string($conn, $_POST["question10" ]);
 
         // =================== getting the answers here =================== //
         $applicant_name = isset($conn, $_POST["applicant_name"]) ? mysqli_real_escape_string($conn, $_POST["applicant_name"]) : "";
